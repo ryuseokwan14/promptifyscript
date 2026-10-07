@@ -1,11 +1,20 @@
 import React, { useState } from "react";
+import { toast } from "sonner";
 import { Product, ScriptItem } from "@/types";
 import { EditProductModal } from "./edit-product-modal";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface ProductsTableProps {
   products: Product[];
   scripts: ScriptItem[];
   onDeleteProduct: (id: string) => void;
+  onDeleteBatchProducts?: (ids: string[]) => Promise<boolean | void>;
   onUpdateProduct?: (product: Partial<Product> & { id: string }) => Promise<void> | void;
   onSelectProductForScripts: (id: string) => void;
 }
@@ -14,10 +23,67 @@ export function ProductsTable({
   products,
   scripts,
   onDeleteProduct,
+  onDeleteBatchProducts,
   onUpdateProduct,
   onSelectProductForScripts,
 }: ProductsTableProps) {
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [isDeletingBatch, setIsDeletingBatch] = useState(false);
+
+  const isAllSelected = products.length > 0 && selectedIds.length === products.length;
+  const isPartiallySelected = selectedIds.length > 0 && selectedIds.length < products.length;
+
+  const handleToggleSelectAll = () => {
+    if (isAllSelected) {
+      setSelectedIds([]);
+    } else {
+      setSelectedIds(products.map((p) => p.id));
+    }
+  };
+
+  const handleToggleSelectOne = (id: string) => {
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
+
+  const handleBatchDelete = async () => {
+    if (selectedIds.length === 0 || isDeletingBatch) return;
+    if (
+      !confirm(
+        `Yakin ingin menghapus ${selectedIds.length} produk terpilih sekaligus beserta seluruh script-nya?`
+      )
+    ) {
+      return;
+    }
+
+    setIsDeletingBatch(true);
+    try {
+      if (onDeleteBatchProducts) {
+        await onDeleteBatchProducts(selectedIds);
+      } else {
+        for (const id of selectedIds) {
+          onDeleteProduct(id);
+        }
+      }
+      toast.success(`${selectedIds.length} produk berhasil dihapus secara massal.`);
+      setSelectedIds([]);
+    } catch {
+      toast.error("Gagal menghapus batch produk.");
+    } finally {
+      setIsDeletingBatch(false);
+    }
+  };
+
+  const handleDelete = (product: Product) => {
+    if (confirm(`Hapus produk "${product.name}" beserta semua script-nya?`)) {
+      onDeleteProduct(product.id);
+      setSelectedIds((prev) => prev.filter((id) => id !== product.id));
+      toast.success(`Produk "${product.name}" berhasil dihapus.`);
+    }
+  };
+
   return (
     <div className="bg-surface-container-low border border-surface-container-high/40 rounded-2xl shadow-md overflow-hidden">
       <div className="px-space-lg py-space-md bg-surface-container border-b border-surface-container-high/40 flex items-center justify-between flex-wrap gap-2">
@@ -37,10 +103,58 @@ export function ProductsTable({
         </div>
       </div>
 
+      {selectedIds.length > 0 && (
+        <div className="px-space-lg py-2.5 bg-primary/10 border-b border-primary/25 flex items-center justify-between flex-wrap gap-2 animate-fade-in">
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-primary text-[20px]">
+              check_box
+            </span>
+            <span className="font-label-code text-sm font-semibold text-on-surface">
+              {selectedIds.length} produk terpilih
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setSelectedIds([])}
+              disabled={isDeletingBatch}
+              className="px-3 py-1 rounded-lg text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition cursor-pointer"
+            >
+              Batalkan Pilihan
+            </button>
+            <button
+              type="button"
+              onClick={handleBatchDelete}
+              disabled={isDeletingBatch}
+              className="px-3.5 py-1.5 rounded-lg bg-error hover:brightness-110 active:scale-95 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition cursor-pointer disabled:opacity-50"
+            >
+              <span className="material-symbols-outlined text-[16px]">delete</span>
+              <span>
+                {isDeletingBatch
+                  ? "Menghapus..."
+                  : `Hapus (${selectedIds.length}) Produk Terpilih`}
+              </span>
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="w-full overflow-x-auto">
         <table className="w-full text-left font-body-md text-body-md">
           <thead className="bg-surface-container-lowest text-on-surface-variant font-label-code text-label-code uppercase tracking-wider border-b border-surface-container-high/30">
             <tr>
+              <th className="px-space-md py-3 w-12 text-center">
+                <input
+                  type="checkbox"
+                  checked={isAllSelected}
+                  ref={(el) => {
+                    if (el) el.indeterminate = isPartiallySelected;
+                  }}
+                  onChange={handleToggleSelectAll}
+                  aria-label="Pilih semua produk"
+                  className="w-4 h-4 rounded border-surface-container-high text-primary focus:ring-primary cursor-pointer accent-primary"
+                />
+              </th>
               <th className="px-space-lg py-3">Product Name</th>
               <th className="px-space-md py-3">Gender Persona</th>
               <th className="px-space-md py-3">Linked Lip-Syncs</th>
@@ -51,9 +165,24 @@ export function ProductsTable({
             {products.map((product) => {
               const isFemale = product.gender === "female";
               const linkedCount = scripts.filter((s) => s.productId === product.id).length;
+              const isSelected = selectedIds.includes(product.id);
 
               return (
-                <tr key={product.id} className="hover:bg-surface-container/60 transition-colors">
+                <tr
+                  key={product.id}
+                  className={`transition-colors ${
+                    isSelected ? "bg-primary/10" : "hover:bg-surface-container/60"
+                  }`}
+                >
+                  <td className="px-space-md py-space-md text-center">
+                    <input
+                      type="checkbox"
+                      checked={isSelected}
+                      onChange={() => handleToggleSelectOne(product.id)}
+                      aria-label={`Pilih produk ${product.name}`}
+                      className="w-4 h-4 rounded border-surface-container-high text-primary focus:ring-primary cursor-pointer accent-primary"
+                    />
+                  </td>
                   <td className="px-space-lg py-space-md">
                     <div className="flex items-center gap-space-sm">
                       {product.imageUrl ? (
@@ -116,38 +245,42 @@ export function ProductsTable({
                   </td>
 
                   <td className="px-space-lg py-space-md text-right">
-                    <div className="flex items-center justify-end gap-1">
-                      <button
-                        type="button"
-                        onClick={() => onSelectProductForScripts(product.id)}
-                        className="p-1.5 rounded-lg hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-all cursor-pointer"
-                        title="View Lip-Sync Scripts"
-                      >
-                        <span className="material-symbols-outlined text-[18px]">
-                          record_voice_over
-                        </span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setEditingProduct(product)}
-                        className="p-1.5 rounded-lg hover:bg-surface-container-highest text-on-surface-variant hover:text-secondary transition-all cursor-pointer"
-                        title="Edit Produk"
-                      >
-                        <span className="material-symbols-outlined text-[18px]">edit</span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          if (confirm(`Hapus produk "${product.name}" beserta semua script-nya?`)) {
-                            onDeleteProduct(product.id);
-                          }
-                        }}
-                        className="p-1.5 rounded-lg hover:bg-error-container/30 text-on-surface-variant hover:text-error transition-all cursor-pointer"
-                        title="Delete"
-                      >
-                        <span className="material-symbols-outlined text-[18px]">delete</span>
-                      </button>
-                    </div>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger className="w-8 h-8 rounded-lg hover:bg-surface-container-highest flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-all cursor-pointer">
+                        <span className="material-symbols-outlined text-[20px]">more_vert</span>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end" className="w-52">
+                        <DropdownMenuItem
+                          onClick={() => onSelectProductForScripts(product.id)}
+                          className="gap-2 cursor-pointer"
+                        >
+                          <span className="material-symbols-outlined text-[18px] text-secondary">
+                            record_voice_over
+                          </span>
+                          <span>Kelola Lip-Sync</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={() => setEditingProduct(product)}
+                          className="gap-2 cursor-pointer"
+                        >
+                          <span className="material-symbols-outlined text-[18px] text-primary">
+                            edit
+                          </span>
+                          <span>Edit Produk</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem
+                          variant="destructive"
+                          onClick={() => handleDelete(product)}
+                          className="gap-2 cursor-pointer text-error hover:text-error"
+                        >
+                          <span className="material-symbols-outlined text-[18px]">
+                            delete
+                          </span>
+                          <span>Hapus Produk</span>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </td>
                 </tr>
               );

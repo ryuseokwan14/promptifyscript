@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { toast } from "sonner";
 import { Product } from "@/types";
 import { ProductImageUploader } from "./product-image-uploader";
 
@@ -36,9 +37,11 @@ export function EditProductModal({
         itemDesc,
         imageUrl: imageUrl || null,
       });
+      toast.success(`Data produk "${name}" berhasil diperbarui!`);
       onClose();
     } catch (err) {
       console.error("Gagal memperbarui produk:", err);
+      toast.error("Gagal memperbarui data produk.");
     } finally {
       setIsSubmitting(false);
     }
@@ -151,7 +154,7 @@ export function EditProductModal({
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-space-lg py-2.5 rounded-xl bg-primary hover:brightness-110 text-on-primary font-headline-sm text-headline-sm font-semibold flex items-center gap-1.5 shadow-[0_0_16px_rgba(128,131,255,0.3)] cursor-pointer disabled:opacity-50"
+              className="px-space-lg py-2.5 rounded-xl bg-primary hover:brightness-105 text-primary-foreground font-headline-sm text-headline-sm font-bold flex items-center gap-1.5 shadow-[0_0_16px_rgba(128,131,255,0.3)] cursor-pointer disabled:opacity-50"
             >
               <span className="material-symbols-outlined text-[18px]">save</span>
               <span>{isSubmitting ? "Menyimpan..." : "Simpan Perubahan"}</span>

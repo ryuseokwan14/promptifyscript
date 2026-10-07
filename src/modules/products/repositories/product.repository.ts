@@ -41,6 +41,14 @@ export class ProductRepository {
       where: { id },
     });
   }
+
+  async deleteMany(ids: string[]) {
+    return prisma.product.deleteMany({
+      where: {
+        id: { in: ids },
+      },
+    });
+  }
 }
 
 export const productRepository = new ProductRepository();

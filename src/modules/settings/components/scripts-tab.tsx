@@ -12,6 +12,7 @@ interface ScriptsTabProps {
   onAddScript: (productId: string, text: string) => void;
   onAddBatchScripts?: (productId: string, texts: string[]) => Promise<boolean | void>;
   onDeleteScript: (id: string) => void;
+  onDeleteBatchScripts?: (ids: string[]) => Promise<boolean | void>;
 }
 
 export function ScriptsTab({
@@ -22,6 +23,7 @@ export function ScriptsTab({
   onAddScript,
   onAddBatchScripts,
   onDeleteScript,
+  onDeleteBatchScripts,
 }: ScriptsTabProps) {
   const [newScriptText, setNewScriptText] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -106,13 +108,13 @@ export function ScriptsTab({
               onChange={(e) => setNewScriptText(e.target.value)}
               placeholder='Tempel satu atau ratusan skrip sekaligus dipisahkan tanda kutip " (contoh: "Skrip satu" "Skrip dua")...'
               rows={3}
-              className="w-full bg-surface-container-lowest border border-surface-container-high/40 p-space-md rounded-xl text-on-surface font-body-md text-body-md placeholder:text-outline-variant focus:outline-none focus:ring-1 focus:ring-primary shadow-inner resize-none"
+              className="w-full bg-surface-container-lowest border border-surface-container-high/60 p-space-md rounded-xl text-on-surface font-body-md text-body-md placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary shadow-inner resize-none"
             />
           </div>
           <button
             type="submit"
             disabled={parsedItems.length === 0 || isSubmitting}
-            className="sm:self-stretch px-space-lg rounded-xl bg-primary-container text-on-primary-container font-headline-sm text-headline-sm flex items-center justify-center gap-1.5 hover:brightness-110 shadow-[0_2px_12px_rgba(128,131,255,0.25)] transition-all cursor-pointer font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+            className="sm:self-stretch px-space-lg rounded-xl bg-primary text-primary-foreground font-headline-sm text-headline-sm flex items-center justify-center gap-1.5 hover:brightness-105 shadow-[0_2px_12px_rgba(128,131,255,0.25)] transition-all cursor-pointer font-bold disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <span className="material-symbols-outlined text-[20px]">
               {parsedItems.length > 1 ? "library_add" : "add_circle"}
@@ -131,6 +133,7 @@ export function ScriptsTab({
         scripts={currentScripts}
         productName={selectedProduct?.name}
         onDeleteScript={onDeleteScript}
+        onDeleteBatchScripts={onDeleteBatchScripts}
       />
     </section>
   );

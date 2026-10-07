@@ -1,12 +1,14 @@
 import React from "react";
 import { Product, ScriptItem } from "@/types";
 import { ProductCard } from "./product-card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface ProductSelectorProps {
   products: Product[];
   scripts: ScriptItem[];
   activeProductId: string;
   onSelectProduct: (id: string) => void;
+  isLoading?: boolean;
 }
 
 export function ProductSelector({
@@ -14,9 +16,35 @@ export function ProductSelector({
   scripts,
   activeProductId,
   onSelectProduct,
+  isLoading = false,
 }: ProductSelectorProps) {
   const femaleProducts = products.filter((p) => p.gender === "female");
   const maleProducts = products.filter((p) => p.gender === "male");
+
+  if (isLoading || products.length === 0) {
+    return (
+      <section className="flex flex-col gap-space-md">
+        <div className="flex items-center justify-between">
+          <Skeleton className="h-6 w-48 bg-surface-container-high/60" />
+          <Skeleton className="h-5 w-24 bg-surface-container-high/60" />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+          {[1, 2, 3, 4].map((i) => (
+            <div
+              key={i}
+              className="bg-surface-container-low border border-surface-container-high/40 rounded-2xl overflow-hidden p-0 flex flex-col"
+            >
+              <Skeleton className="w-full aspect-[16/10] bg-surface-container-high/40" />
+              <div className="p-space-md flex flex-col gap-2">
+                <Skeleton className="h-5 w-3/4 bg-surface-container-high/60" />
+                <Skeleton className="h-4 w-1/2 bg-surface-container-high/40" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="flex flex-col gap-space-md">

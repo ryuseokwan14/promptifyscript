@@ -17,10 +17,16 @@ export function SecurityTab({ user, creatorEmail, onRefreshUser }: SecurityTabPr
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   // State untuk form Superadmin (Reset Akun Utama)
   const [targetEmail, setTargetEmail] = useState(creatorEmail || "najmishfwn@gmail.com");
   const [resetPassword, setResetPassword] = useState("");
+  const [confirmResetPassword, setConfirmResetPassword] = useState("");
+  const [showResetPassword, setShowResetPassword] = useState(false);
+  const [showConfirmResetPassword, setShowConfirmResetPassword] = useState(false);
 
   const [loading, setLoading] = useState(false);
   const [statusMessage, setStatusMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
@@ -61,6 +67,15 @@ export function SecurityTab({ user, creatorEmail, onRefreshUser }: SecurityTabPr
   // Handle Reset Creator oleh Superadmin
   const handleResetCreator = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (resetPassword.length < 6) {
+      setStatusMessage({ type: "error", text: "Password baru minimal 6 karakter" });
+      return;
+    }
+    if (resetPassword !== confirmResetPassword) {
+      setStatusMessage({ type: "error", text: "Konfirmasi password baru tidak cocok" });
+      return;
+    }
+
     setLoading(true);
     setStatusMessage(null);
 
@@ -76,6 +91,7 @@ export function SecurityTab({ user, creatorEmail, onRefreshUser }: SecurityTabPr
           text: `Kredensial akun utama (${res.email}) berhasil direset!`,
         });
         setResetPassword("");
+        setConfirmResetPassword("");
         if (onRefreshUser) await onRefreshUser();
       } else {
         setStatusMessage({ type: "error", text: res.message || "Gagal mereset akun utama" });
@@ -203,14 +219,52 @@ export function SecurityTab({ user, creatorEmail, onRefreshUser }: SecurityTabPr
                 <label className="block text-xs font-label-code text-on-surface-variant font-medium">
                   Set Password Baru untuk Akun Utama
                 </label>
-                <input
-                  type="password"
-                  value={resetPassword}
-                  onChange={(e) => setResetPassword(e.target.value)}
-                  placeholder="Minimal 6 karakter"
-                  className="w-full bg-surface-container text-on-surface px-3.5 py-2.5 rounded-xl border border-surface-container-high/60 text-sm outline-none focus:border-secondary/60"
-                  required
-                />
+                <div className="relative flex items-center">
+                  <input
+                    type={showResetPassword ? "text" : "password"}
+                    value={resetPassword}
+                    onChange={(e) => setResetPassword(e.target.value)}
+                    placeholder="Minimal 6 karakter"
+                    className="w-full bg-surface-container text-on-surface px-3.5 py-2.5 pr-10 rounded-xl border border-surface-container-high/60 text-sm outline-none focus:border-secondary/60"
+                    required
+                  />
+                  <button
+                    type="button"
+                    aria-label="Toggle visibilitas password baru"
+                    onClick={() => setShowResetPassword(!showResetPassword)}
+                    className="absolute right-2.5 text-on-surface-variant hover:text-on-surface transition-colors p-1 flex items-center justify-center rounded cursor-pointer"
+                  >
+                    <span className="material-symbols-outlined text-[19px]">
+                      {showResetPassword ? "visibility_off" : "visibility"}
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="block text-xs font-label-code text-on-surface-variant font-medium">
+                  Konfirmasi Password Baru
+                </label>
+                <div className="relative flex items-center">
+                  <input
+                    type={showConfirmResetPassword ? "text" : "password"}
+                    value={confirmResetPassword}
+                    onChange={(e) => setConfirmResetPassword(e.target.value)}
+                    placeholder="Ulangi password baru untuk validasi"
+                    className="w-full bg-surface-container text-on-surface px-3.5 py-2.5 pr-10 rounded-xl border border-surface-container-high/60 text-sm outline-none focus:border-secondary/60"
+                    required
+                  />
+                  <button
+                    type="button"
+                    aria-label="Toggle visibilitas konfirmasi password"
+                    onClick={() => setShowConfirmResetPassword(!showConfirmResetPassword)}
+                    className="absolute right-2.5 text-on-surface-variant hover:text-on-surface transition-colors p-1 flex items-center justify-center rounded cursor-pointer"
+                  >
+                    <span className="material-symbols-outlined text-[19px]">
+                      {showConfirmResetPassword ? "visibility_off" : "visibility"}
+                    </span>
+                  </button>
+                </div>
               </div>
 
               <button
@@ -245,48 +299,84 @@ export function SecurityTab({ user, creatorEmail, onRefreshUser }: SecurityTabPr
                 <label className="block text-xs font-label-code text-on-surface-variant font-medium">
                   Password Saat Ini
                 </label>
-                <input
-                  type="password"
-                  value={currentPassword}
-                  onChange={(e) => setCurrentPassword(e.target.value)}
-                  placeholder="Masukkan password saat ini"
-                  className="w-full bg-surface-container text-on-surface px-3.5 py-2.5 rounded-xl border border-surface-container-high/60 text-sm outline-none focus:border-primary/60"
-                  required
-                />
+                <div className="relative flex items-center">
+                  <input
+                    type={showCurrentPassword ? "text" : "password"}
+                    value={currentPassword}
+                    onChange={(e) => setCurrentPassword(e.target.value)}
+                    placeholder="Masukkan password saat ini"
+                    className="w-full bg-surface-container text-on-surface px-3.5 py-2.5 pr-10 rounded-xl border border-surface-container-high/60 text-sm outline-none focus:border-primary/60"
+                    required
+                  />
+                  <button
+                    type="button"
+                    aria-label="Toggle visibilitas password saat ini"
+                    onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                    className="absolute right-2.5 text-on-surface-variant hover:text-on-surface transition-colors p-1 flex items-center justify-center rounded cursor-pointer"
+                  >
+                    <span className="material-symbols-outlined text-[19px]">
+                      {showCurrentPassword ? "visibility_off" : "visibility"}
+                    </span>
+                  </button>
+                </div>
               </div>
 
               <div className="space-y-1.5">
                 <label className="block text-xs font-label-code text-on-surface-variant font-medium">
                   Password Baru
                 </label>
-                <input
-                  type="password"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  placeholder="Minimal 6 karakter"
-                  className="w-full bg-surface-container text-on-surface px-3.5 py-2.5 rounded-xl border border-surface-container-high/60 text-sm outline-none focus:border-primary/60"
-                  required
-                />
+                <div className="relative flex items-center">
+                  <input
+                    type={showNewPassword ? "text" : "password"}
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    placeholder="Minimal 6 karakter"
+                    className="w-full bg-surface-container text-on-surface px-3.5 py-2.5 pr-10 rounded-xl border border-surface-container-high/60 text-sm outline-none focus:border-primary/60"
+                    required
+                  />
+                  <button
+                    type="button"
+                    aria-label="Toggle visibilitas password baru"
+                    onClick={() => setShowNewPassword(!showNewPassword)}
+                    className="absolute right-2.5 text-on-surface-variant hover:text-on-surface transition-colors p-1 flex items-center justify-center rounded cursor-pointer"
+                  >
+                    <span className="material-symbols-outlined text-[19px]">
+                      {showNewPassword ? "visibility_off" : "visibility"}
+                    </span>
+                  </button>
+                </div>
               </div>
 
               <div className="space-y-1.5">
                 <label className="block text-xs font-label-code text-on-surface-variant font-medium">
                   Konfirmasi Password Baru
                 </label>
-                <input
-                  type="password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  placeholder="Ulangi password baru"
-                  className="w-full bg-surface-container text-on-surface px-3.5 py-2.5 rounded-xl border border-surface-container-high/60 text-sm outline-none focus:border-primary/60"
-                  required
-                />
+                <div className="relative flex items-center">
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="Ulangi password baru"
+                    className="w-full bg-surface-container text-on-surface px-3.5 py-2.5 pr-10 rounded-xl border border-surface-container-high/60 text-sm outline-none focus:border-primary/60"
+                    required
+                  />
+                  <button
+                    type="button"
+                    aria-label="Toggle visibilitas konfirmasi password"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-2.5 text-on-surface-variant hover:text-on-surface transition-colors p-1 flex items-center justify-center rounded cursor-pointer"
+                  >
+                    <span className="material-symbols-outlined text-[19px]">
+                      {showConfirmPassword ? "visibility_off" : "visibility"}
+                    </span>
+                  </button>
+                </div>
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 px-4 rounded-xl bg-primary text-on-primary font-headline-sm text-sm font-semibold hover:brightness-110 active:scale-[0.99] transition shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                className="w-full py-2.5 px-4 rounded-xl bg-primary text-primary-foreground font-headline-sm text-sm font-bold hover:brightness-105 active:scale-[0.99] transition shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
               >
                 <span className="material-symbols-outlined text-[18px]">lock_reset</span>
                 <span>{loading ? "Menyimpan..." : "Simpan Password Baru"}</span>

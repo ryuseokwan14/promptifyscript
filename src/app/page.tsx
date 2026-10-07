@@ -86,6 +86,7 @@ export default function GeneratorPage() {
                 scripts={scripts}
                 activeProductId={activeProductId}
                 onSelectProduct={setActiveProductId}
+                isLoading={!isLoaded}
               />
 
               <GeneratorControls

@@ -53,6 +53,14 @@ export class ScriptRepository {
       where: { id },
     });
   }
+
+  async deleteMany(ids: string[]) {
+    return prisma.scriptItem.deleteMany({
+      where: {
+        id: { in: ids },
+      },
+    });
+  }
 }
 
 export const scriptRepository = new ScriptRepository();

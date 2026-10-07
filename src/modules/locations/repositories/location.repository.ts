@@ -60,6 +60,17 @@ export class LocationRepository {
       where: { id },
     });
   }
+
+  async deleteMany(idsOrNames: string[]) {
+    return prisma.location.deleteMany({
+      where: {
+        OR: [
+          { id: { in: idsOrNames } },
+          { name: { in: idsOrNames } },
+        ],
+      },
+    });
+  }
 }
 
 export const locationRepository = new LocationRepository();

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { toast } from "sonner";
 import { Product } from "@/types";
 import { ProductImageUploader } from "./product-image-uploader";
 
@@ -17,10 +18,11 @@ export function AddProductForm({ onAddProduct }: AddProductFormProps) {
     e.preventDefault();
     if (!newProdName.trim()) return;
 
+    const prodName = newProdName.trim();
     onAddProduct({
-      name: newProdName.trim(),
+      name: prodName,
       gender: newProdGender,
-      itemDesc: `${newProdName.trim()} warna elegan yang jatuh rapi`,
+      itemDesc: `${prodName} warna elegan yang jatuh rapi`,
       icon: newProdGender === "female" ? "checkroom" : "man",
       imageUrl: imageUrl || null,
       imageFit: imageUrl || null,
@@ -28,6 +30,7 @@ export function AddProductForm({ onAddProduct }: AddProductFormProps) {
       imageAtmosphere: null,
     });
 
+    toast.success(`Produk "${prodName}" berhasil ditambahkan!`);
     setNewProdName("");
     setImageUrl("");
   };
@@ -65,7 +68,7 @@ export function AddProductForm({ onAddProduct }: AddProductFormProps) {
               onChange={(e) => setNewProdName(e.target.value)}
               placeholder="e.g. Celana Kulot Linen"
               required
-              className="w-full bg-surface-container-lowest border border-surface-container-high/40 px-space-md py-2.5 rounded-xl text-on-surface font-body-md text-body-md placeholder:text-outline-variant focus:outline-none focus:ring-1 focus:ring-primary shadow-inner"
+              className="w-full bg-surface-container-lowest border border-surface-container-high/60 px-space-md py-2.5 rounded-xl text-on-surface font-body-md text-body-md placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary shadow-inner"
             />
           </div>
 
@@ -73,7 +76,7 @@ export function AddProductForm({ onAddProduct }: AddProductFormProps) {
             <label className="font-label-code text-label-code text-on-surface-variant">
               Gender Persona Model
             </label>
-            <div className="grid grid-cols-2 gap-2 bg-surface-container-lowest border border-surface-container-high/40 p-1 rounded-xl">
+            <div className="grid grid-cols-2 gap-2 bg-surface-container-lowest border border-surface-container-high/60 p-1 rounded-xl">
               <button
                 type="button"
                 onClick={() => setNewProdGender("female")}
@@ -107,7 +110,7 @@ export function AddProductForm({ onAddProduct }: AddProductFormProps) {
             </label>
             <button
               type="submit"
-              className="w-full py-2.5 px-space-md rounded-xl bg-primary-container text-on-primary-container font-headline-sm text-headline-sm flex items-center justify-center gap-1 hover:brightness-110 shadow-sm transition-all cursor-pointer font-semibold"
+              className="w-full py-2.5 px-space-md rounded-xl bg-primary text-primary-foreground font-headline-sm text-headline-sm flex items-center justify-center gap-1 hover:brightness-105 shadow-sm transition-all cursor-pointer font-bold"
             >
               <span className="material-symbols-outlined text-[18px]">add</span>
               Tambah Produk

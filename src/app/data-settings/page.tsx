@@ -31,13 +31,16 @@ export default function DataSettingsPage() {
     addProduct,
     updateProduct,
     deleteProduct,
+    deleteBatchProducts,
     addScript,
     addBatchScripts,
     deleteScript,
+    deleteBatchScripts,
     addLocation,
     addBatchLocations,
     updateLocation,
     deleteLocation,
+    deleteBatchLocations,
     updateTemplates,
   } = useApp();
 
@@ -131,6 +134,7 @@ export default function DataSettingsPage() {
                 onAddProduct={addProduct}
                 onUpdateProduct={updateProduct}
                 onDeleteProduct={deleteProduct}
+                onDeleteBatchProducts={deleteBatchProducts}
                 onSelectProductForScripts={(id) => {
                   setSelectedProductId(id);
                   setActiveTab("scripts");
@@ -146,6 +150,7 @@ export default function DataSettingsPage() {
                 onAddScript={addScript}
                 onAddBatchScripts={addBatchScripts}
                 onDeleteScript={deleteScript}
+                onDeleteBatchScripts={deleteBatchScripts}
               />
             )}
             {activeTab === "locations" && (
@@ -156,6 +161,7 @@ export default function DataSettingsPage() {
                 onAddBatchLocations={addBatchLocations}
                 onUpdateLocation={updateLocation}
                 onDeleteLocation={deleteLocation}
+                onDeleteBatchLocations={deleteBatchLocations}
               />
             )}
             {activeTab === "templates" && (

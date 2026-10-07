@@ -1,7 +1,15 @@
 import React, { useState, useMemo } from "react";
+import { toast } from "sonner";
 import { LocationItem } from "@/types";
 import { LocationsTable } from "./locations-table";
 import { parseBatchDelimited } from "@/common/utils/batch-parser";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface LocationsTabProps {
   locations: string[];
@@ -13,6 +21,7 @@ interface LocationsTabProps {
   ) => Promise<boolean | void>;
   onUpdateLocation?: (id: string, name: string, vibe: string) => Promise<void> | void;
   onDeleteLocation: (loc: string) => void;
+  onDeleteBatchLocations?: (locsOrIds: string[]) => Promise<boolean | void>;
 }
 
 export function LocationsTab({
@@ -22,6 +31,7 @@ export function LocationsTab({
   onAddBatchLocations,
   onUpdateLocation,
   onDeleteLocation,
+  onDeleteBatchLocations,
 }: LocationsTabProps) {
   const [newLocationText, setNewLocationText] = useState("");
   const [newLocationVibe, setNewLocationVibe] = useState<
@@ -59,7 +69,10 @@ export function LocationsTab({
           onAddLocation(item, newLocationVibe);
         }
       }
+      toast.success(`Berhasil menambahkan ${parsedItems.length} setting lokasi!`);
       setNewLocationText("");
+    } catch {
+      toast.error("Gagal menambahkan setting lokasi.");
     } finally {
       setIsSubmitting(false);
     }
@@ -111,7 +124,7 @@ export function LocationsTab({
                 onChange={(e) => setNewLocationText(e.target.value)}
                 placeholder='Ketik satu lokasi atau tempel ratusan lokasi sekaligus dipisahkan tanda kutip " (contoh: "cafe rooftop" "mall megah")...'
                 rows={2}
-                className="w-full bg-transparent text-on-surface font-body-md text-body-md placeholder:text-outline-variant focus:outline-none resize-none leading-relaxed"
+                className="w-full bg-transparent text-on-surface font-body-md text-body-md placeholder:text-outline focus:outline-none resize-none leading-relaxed"
               />
             </div>
           </div>
@@ -120,25 +133,29 @@ export function LocationsTab({
             <label className="font-label-code text-label-code text-on-surface-variant">
               Kategori Vibe
             </label>
-            <select
+            <Select
               value={newLocationVibe}
-              onChange={(e) =>
+              onValueChange={(val) =>
                 setNewLocationVibe(
-                  e.target.value as "casual_aesthetic" | "urban_adventure" | "universal"
+                  val as "casual_aesthetic" | "urban_adventure" | "universal"
                 )
               }
-              className="w-full bg-surface-container-lowest border border-surface-container-high/40 px-space-md py-2.5 rounded-xl text-on-surface font-body-md text-body-md focus:outline-none cursor-pointer"
             >
-              <option value="universal">Universal</option>
-              <option value="casual_aesthetic">Casual Aesthetic</option>
-              <option value="urban_adventure">Urban Adventure</option>
-            </select>
+              <SelectTrigger className="w-full bg-surface-container-lowest border-surface-container-high/40 rounded-xl px-space-md py-2.5 h-auto text-on-surface">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="bg-surface-container-low border-surface-container-high/60">
+                <SelectItem value="universal">Universal</SelectItem>
+                <SelectItem value="casual_aesthetic">Casual Aesthetic</SelectItem>
+                <SelectItem value="urban_adventure">Urban Adventure</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           <button
             type="submit"
             disabled={parsedItems.length === 0 || isSubmitting}
-            className="px-space-lg py-2.5 rounded-xl bg-primary-container text-on-primary-container font-headline-sm text-headline-sm flex items-center justify-center gap-1.5 hover:brightness-110 shadow-sm transition-all whitespace-nowrap cursor-pointer font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-space-lg py-2.5 rounded-xl bg-primary text-primary-foreground font-headline-sm text-headline-sm flex items-center justify-center gap-1.5 hover:brightness-105 shadow-sm transition-all whitespace-nowrap cursor-pointer font-bold disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <span className="material-symbols-outlined text-[18px]">
               {parsedItems.length > 1 ? "library_add" : "add"}
@@ -156,6 +173,7 @@ export function LocationsTab({
       <LocationsTable
         items={displayList}
         onDeleteLocation={onDeleteLocation}
+        onDeleteBatchLocations={onDeleteBatchLocations}
         onUpdateLocation={onUpdateLocation}
       />
     </section>

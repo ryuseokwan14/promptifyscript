@@ -9,6 +9,7 @@ interface ProductCatalogTabProps {
   onAddProduct: (item: Omit<Product, "id">) => void;
   onUpdateProduct?: (product: Partial<Product> & { id: string }) => Promise<void> | void;
   onDeleteProduct: (id: string) => void;
+  onDeleteBatchProducts?: (ids: string[]) => Promise<boolean | void>;
   onSelectProductForScripts: (id: string) => void;
 }
 
@@ -18,6 +19,7 @@ export function ProductCatalogTab({
   onAddProduct,
   onUpdateProduct,
   onDeleteProduct,
+  onDeleteBatchProducts,
   onSelectProductForScripts,
 }: ProductCatalogTabProps) {
   return (
@@ -27,6 +29,7 @@ export function ProductCatalogTab({
         products={products}
         scripts={scripts}
         onDeleteProduct={onDeleteProduct}
+        onDeleteBatchProducts={onDeleteBatchProducts}
         onUpdateProduct={onUpdateProduct}
         onSelectProductForScripts={onSelectProductForScripts}
       />

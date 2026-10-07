@@ -40,7 +40,7 @@ export function ProductCard({ product, isActive, scriptCount, onSelect }: Produc
                 {product.icon || (isFemale ? "checkroom" : "man")}
               </span>
             </div>
-            <span className="mt-2 text-[11px] font-label-code text-on-surface-variant/60">
+            <span className="mt-2 text-[11px] font-label-code text-on-surface-variant/80">
               Belum ada foto produk
             </span>
           </div>

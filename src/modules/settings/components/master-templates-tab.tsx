@@ -129,10 +129,10 @@ export function MasterTemplatesTab({
           type="button"
           onClick={onSaveTemplates}
           disabled={!hasUnsavedChanges}
-          className={`w-full sm:w-auto px-space-lg py-2.5 rounded-xl font-headline-sm text-headline-sm flex items-center justify-center gap-2 transition-all font-semibold ${
+          className={`w-full sm:w-auto px-space-lg py-2.5 rounded-xl font-headline-sm text-headline-sm flex items-center justify-center gap-2 transition-all ${
             hasUnsavedChanges
-              ? "bg-primary hover:brightness-110 text-on-primary shadow-[0_0_16px_rgba(192,193,255,0.3)] cursor-pointer"
-              : "bg-surface-container text-on-surface-variant/40 border border-surface-container-high/40 cursor-not-allowed opacity-50"
+              ? "bg-primary hover:brightness-105 text-primary-foreground shadow-[0_0_16px_rgba(192,193,255,0.3)] cursor-pointer font-bold"
+              : "bg-surface-container-high/60 text-on-surface-variant/70 border border-white/10 cursor-not-allowed font-medium"
           }`}
           id="btn-recompile"
         >

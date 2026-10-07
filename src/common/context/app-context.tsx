@@ -15,13 +15,16 @@ export interface AppContextType {
   addProduct: (product: Omit<Product, "id">) => Promise<Product | null>;
   updateProduct: (product: Partial<Product> & { id: string }) => Promise<void>;
   deleteProduct: (id: string) => Promise<void>;
+  deleteBatchProducts: (ids: string[]) => Promise<boolean>;
   addScript: (productId: string, text: string) => Promise<void>;
   addBatchScripts: (productId: string, texts: string[]) => Promise<boolean>;
   deleteScript: (id: string) => Promise<void>;
+  deleteBatchScripts: (ids: string[]) => Promise<boolean>;
   addLocation: (location: string, vibe?: "casual_aesthetic" | "urban_adventure" | "universal") => Promise<void>;
   addBatchLocations: (names: string[], vibe?: "casual_aesthetic" | "urban_adventure" | "universal") => Promise<boolean>;
   updateLocation: (id: string, name: string, vibe: string) => Promise<void>;
   deleteLocation: (location: string) => Promise<void>;
+  deleteBatchLocations: (idsOrNames: string[]) => Promise<boolean>;
   updateTemplates: (female: string, male: string) => Promise<void>;
   resetTemplates: () => Promise<void>;
   login: (email: string, role?: "SUPERADMIN" | "CREATOR") => void;

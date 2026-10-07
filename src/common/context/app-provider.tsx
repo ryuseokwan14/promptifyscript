@@ -9,12 +9,14 @@ import {
   createProductAction,
   updateProductAction,
   deleteProductAction,
+  deleteBatchProductsAction,
 } from "@/modules/products";
 import {
   getScriptsAction,
   createScriptAction,
   createBatchScriptsAction,
   deleteScriptAction,
+  deleteBatchScriptsAction,
 } from "@/modules/scripts";
 import {
   getLocationsAction,
@@ -22,6 +24,7 @@ import {
   createBatchLocationsAction,
   updateLocationAction,
   deleteLocationAction,
+  deleteBatchLocationsAction,
 } from "@/modules/locations";
 import {
   getTemplatesAction,
@@ -140,6 +143,25 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const deleteBatchProducts = async (ids: string[]): Promise<boolean> => {
+    if (ids.length === 0) return false;
+    const res = await deleteBatchProductsAction({ ids });
+    if (res.success) {
+      const idSet = new Set(ids);
+      setProducts((prev) => prev.filter((p) => !idSet.has(p.id)));
+      setScripts((prev) => prev.filter((s) => !idSet.has(s.productId)));
+      setActiveProductId((prev) => {
+        if (idSet.has(prev)) {
+          const remaining = products.filter((p) => !idSet.has(p.id));
+          return remaining[0]?.id || "";
+        }
+        return prev;
+      });
+      return true;
+    }
+    return false;
+  };
+
   const addScript = async (productId: string, text: string) => {
     const res = await createScriptAction({ productId, text });
     if (res.success && res.data) {
@@ -164,6 +186,17 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     if (res.success) {
       setScripts((prev) => prev.filter((s) => s.id !== id));
     }
+  };
+
+  const deleteBatchScripts = async (ids: string[]): Promise<boolean> => {
+    if (ids.length === 0) return false;
+    const res = await deleteBatchScriptsAction({ ids });
+    if (res.success) {
+      const idSet = new Set(ids);
+      setScripts((prev) => prev.filter((s) => !idSet.has(s.id)));
+      return true;
+    }
+    return false;
   };
 
   const addLocation = async (
@@ -218,6 +251,18 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       setLocationItems((prev) => prev.filter((l) => l.id !== deletedId && l.name !== deletedName));
       setLocations((prev) => prev.filter((l) => l !== deletedName && l !== deletedId));
     }
+  };
+
+  const deleteBatchLocations = async (idsOrNames: string[]): Promise<boolean> => {
+    if (idsOrNames.length === 0) return false;
+    const res = await deleteBatchLocationsAction({ idsOrNames });
+    if (res.success) {
+      const targetSet = new Set(idsOrNames);
+      setLocationItems((prev) => prev.filter((l) => !targetSet.has(l.id) && !targetSet.has(l.name)));
+      setLocations((prev) => prev.filter((l) => !targetSet.has(l)));
+      return true;
+    }
+    return false;
   };
 
   const updateTemplates = async (female: string, male: string) => {
@@ -293,13 +338,16 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         addProduct,
         updateProduct,
         deleteProduct,
+        deleteBatchProducts,
         addScript,
         addBatchScripts,
         deleteScript,
+        deleteBatchScripts,
         addLocation,
         addBatchLocations,
         updateLocation,
         deleteLocation,
+        deleteBatchLocations,
         updateTemplates,
         resetTemplates,
         login,

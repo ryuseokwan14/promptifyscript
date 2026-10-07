@@ -45,10 +45,10 @@ export function SettingsHeader({
           type="button"
           onClick={onSaveAll}
           disabled={!hasUnsavedChanges}
-          className={`flex items-center gap-space-xs px-space-lg py-2.5 rounded-xl font-headline-sm text-headline-sm transition-all font-semibold ${
+          className={`flex items-center gap-space-xs px-space-lg py-2.5 rounded-xl font-headline-sm text-headline-sm transition-all ${
             hasUnsavedChanges
-              ? "bg-primary text-on-primary shadow-[0_4px_16px_rgba(128,131,255,0.4)] hover:brightness-110 active:scale-95 cursor-pointer ring-2 ring-primary/40 animate-pulse"
-              : "bg-surface-container text-on-surface-variant/40 border border-surface-container-high/40 cursor-not-allowed opacity-50"
+              ? "bg-primary text-primary-foreground shadow-[0_4px_16px_rgba(192,193,255,0.4)] hover:brightness-105 active:scale-95 cursor-pointer ring-2 ring-primary/40 animate-pulse font-bold"
+              : "bg-surface-container-high/60 text-on-surface-variant/70 border border-white/10 cursor-not-allowed font-medium"
           }`}
           id="btn-save-all"
         >

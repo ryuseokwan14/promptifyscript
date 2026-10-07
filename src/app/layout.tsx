@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk, Plus_Jakarta_Sans, JetBrains_Mono, Geist } from "next/font/google";
 import "./globals.css";
 import { AppProvider } from "@/common/context/app-provider";
+import { ThemeProvider } from "@/common/components/theme-provider";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-headline",
@@ -24,6 +28,9 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+
 export const metadata: Metadata = {
   title: "Promptify Script — AI Prompt Video Automation Engine",
   description: "Accelerated Video Retaining Engine for Gemini & TikTok/Reels Video Generators",
@@ -40,7 +47,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark ${spaceGrotesk.variable} ${plusJakartaSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={cn("h-full", "antialiased", spaceGrotesk.variable, plusJakartaSans.variable, jetbrainsMono.variable, "font-sans", geist.variable)}
     >
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -51,7 +59,19 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-background text-on-surface">
-        <AppProvider>{children}</AppProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <AppProvider>
+            <TooltipProvider delay={150}>
+              {children}
+              <Toaster position="top-right" richColors />
+            </TooltipProvider>
+          </AppProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

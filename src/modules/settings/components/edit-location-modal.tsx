@@ -1,5 +1,13 @@
 import React, { useState } from "react";
+import { toast } from "sonner";
 import { LocationItem } from "@/types";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface EditLocationModalProps {
   location: LocationItem | null;
@@ -36,7 +44,11 @@ export function EditLocationModal({
     try {
       setIsSubmitting(true);
       await onSave(location.id, name.trim(), vibe);
+      toast.success("Data setting lokasi berhasil diperbarui!");
       onClose();
+    } catch (err) {
+      console.error("Gagal edit lokasi:", err);
+      toast.error("Gagal memperbarui lokasi.");
     } finally {
       setIsSubmitting(false);
     }
@@ -80,7 +92,7 @@ export function EditLocationModal({
                 onChange={(e) => setName(e.target.value)}
                 required
                 placeholder="e.g. coffee shop outdoor bernuansa kayu minimalis"
-                className="w-full bg-transparent text-on-surface font-body-md text-body-md placeholder:text-outline-variant focus:outline-none"
+                className="w-full bg-transparent text-on-surface font-body-md text-body-md placeholder:text-outline focus:outline-none"
               />
             </div>
           </div>
@@ -89,19 +101,23 @@ export function EditLocationModal({
             <label className="font-label-code text-label-code text-on-surface-variant">
               Kategori Vibe
             </label>
-            <select
+            <Select
               value={vibe}
-              onChange={(e) =>
+              onValueChange={(val) =>
                 setVibe(
-                  e.target.value as "casual_aesthetic" | "urban_adventure" | "universal"
+                  val as "casual_aesthetic" | "urban_adventure" | "universal"
                 )
               }
-              className="w-full bg-surface-container-lowest border border-surface-container-high/40 px-space-md py-2.5 rounded-xl text-on-surface font-body-md text-body-md focus:outline-none cursor-pointer"
             >
-              <option value="universal">Universal</option>
-              <option value="casual_aesthetic">Casual Aesthetic</option>
-              <option value="urban_adventure">Urban Adventure</option>
-            </select>
+              <SelectTrigger className="w-full bg-surface-container-lowest border-surface-container-high/40 rounded-xl px-space-md py-2.5 h-auto text-on-surface">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="bg-surface-container-low border-surface-container-high/60">
+                <SelectItem value="universal">Universal</SelectItem>
+                <SelectItem value="casual_aesthetic">Casual Aesthetic</SelectItem>
+                <SelectItem value="urban_adventure">Urban Adventure</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Action Buttons */}
@@ -117,7 +133,7 @@ export function EditLocationModal({
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-space-lg py-2 rounded-xl bg-primary hover:brightness-110 text-on-primary font-headline-sm text-headline-sm flex items-center gap-1.5 shadow-[0_0_16px_rgba(128,131,255,0.3)] transition-all cursor-pointer font-semibold disabled:opacity-60"
+              className="px-space-lg py-2 rounded-xl bg-primary hover:brightness-105 text-primary-foreground font-headline-sm text-headline-sm flex items-center gap-1.5 shadow-[0_0_16px_rgba(128,131,255,0.3)] transition-all cursor-pointer font-bold disabled:opacity-60"
             >
               <span className="material-symbols-outlined text-[18px]">check</span>
               {isSubmitting ? "Menyimpan..." : "Simpan Perubahan"}
