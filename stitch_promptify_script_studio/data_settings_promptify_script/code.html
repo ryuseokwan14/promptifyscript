@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary-container": "#8083ff", "on-surface": "#e4e1e7", "inverse-surface": "#e4e1e7", "surface": "#131317", "on-background": "#e4e1e7", "surface-container-highest": "#353439", "tertiary-fixed": "#ffdadb", "tertiary-fixed-dim": "#ffb2b7", "primary-fixed": "#e1e0ff", "on-tertiary-container": "#5b0017", "primary-fixed-dim": "#c0c1ff", "inverse-primary": "#494bd6", "tertiary-container": "#ff516a", "on-surface-variant": "#c7c4d7", "on-secondary-fixed-variant": "#004e5c", "surface-bright": "#39393d", "surface-container-high": "#2a292e", "on-tertiary-fixed-variant": "#92002a", "tertiary": "#ffb2b7", "primary": "#c0c1ff", "on-error-container": "#ffdad6", "secondary": "#4cd7f6", "surface-container": "#1f1f24", "on-primary-container": "#0d0096", "surface-tint": "#c0c1ff", "on-tertiary": "#67001b", "on-secondary-container": "#00424e", "inverse-on-surface": "#303034", "on-primary-fixed": "#07006c", "error-container": "#93000a", "on-secondary": "#003640", "on-primary-fixed-variant": "#2f2ebe", "secondary-fixed": "#acedff", "secondary-fixed-dim": "#4cd7f6", "surface-dim": "#131317", "background": "#131317", "on-tertiary-fixed": "#40000d", "surface-container-low": "#1b1b1f", "on-secondary-fixed": "#001f26", "secondary-container": "#03b5d3", "on-primary": "#1000a9", "on-error": "#690005", "outline": "#908fa0", "surface-container-lowest": "#0e0e12", "surface-variant": "#353439", "error": "#ffb4ab", "outline-variant": "#464554" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin-mobile": "1rem", "margin": "2rem", "space-md": "1rem", "space-xs": "0.25rem", "space-sm": "0.5rem", "gutter-mobile": "0.75rem", "space-lg": "1.5rem", "space-xl": "2.5rem", "gutter": "1.5rem" }, "fontFamily": { "headline-md": [ "Space Grotesk" ], "headline-lg-mobile": [ "Space Grotesk" ], "body-md": [ "Plus Jakarta Sans" ], "headline-sm": [ "Space Grotesk" ], "headline-xl-mobile": [ "Space Grotesk" ], "headline-lg": [ "Space Grotesk" ], "label-code": [ "JetBrains Mono" ], "body-lg": [ "Plus Jakarta Sans" ], "label-badge": [ "JetBrains Mono" ], "headline-xl": [ "Space Grotesk" ], "body-sm": [ "Plus Jakarta Sans" ] }, "fontSize": { "headline-md": [ "22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "headline-lg-mobile": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-md": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "headline-sm": [ "18px", { "lineHeight": "24px", "fontWeight": "600" } ], "headline-xl-mobile": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-lg": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "label-code": [ "13px", { "lineHeight": "18px", "fontWeight": "500" } ], "body-lg": [ "16px", { "lineHeight": "24px", "fontWeight": "400" } ], "label-badge": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" } ], "headline-xl": [ "48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "700" } ], "body-sm": [ "12px", { "lineHeight": "16px", "fontWeight": "400" } ] } } } }</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 h-16 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)]"><div class="w-full h-full px-gutter flex items-center justify-between"><div class="flex items-center gap-space-md"><a class="flex items-center gap-space-sm group" href="#"><div class="relative flex items-center justify-center"><div class="absolute -inset-1 rounded-full bg-secondary/20 blur-sm group-hover:bg-secondary/30 transition-all"></div><img alt="Promptify Script logo mark: Sleek futuristic 3D glassmorphic vertical 9:16 mobile frame intertwined with an AI prompt cursor (&gt;_) and a glowing cosmic spark star, featuring iridescent gradient from Electric Indigo (#6366F1) to Cyber Cyan (#06B6D4) and Neon Rose (#F43F5E) with radial glow.. Brand logo" class="relative h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UOVKFBLRAg2GOHFmxvLsb47vsEsWLLxCh-Y8LlMbV6TzqMSY35Qx5pzKsgcrTLHq9u4MlVfrLwLgYT1sFnPb4IFpdszxvvvQ1lak26WRoovyoZlyTKAm3AQWzEu40kp4jv92cGh7tra_ApSNtMZi7N0ms2gEJd9n8zqWmB7vkPR_Xnz7uGH-7e0cjXDtI0hUVHv9WXsz8dx-TI4MTuOVgMs2ONzHTjUrzOiiMAXqIW0g"/></div><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Promptify Script</span></a><span class="font-label-badge text-label-badge text-secondary bg-surface-container-high px-space-sm py-0.5 rounded-full uppercase">v2.4-gemini</span></div><nav class="hidden md:flex items-center gap-space-xs bg-surface-container-lowest/60 p-1 rounded-lg backdrop-blur-md" data-active-classes="bg-surface-container-high text-primary font-medium rounded-lg shadow-[0_0_12px_rgba(128,131,255,0.15)]"><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container px-space-md py-space-xs rounded-lg transition-all flex items-center gap-space-xs" data-path="generator" href="#">Generator</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container px-space-md py-space-xs rounded-lg transition-all flex items-center gap-space-xs" data-path="data-settings" href="#">Data &amp; Settings</a></nav><div class="flex items-center gap-space-sm"><button class="w-9 h-9 rounded-lg bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-all" title="Logout" type="button"><span class="material-symbols-outlined text-[20px]">logout</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_0_12px_rgba(192,193,255,0.35)]"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 flex-1 px-gutter"><div class="flex flex-col w-full py-space-md gap-space-lg">
+<!-- Top Notification Pill Bar -->
+<div class="flex items-center justify-between flex-wrap gap-space-sm bg-surface-container-low px-space-md py-space-sm rounded-xl">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary animate-ping"></span>
+<span class="font-label-badge text-label-badge text-secondary uppercase tracking-wider">Sync State: Synced to Cloud DB</span>
+<span class="text-outline-variant">•</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">4 Active Collections &amp; 2 Prompt Blueprints</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-code text-label-code text-primary">Gemini 1.5 Context Window: 1.04M tokens</span>
+</div>
+</div>
+<!-- Page Header Sub-Section -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-sm">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Data &amp; Prompt Settings</h1>
+<span class="font-label-badge text-label-badge bg-primary-container/20 text-primary px-space-sm py-0.5 rounded-full">v2.4 CRUD</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+        Manage your creator products, dialogue variations, location libraries, and Gemini master prompt templates with real-time payload compilation.
+      </p>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-body-md text-body-md shadow-sm transition-all" id="btn-export-json" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">file_download</span>
+        Export JSON Backup
+      </button>
+<button class="flex items-center gap-space-xs px-space-lg py-2.5 rounded-lg bg-primary-container hover:bg-primary-container/90 text-on-primary-container font-headline-sm text-headline-sm shadow-[0_4px_16px_rgba(128,131,255,0.35)] transition-all active:scale-95" id="btn-save-all" type="button">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+        Save All Changes
+      </button>
+</div>
+</div>
+<!-- Segmented Navigation Rail (Tabs) -->
+<div class="bg-surface-container-lowest p-1 rounded-xl flex items-center gap-1 overflow-x-auto shadow-md">
+<button class="tab-button flex items-center gap-space-xs px-space-lg py-2.5 rounded-lg font-headline-sm text-headline-sm transition-all bg-surface-container-high text-primary shadow-[0_0_12px_rgba(128,131,255,0.18)]" data-tab-target="section-products" type="button">
+<span class="material-symbols-outlined text-[18px]">inventory_2</span>
+<span>Products</span>
+<span class="bg-primary/20 text-primary font-label-code text-label-code px-1.5 py-0.5 rounded-full ml-1">4</span>
+</button>
+<button class="tab-button flex items-center gap-space-xs px-space-lg py-2.5 rounded-lg font-headline-sm text-headline-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-tab-target="section-scripts" type="button">
+<span class="material-symbols-outlined text-[18px]">record_voice_over</span>
+<span>Lip-Sync Scripts</span>
+<span class="bg-surface-container-highest text-on-surface-variant font-label-code text-label-code px-1.5 py-0.5 rounded-full ml-1">26</span>
+</button>
+<button class="tab-button flex items-center gap-space-xs px-space-lg py-2.5 rounded-lg font-headline-sm text-headline-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-tab-target="section-locations" type="button">
+<span class="material-symbols-outlined text-[18px]">explore</span>
+<span>Locations Bank</span>
+<span class="bg-surface-container-highest text-on-surface-variant font-label-code text-label-code px-1.5 py-0.5 rounded-full ml-1">12</span>
+</button>
+<button class="tab-button flex items-center gap-space-xs px-space-lg py-2.5 rounded-lg font-headline-sm text-headline-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-tab-target="section-templates" type="button">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+<span>Master Templates</span>
+<span class="bg-tertiary-container/30 text-tertiary font-label-code text-label-code px-1.5 py-0.5 rounded-full ml-1">Live</span>
+</button>
+</div>
+<!-- TAB CONTENT WRAPPER -->
+<div class="flex flex-col gap-space-xl">
+<!-- SECTION A: PRODUCTS MANAGEMENT -->
+<section class="tab-pane flex flex-col gap-space-lg" id="section-products">
+<!-- Quick Add Toolbar Card -->
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-8 h-8 rounded-lg bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">add_box</span>
+</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Add New Product Catalog Item</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Define SKU names, target avatar gender, and categories for prompt variable injection.</p>
+</div>
+</div>
+<span class="font-label-badge text-label-badge bg-surface-container-highest px-space-sm py-1 rounded text-on-surface-variant uppercase">Instant Feed</span>
+</div>
+<form class="grid grid-cols-1 md:grid-cols-12 gap-space-md items-end" id="form-add-product">
+<div class="md:col-span-5 flex flex-col gap-1.5">
+<label class="font-label-code text-label-code text-on-surface-variant">Product Name</label>
+<input class="w-full bg-surface-container-lowest px-space-md py-2.5 rounded-lg text-on-surface font-body-md text-body-md placeholder-outline focus:outline-none focus:ring-1 focus:ring-primary shadow-inner" id="prod-name-input" placeholder="e.g. Celana Kulot Linen" type="text"/>
+</div>
+<div class="md:col-span-4 flex flex-col gap-1.5">
+<label class="font-label-code text-label-code text-on-surface-variant">Model Gender Persona</label>
+<div class="grid grid-cols-2 gap-2 bg-surface-container-lowest p-1 rounded-lg">
+<label class="flex items-center justify-center gap-1.5 py-1.5 px-space-sm rounded-md cursor-pointer transition-all bg-tertiary-container/20 text-tertiary font-body-sm text-body-sm">
+<input checked="" class="hidden" name="prod-gender" type="radio" value="Cewek"/>
+<span>Cewek</span>
+</label>
+<label class="flex items-center justify-center gap-1.5 py-1.5 px-space-sm rounded-md cursor-pointer transition-all text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm">
+<input class="hidden" name="prod-gender" type="radio" value="Cowok"/>
+<span>Cowok</span>
+</label>
+</div>
+</div>
+<div class="md:col-span-3">
+<button class="w-full py-2.5 px-space-md rounded-lg bg-primary-container text-on-primary-container font-headline-sm text-headline-sm flex items-center justify-center gap-1 hover:brightness-110 shadow-sm transition-all" type="submit">
+<span class="material-symbols-outlined text-[18px]">add</span>
+              Add Product
+            </button>
+</div>
+</form>
+</div>
+<!-- Products Data Table -->
+<div class="bg-surface-container-low rounded-xl shadow-md overflow-hidden">
+<div class="px-space-lg py-space-md bg-surface-container flex items-center justify-between flex-wrap gap-2">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-sm text-headline-sm text-on-surface">Registered Video Products</span>
+<span class="font-label-code text-label-code bg-surface-container-highest text-secondary px-2 py-0.5 rounded-full">4 Items</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[18px] text-outline">tune</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Auto-linked with Prompt Compiler engine</span>
+</div>
+</div>
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left font-body-md text-body-md">
+<thead class="bg-surface-container-lowest text-on-surface-variant font-label-code text-label-code uppercase tracking-wider">
+<tr>
+<th class="px-space-lg py-3">Product Name &amp; Category</th>
+<th class="px-space-md py-3">Gender Persona</th>
+<th class="px-space-md py-3">Linked Lip-Syncs</th>
+<th class="px-space-md py-3">System Status</th>
+<th class="px-space-lg py-3 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-lowest/40" id="products-table-body">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="px-space-lg py-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">checkroom</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Celana Kulot Linen</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Fashion Bottom • SK-LN-001</div>
+</div>
+</div>
+</td>
+<td class="px-space-md py-space-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-tertiary-container/20 text-tertiary font-label-badge text-label-badge uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                    Cewek
+                  </span>
+</td>
+<td class="px-space-md py-space-md">
+<div class="flex items-center gap-1.5 font-label-code text-label-code text-on-surface">
+<span class="material-symbols-outlined text-secondary text-[16px]">graphic_eq</span>
+                    8 Linked Scripts
+                  </div>
+</td>
+<td class="px-space-md py-space-md">
+<span class="inline-flex items-center gap-1 text-secondary font-label-badge text-label-badge">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                    ACTIVE
+                  </span>
+</td>
+<td class="px-space-lg py-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-all" title="Edit" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-error-container/30 text-on-surface-variant hover:text-error transition-all" title="Delete" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="px-space-lg py-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Celana Cargo Pria</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Fashion Menswear • SK-CRG-02</div>
+</div>
+</div>
+</td>
+<td class="px-space-md py-space-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary-container/20 text-secondary font-label-badge text-label-badge uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    Cowok
+                  </span>
+</td>
+<td class="px-space-md py-space-md">
+<div class="flex items-center gap-1.5 font-label-code text-label-code text-on-surface">
+<span class="material-symbols-outlined text-secondary text-[16px]">graphic_eq</span>
+                    6 Linked Scripts
+                  </div>
+</td>
+<td class="px-space-md py-space-md">
+<span class="inline-flex items-center gap-1 text-secondary font-label-badge text-label-badge">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                    ACTIVE
+                  </span>
+</td>
+<td class="px-space-lg py-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-all" title="Edit" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-error-container/30 text-on-surface-variant hover:text-error transition-all" title="Delete" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="px-space-lg py-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-fixed">
+<span class="material-symbols-outlined text-[20px]">apparel</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Oversized Shirt</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Streetwear Casual • SK-OVS-88</div>
+</div>
+</div>
+</td>
+<td class="px-space-md py-space-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary-container/20 text-secondary font-label-badge text-label-badge uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    Cowok
+                  </span>
+</td>
+<td class="px-space-md py-space-md">
+<div class="flex items-center gap-1.5 font-label-code text-label-code text-on-surface">
+<span class="material-symbols-outlined text-secondary text-[16px]">graphic_eq</span>
+                    5 Linked Scripts
+                  </div>
+</td>
+<td class="px-space-md py-space-md">
+<span class="inline-flex items-center gap-1 text-secondary font-label-badge text-label-badge">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                    ACTIVE
+                  </span>
+</td>
+<td class="px-space-lg py-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-all" title="Edit" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-error-container/30 text-on-surface-variant hover:text-error transition-all" title="Delete" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="px-space-lg py-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[20px]">style</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Pleated Skirt</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Korean Minimalist • SK-PLT-14</div>
+</div>
+</div>
+</td>
+<td class="px-space-md py-space-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-tertiary-container/20 text-tertiary font-label-badge text-label-badge uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                    Cewek
+                  </span>
+</td>
+<td class="px-space-md py-space-md">
+<div class="flex items-center gap-1.5 font-label-code text-label-code text-on-surface">
+<span class="material-symbols-outlined text-secondary text-[16px]">graphic_eq</span>
+                    7 Linked Scripts
+                  </div>
+</td>
+<td class="px-space-md py-space-md">
+<span class="inline-flex items-center gap-1 text-secondary font-label-badge text-label-badge">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                    ACTIVE
+                  </span>
+</td>
+<td class="px-space-lg py-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-all" title="Edit" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-error-container/30 text-on-surface-variant hover:text-error transition-all" title="Delete" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- SECTION B: LIP-SYNC SCRIPTS MANAGEMENT -->
+<section class="tab-pane flex flex-col gap-space-lg" id="section-scripts">
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface flex items-center gap-2">
+<span>Product-Linked Spoken Dialogues</span>
+</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Natural Indonesian speech scripts with micro-pauses for video AI lip-sync synthesis.</p>
+</div>
+<!-- Product Selector Dropdown -->
+<div class="flex items-center gap-space-sm bg-surface-container-low px-space-md py-2 rounded-xl">
+<label class="font-label-code text-label-code text-on-surface-variant">Filter by Product:</label>
+<div class="relative">
+<select class="appearance-none bg-surface-container-highest text-primary font-headline-sm text-headline-sm pl-space-md pr-8 py-1.5 rounded-lg focus:outline-none cursor-pointer" id="script-product-filter">
+<option selected="" value="kulot">Celana Kulot Linen (Cewek)</option>
+<option value="cargo">Celana Cargo Pria (Cowok)</option>
+<option value="oversized">Oversized Shirt (Cowok)</option>
+<option value="pleated">Pleated Skirt (Cewek)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Quick Add Script Input Box -->
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-md flex flex-col gap-space-sm">
+<label class="font-headline-sm text-headline-sm text-on-surface flex items-center justify-between">
+<span>Add Spoken Lip-Sync Line for "Celana Kulot Linen"</span>
+<span class="font-label-code text-label-code text-secondary">Target Speech Pace: 130 WPM</span>
+</label>
+<div class="flex flex-col sm:flex-row gap-space-sm">
+<div class="flex-1 relative">
+<textarea class="w-full bg-surface-container-lowest p-space-md rounded-xl text-on-surface font-body-md text-body-md placeholder-outline focus:outline-none focus:ring-1 focus:ring-primary shadow-inner resize-none" id="input-new-script" placeholder="Tuliskan script natural yang akan diucapkan model, e.g. Sumpah ya celana ini tuh adem banget dan jatuhnya cakep banget pas dipake jalan..." rows="2"></textarea>
+</div>
+<button class="sm:self-stretch px-space-lg rounded-xl bg-primary-container text-on-primary-container font-headline-sm text-headline-sm flex items-center justify-center gap-1.5 hover:brightness-110 shadow-[0_2px_12px_rgba(128,131,255,0.25)] transition-all" id="btn-add-script" type="button">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+            Add Script
+          </button>
+</div>
+</div>
+<!-- Script List Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md" id="scripts-container">
+<!-- Script Card 1 -->
+<div class="bg-surface-container-low p-space-lg rounded-xl flex flex-col justify-between gap-space-md shadow-sm hover:shadow-md transition-all group">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-badge text-label-badge bg-tertiary-container/20 text-tertiary px-2 py-0.5 rounded-full uppercase">Variation #01 • Hook Spill</span>
+<div class="flex items-center gap-1 font-label-code text-label-code text-secondary">
+<span class="material-symbols-outlined text-[16px]">timer</span>
+                ~4.2s speech
+              </div>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface italic">
+              "Kalian yang nyari celana kulot yang gak bikin keliatan bantet, nih liat deh cuttingan yang ini bener-bener jenjang banget!"
+            </p>
+</div>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container-low">
+<span class="font-label-code text-label-code text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">analytics</span>
+              Used 42 times • 89% Retention
+            </span>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-error-container/30 text-on-surface-variant hover:text-error transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Script Card 2 -->
+<div class="bg-surface-container-low p-space-lg rounded-xl flex flex-col justify-between gap-space-md shadow-sm hover:shadow-md transition-all group">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-badge text-label-badge bg-secondary-container/20 text-secondary px-2 py-0.5 rounded-full uppercase">Variation #02 • Material Proof</span>
+<div class="flex items-center gap-1 font-label-code text-label-code text-secondary">
+<span class="material-symbols-outlined text-[16px]">timer</span>
+                ~3.8s speech
+              </div>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface italic">
+              "Bahan linennya beneran premium import, gak nerawang sama sekali dan super flowy pas dibawa jalan santai."
+            </p>
+</div>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container-low">
+<span class="font-label-code text-label-code text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">analytics</span>
+              Used 28 times • 92% Retention
+            </span>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-error-container/30 text-on-surface-variant hover:text-error transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Script Card 3 -->
+<div class="bg-surface-container-low p-space-lg rounded-xl flex flex-col justify-between gap-space-md shadow-sm hover:shadow-md transition-all group">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-badge text-label-badge bg-primary-container/20 text-primary px-2 py-0.5 rounded-full uppercase">Variation #03 • Direct CTA</span>
+<div class="flex items-center gap-1 font-label-code text-label-code text-secondary">
+<span class="material-symbols-outlined text-[16px]">timer</span>
+                ~4.9s speech
+              </div>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface italic">
+              "Yang mau samaan langsung klik keranjang kuning sekarang mumpung stok warna sage green masih ready ya girls!"
+            </p>
+</div>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container-low">
+<span class="font-label-code text-label-code text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">analytics</span>
+              Used 35 times • 84% Retention
+            </span>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-error-container/30 text-on-surface-variant hover:text-error transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Script Card 4 -->
+<div class="bg-surface-container-low p-space-lg rounded-xl flex flex-col justify-between gap-space-md shadow-sm hover:shadow-md transition-all group">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-badge text-label-badge bg-tertiary-container/20 text-tertiary px-2 py-0.5 rounded-full uppercase">Variation #04 • Fit Check</span>
+<div class="flex items-center gap-1 font-label-code text-label-code text-secondary">
+<span class="material-symbols-outlined text-[16px]">timer</span>
+                ~3.5s speech
+              </div>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface italic">
+              "TB 160 BB 50 pake size M pas banget di pinggang, karetnya lembut gak nyeplak di perut sama sekali."
+            </p>
+</div>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container-low">
+<span class="font-label-code text-label-code text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">analytics</span>
+              Used 19 times • 95% Retention
+            </span>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-error-container/30 text-on-surface-variant hover:text-error transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION C: LOCATIONS BANK -->
+<section class="tab-pane flex flex-col gap-space-lg" id="section-locations">
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Aesthetic Video Locations Bank</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Presets dynamically fed into `{tempat}` parameter to set atmospheric lighting, backdrop textures, and depth of field.</p>
+</div>
+<span class="font-label-code text-label-code text-secondary bg-surface-container-low px-space-md py-1.5 rounded-xl">
+          Auto-Randomizer: Enabled
+        </span>
+</div>
+<!-- Quick Location Input Bar -->
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-md flex flex-col sm:flex-row gap-space-sm items-center">
+<div class="flex-1 w-full flex items-center gap-space-sm bg-surface-container-lowest px-space-md py-2.5 rounded-lg">
+<span class="material-symbols-outlined text-outline text-[20px]">add_location_alt</span>
+<input class="w-full bg-transparent text-on-surface font-body-md text-body-md placeholder-outline focus:outline-none" id="input-new-location" placeholder="Add new setting / location (e.g. cafe outdoor rooftop sunset minimalis)..." type="text"/>
+</div>
+<button class="w-full sm:w-auto px-space-lg py-2.5 rounded-lg bg-secondary-container hover:bg-secondary-container/90 text-on-secondary-container font-headline-sm text-headline-sm flex items-center justify-center gap-1.5 shadow-sm transition-all whitespace-nowrap" id="btn-add-location" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+          Add Location
+        </button>
+</div>
+<!-- Tag Cloud & Preset Cards -->
+<div class="flex flex-col gap-space-md">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span>Active Location Badges</span>
+<span class="font-label-code text-label-code text-on-surface-variant font-normal">(Click '×' to remove)</span>
+</h3>
+<div class="flex flex-wrap gap-2.5" id="locations-cloud">
+<div class="location-badge flex items-center gap-2 bg-surface-container px-3.5 py-2 rounded-xl group hover:bg-surface-container-high transition-all">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-body-md text-body-md text-on-surface">coffee shop outdoor bernuansa kayu minimalis</span>
+<button class="text-on-surface-variant hover:text-error transition-colors p-0.5 rounded" title="Remove" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="location-badge flex items-center gap-2 bg-surface-container px-3.5 py-2 rounded-xl group hover:bg-surface-container-high transition-all">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-body-md text-body-md text-on-surface">pedestrian trotoar kota modern bernuansa senja</span>
+<button class="text-on-surface-variant hover:text-error transition-colors p-0.5 rounded" title="Remove" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="location-badge flex items-center gap-2 bg-surface-container px-3.5 py-2 rounded-xl group hover:bg-surface-container-high transition-all">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-body-md text-body-md text-on-surface">studio aesthetic background abu-abu clean</span>
+<button class="text-on-surface-variant hover:text-error transition-colors p-0.5 rounded" title="Remove" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="location-badge flex items-center gap-2 bg-surface-container px-3.5 py-2 rounded-xl group hover:bg-surface-container-high transition-all">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-body-md text-body-md text-on-surface">living room minimalis pencahayaan jendela pagi</span>
+<button class="text-on-surface-variant hover:text-error transition-colors p-0.5 rounded" title="Remove" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="location-badge flex items-center gap-2 bg-surface-container px-3.5 py-2 rounded-xl group hover:bg-surface-container-high transition-all">
+<span class="w-2 h-2 rounded-full bg-primary-fixed"></span>
+<span class="font-body-md text-body-md text-on-surface">taman kota sore hari golden hour hangat</span>
+<button class="text-on-surface-variant hover:text-error transition-colors p-0.5 rounded" title="Remove" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="location-badge flex items-center gap-2 bg-surface-container px-3.5 py-2 rounded-xl group hover:bg-surface-container-high transition-all">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span>
+<span class="font-body-md text-body-md text-on-surface">rooftop mall metropolitan view lampu gedung malam</span>
+<button class="text-on-surface-variant hover:text-error transition-colors p-0.5 rounded" title="Remove" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+</section>
+<!-- SECTION D: MASTER TEMPLATES EDITOR -->
+<section class="tab-pane flex flex-col gap-space-lg" id="section-templates">
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface flex items-center gap-2">
+<span>Master Prompt Templates</span>
+</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            These system prompts compile input variables into full image/video instructions. Placeholders like <code class="font-label-code text-label-code text-primary bg-surface-container px-1 py-0.5 rounded">{tempat}</code> and <code class="font-label-code text-label-code text-secondary bg-surface-container px-1 py-0.5 rounded">{Script gerak bibir}</code> get replaced automatically.
+          </p>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="font-label-code text-label-code text-on-surface-variant">Compiler Syntax: Validated</span>
+</div>
+</div>
+<!-- Split Column Master Prompt Editors -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg">
+<!-- Column 1: Female Template -->
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-8 h-8 rounded-lg bg-tertiary-container/30 text-tertiary flex items-center justify-center font-headline-sm text-headline-sm"></span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Template Cewek (Female Model)</h3>
+<span class="font-label-badge text-label-badge text-tertiary uppercase">Gender: Cewek • Model: Indonesian Female</span>
+</div>
+</div>
+<button class="p-1 rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-on-surface" title="Reset default" type="button">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+</button>
+</div>
+<div class="relative flex flex-col">
+<div class="bg-surface-container-lowest text-on-surface-variant px-3 py-1.5 rounded-t-lg font-label-code text-label-code flex items-center justify-between">
+<span>gemini_prompt_female_v2.prompt</span>
+<span class="text-tertiary">2 Variable Hooks Detected</span>
+</div>
+<textarea class="w-full bg-surface-container-lowest p-space-md rounded-b-lg font-label-code text-label-code text-on-surface focus:outline-none focus:ring-1 focus:ring-tertiary shadow-inner resize-y leading-relaxed" id="tpl-female" rows="12">Video vertikal 9:16 sinematik TikTok / Reels. Seorang model wanita Indonesia muda usia 22 tahun, berparas cantik natural, senyum ramah dan ekspresif.
+Ia sedang berada di {tempat}, pencahayaan alami terang bernuansa clean warm aesthetic.
+Model mengenakan {produk} yang tampak sangat pas, rapi, dan jatuh kainnya terlihat sangat berkualitas tinggi.
+Model menatap langsung ke kamera smartphone dan berbicara aktif (lip-sync realistis) dengan intonasi natural:
+"{Script gerak bibir}"
+Kamera bergerak smooth handheld tracking shot, 4k ultra realistic, high-fidelity fabric details, depth of field blur lembut di latar belakang.</textarea>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span>Character count: 684</span>
+<span class="font-label-code text-label-code text-primary">Token estimate: ~142</span>
+</div>
+</div>
+<!-- Column 2: Male Template -->
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-8 h-8 rounded-lg bg-secondary-container/30 text-secondary flex items-center justify-center font-headline-sm text-headline-sm"></span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Template Cowok (Male Model)</h3>
+<span class="font-label-badge text-label-badge text-secondary uppercase">Gender: Cowok • Model: Indonesian Male</span>
+</div>
+</div>
+<button class="p-1 rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-on-surface" title="Reset default" type="button">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+</button>
+</div>
+<div class="relative flex flex-col">
+<div class="bg-surface-container-lowest text-on-surface-variant px-3 py-1.5 rounded-t-lg font-label-code text-label-code flex items-center justify-between">
+<span>gemini_prompt_male_v2.prompt</span>
+<span class="text-secondary">2 Variable Hooks Detected</span>
+</div>
+<textarea class="w-full bg-surface-container-lowest p-space-md rounded-b-lg font-label-code text-label-code text-on-surface focus:outline-none focus:ring-1 focus:ring-secondary shadow-inner resize-y leading-relaxed" id="tpl-male" rows="12">Video vertikal 9:16 sinematik modern casual TikTok / Reels. Seorang pria Indonesia muda usia 24 tahun, berpenampilan rapi maskulin dan percaya diri.
+Ia sedang berada di {tempat}, dengan ambient lighting estetik dan modern city contrast.
+Model memakai {produk} dengan fitting pas di badan, menunjukkan kenyamanan dan fleksibilitas bahan pakaian.
+Model berbicara santai dan percaya diri langsung ke arah lensa kamera (gerakan bibir natural sinkron):
+"{Script gerak bibir}"
+Gaya kamera low-angle subtle tilt, warna tajam kontras netral, 4k 60fps cinematic look, shallow depth of field.</textarea>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span>Character count: 671</span>
+<span class="font-label-code text-label-code text-secondary">Token estimate: ~139</span>
+</div>
+</div>
+</div>
+<!-- Template Bottom Compiler Bar -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col sm:flex-row items-center justify-between gap-space-md shadow-md">
+<div class="flex items-center gap-space-sm text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">sync</span>
+<span>Auto-compiles instantly into active Generator queue</span>
+<span class="text-outline-variant">•</span>
+<span class="font-label-code text-label-code text-on-surface" id="sync-timestamp">Last synced: 2 minutes ago</span>
+</div>
+<button class="w-full sm:w-auto px-space-lg py-2.5 rounded-lg bg-primary hover:bg-primary/90 text-on-primary font-headline-sm text-headline-sm flex items-center justify-center gap-2 shadow-[0_0_16px_rgba(192,193,255,0.3)] transition-all" id="btn-recompile" type="button">
+<span class="material-symbols-outlined text-[18px]">electric_bolt</span>
+          Save &amp; Recompile All Templates
+        </button>
+</div>
+</section>
+</div>
+<!-- Interactive JavaScript Behavior -->
+<script>
+    (function () {
+      // 1. Tab Switching Functionality
+      const tabButtons = document.querySelectorAll('.tab-button');
+      const tabPanes = document.querySelectorAll('.tab-pane');
+
+      tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const targetId = button.getAttribute('data-tab-target');
+
+          // Reset all tabs styles
+          tabButtons.forEach(btn => {
+            btn.classList.remove('bg-surface-container-high', 'text-primary', 'shadow-[0_0_12px_rgba(128,131,255,0.18)]');
+            btn.classList.add('text-on-surface-variant');
+          });
+
+          // Set active button style
+          button.classList.add('bg-surface-container-high', 'text-primary', 'shadow-[0_0_12px_rgba(128,131,255,0.18)]');
+          button.classList.remove('text-on-surface-variant');
+
+          // Switch panes with smooth scroll or display toggle
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // 2. Add New Product Interaction
+      const formAddProduct = document.getElementById('form-add-product');
+      const prodNameInput = document.getElementById('prod-name-input');
+      const prodCatInput = document.getElementById('prod-category-input');
+      const productsTableBody = document.getElementById('products-table-body');
+
+      if (formAddProduct) {
+        formAddProduct.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const name = prodNameInput.value.trim();
+          const category = prodCatInput.value.trim() || 'General Apparel';
+          const genderInput = document.querySelector('input[name="prod-gender"]:checked');
+          const gender = genderInput ? genderInput.value : 'Cewek';
+
+          if (!name) {
+            alert('Please enter a product name');
+            return;
+          }
+
+          const isFemale = gender === 'Cewek';
+          const badgeClass = isFemale 
+            ? 'bg-tertiary-container/20 text-tertiary' 
+            : 'bg-secondary-container/20 text-secondary';
+          const dotColor = isFemale ? 'bg-tertiary' : 'bg-secondary';
+          const iconColor = isFemale ? 'text-primary' : 'text-secondary';
+
+          const newRow = document.createElement('tr');
+          newRow.className = 'hover:bg-surface-container/60 transition-colors animate-pulse';
+          newRow.innerHTML = `
+            <td class="px-space-lg py-space-md">
+              <div class="flex items-center gap-space-sm">
+                <div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center ${iconColor}">
+                  <span class="material-symbols-outlined text-[20px]">checkroom</span>
+                </div>
+                <div>
+                  <div class="font-headline-sm text-headline-sm text-on-surface">${name}</div>
+                  <div class="font-body-sm text-body-sm text-on-surface-variant">${category} • New SKU</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-space-md py-space-md">
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full ${badgeClass} font-label-badge text-label-badge uppercase">
+                <span class="w-1.5 h-1.5 rounded-full ${dotColor}"></span>
+                ${isFemale ? 'Cewek' : 'Cowok'}
+              </span>
+            </td>
+            <td class="px-space-md py-space-md">
+              <div class="flex items-center gap-1.5 font-label-code text-label-code text-on-surface">
+                <span class="material-symbols-outlined text-secondary text-[16px]">graphic_eq</span>
+                0 Linked Scripts
+              </div>
+            </td>
+            <td class="px-space-md py-space-md">
+              <span class="inline-flex items-center gap-1 text-secondary font-label-badge text-label-badge">
+                <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                ACTIVE
+              </span>
+            </td>
+            <td class="px-space-lg py-space-md text-right">
+              <div class="flex items-center justify-end gap-1">
+                <button type="button" class="p-1.5 rounded-lg hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-all">
+                  <span class="material-symbols-outlined text-[18px]">edit</span>
+                </button>
+                <button type="button" onclick="this.closest('tr').remove()" class="p-1.5 rounded-lg hover:bg-error-container/30 text-on-surface-variant hover:text-error transition-all">
+                  <span class="material-symbols-outlined text-[18px]">delete</span>
+                </button>
+              </div>
+            </td>
+          `;
+
+          productsTableBody.prepend(newRow);
+          prodNameInput.value = '';
+          prodCatInput.value = '';
+          setTimeout(() => newRow.classList.remove('animate-pulse'), 1200);
+        });
+      }
+
+      // 3. Add Script Interaction
+      const btnAddScript = document.getElementById('btn-add-script');
+      const inputNewScript = document.getElementById('input-new-script');
+      const scriptsContainer = document.getElementById('scripts-container');
+
+      if (btnAddScript && inputNewScript && scriptsContainer) {
+        btnAddScript.addEventListener('click', () => {
+          const text = inputNewScript.value.trim();
+          if (!text) return;
+
+          const card = document.createElement('div');
+          card.className = 'bg-surface-container-low p-space-lg rounded-xl flex flex-col justify-between gap-space-md shadow-sm hover:shadow-md transition-all group animate-fade-in';
+          card.innerHTML = `
+            <div class="flex flex-col gap-space-sm">
+              <div class="flex items-center justify-between">
+                <span class="font-label-badge text-label-badge bg-primary-container/20 text-primary px-2 py-0.5 rounded-full uppercase">Variation #New • Custom Lip-Sync</span>
+                <div class="flex items-center gap-1 font-label-code text-label-code text-secondary">
+                  <span class="material-symbols-outlined text-[16px]">timer</span>
+                  ~3.6s speech
+                </div>
+              </div>
+              <p class="font-body-lg text-body-lg text-on-surface italic">
+                "${text}"
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-space-sm bg-surface-container-low">
+              <span class="font-label-code text-label-code text-on-surface-variant flex items-center gap-1">
+                <span class="material-symbols-outlined text-[16px] text-primary">analytics</span>
+                Used 0 times • Pending
+              </span>
+              <div class="flex items-center gap-1">
+                <button type="button" class="p-1.5 rounded-lg hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-all">
+                  <span class="material-symbols-outlined text-[18px]">edit</span>
+                </button>
+                <button type="button" onclick="this.closest('.group').remove()" class="p-1.5 rounded-lg hover:bg-error-container/30 text-on-surface-variant hover:text-error transition-all">
+                  <span class="material-symbols-outlined text-[18px]">delete</span>
+                </button>
+              </div>
+            </div>
+          `;
+
+          scriptsContainer.prepend(card);
+          inputNewScript.value = '';
+        });
+      }
+
+      // 4. Add Location Tag
+      const btnAddLocation = document.getElementById('btn-add-location');
+      const inputNewLocation = document.getElementById('input-new-location');
+      const locationsCloud = document.getElementById('locations-cloud');
+
+      if (btnAddLocation && inputNewLocation && locationsCloud) {
+        btnAddLocation.addEventListener('click', () => {
+          const locText = inputNewLocation.value.trim();
+          if (!locText) return;
+
+          const badge = document.createElement('div');
+          badge.className = 'location-badge flex items-center gap-2 bg-surface-container px-3.5 py-2 rounded-xl group hover:bg-surface-container-high transition-all';
+          badge.innerHTML = `
+            <span class="w-2 h-2 rounded-full bg-secondary"></span>
+            <span class="font-body-md text-body-md text-on-surface">${locText}</span>
+            <button type="button" onclick="this.parentElement.remove()" class="text-on-surface-variant hover:text-error transition-colors p-0.5 rounded">
+              <span class="material-symbols-outlined text-[16px]">close</span>
+            </button>
+          `;
+          locationsCloud.appendChild(badge);
+          inputNewLocation.value = '';
+        });
+      }
+
+      // 5. Recompile & Save Buttons Feedback
+      const btnRecompile = document.getElementById('btn-recompile');
+      const btnSaveAll = document.getElementById('btn-save-all');
+      const syncTimestamp = document.getElementById('sync-timestamp');
+
+      function triggerSaveFeedback(btn, message) {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin">autorenew</span> ${message}`;
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          if (syncTimestamp) syncTimestamp.textContent = 'Last synced: Just now';
+        }, 800);
+      }
+
+      if (btnRecompile) {
+        btnRecompile.addEventListener('click', () => triggerSaveFeedback(btnRecompile, 'Recompiling...'));
+      }
+      if (btnSaveAll) {
+        btnSaveAll.addEventListener('click', () => triggerSaveFeedback(btnSaveAll, 'Saving...'));
+      }
+
+      // 6. Remove existing location badges
+      document.querySelectorAll('.location-badge button').forEach(b => {
+        b.addEventListener('click', (e) => {
+          e.currentTarget.closest('.location-badge').remove();
+        });
+      });
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest py-space-md mt-auto shadow-[0_-1px_8px_rgba(0,0,0,0.2)]"><div class="w-full px-gutter flex flex-col md:flex-row items-center justify-between gap-space-sm text-on-surface-variant font-body-sm text-body-sm"><div class="flex items-center gap-space-sm"><span>Promptify Script © 2025</span><span class="text-outline-variant">•</span><span>Accelerated Video Retaining Engine</span></div><div class="flex items-center gap-space-md font-label-code text-label-code text-on-surface-variant"><span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>Gemini 1.5 Pro Connected</span></div></div></footer></body></html>

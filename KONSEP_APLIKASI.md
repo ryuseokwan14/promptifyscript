@@ -27,10 +27,15 @@ Menyimpan variasi naskah ucapan/gerak bibir model. **Hanya aktif jika produk ter
 * `product_id`: Foreign Key ke `Product.id`
 * `script_teks`: text (contoh: *"Bahan linennya bener-bener adem dan jatuh banget pas dipake jalan..."*)
 
-### C. Tabel `Tempat` (Bank Lokasi & Suasana)
-Variasi lokasi tempat pengambilan video (bisa global atau multi-kategori).
-* `id`: string / integer (Primary Key)
-* `nama_tempat`: string (contoh: *"pedestrian trotoar kota dengan pepohonan rindang"*, *"coffee shop outdoor bernuansa kayu minimalis"*, *"ruang tamu aesthetic dengan cahaya alami jendela"*)
+### C. Tabel `Location` / `Tempat` (Bank Lokasi & Suasana Berbasis Vibe)
+Variasi lokasi tempat pengambilan video dengan sistem kategorisasi Vibe Persona:
+* `id`: string (Primary Key)
+* `nama_tempat`: string (contoh: *"coffee shop outdoor bernuansa kayu minimalis"*, *"underground subway tunnel brutalist"*)
+* `vibe`: enum / string:
+  1. `casual_aesthetic` (Santai / Aesthetic — misal: Kulot, Skirt, Blouse, Knitwear)
+  2. `urban_adventure` (Adventure / Streetwear — misal: Cargo, Tactical, Jacket, Hoodie)
+  3. `universal` (Universal — misal: Studio Clean Grey, Living Room Cahaya Pagi)
+* **Logika Injeksi:** Saat produk di-generate, sistem memfilter lokasi sesuai kesesuaian vibe produk + lokasi universal.
 
 ### D. Tabel `Master_Prompt_Template` (Berdasarkan Gender)
 Format baku super prompt yang diisi secara otomatis:
@@ -68,12 +73,26 @@ Format baku super prompt yang diisi secara otomatis:
    * Simple, modern dark mode.
    * Input email/password & tombol sign-in cepat.
 2. **Dashboard Generator (Halaman Utama Harian):**
-   * Selector Kartu Produk (lengkap dengan badge gender: 👩 Wanita / 👨 Pria).
-   * Tombol besar **"Generate Prompt ⚡"** & **"Re-roll / Acak Lagi 🎲"**.
+   * Selector Kartu Produk (lengkap dengan badge gender: Wanita / Pria).
+   * Tombol besar **"Generate Prompt"** & **"Re-roll / Acak Lagi"**.
    * Output Box dengan teks prompt yang sudah dirakit.
-   * Tombol besar **"Copy to Clipboard 📋"** dengan notifikasi toast.
+   * Tombol besar **"Copy to Clipboard"** dengan notifikasi toast.
 3. **Pengaturan / Data Management (CRUD):**
    * **Kelola Produk:** Tambah/edit/hapus produk + set gender (Cewek/Cowok).
    * **Kelola Script Gerak Bibir:** Filter per produk, tambah banyak variasi script ucapan.
    * **Kelola Bank Tempat:** Tambah/edit/hapus list lokasi.
    * **Kelola Master Template:** Edit teks master prompt pria & wanita.
+
+---
+
+## 5. Kebijakan Keamanan & Autentikasi (Strict Kick-Session Auth)
+
+* **Model Sesi: Kick Session (Zero Persistent Session)**
+  * Tidak menggunakan sesi jangka panjang (*No persistent Remember Me*).
+  * Setiap kali browser/tab ditutup atau pengguna keluar dari web, sesi langsung hangus (*session-only cookie / auto-kick*).
+* **Alur Akses:**
+  * Pengguna wajib **LOGIN DULU** setiap kali mengakses URL web baru.
+  * Jika belum login / sesi habis, Middleware Next.js langsung me-redirect akses root (`/`) dan semua sub-halaman ke `/login`.
+  * Setelah kredensial terverifikasi di Supabase Auth, pengguna baru diizinkan masuk ke halaman utama (*Generator Studio*).
+
+

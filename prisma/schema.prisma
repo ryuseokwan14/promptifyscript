@@ -1,0 +1,59 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// 1. Data Produk (Master Catalog)
+model Product {
+  id              String       @id @default(cuid())
+  name            String
+  gender          String       // "female" | "male"
+  itemDesc        String?
+  icon            String?
+  imageUrl        String?
+  imageFit        String?
+  imageTexture    String?
+  imageAtmosphere String?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  scripts         ScriptItem[]
+}
+
+// 2. Data Script Dialog Gerak Bibir (Relasi 1:N ke Product)
+model ScriptItem {
+  id               String   @id @default(cuid())
+  productId        String
+  product          Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  text             String   @db.Text
+  variationType    String?
+  estimatedSeconds Float?
+  retention        Int?     @default(90)
+  usedCount        Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([productId])
+}
+
+// 3. Bank Lokasi Suasana Video (dengan sistem Vibe Mode)
+model Location {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  vibe      String   @default("universal") // "casual_aesthetic" | "urban_adventure" | "universal"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// 4. Master Prompt Blueprint
+model MasterTemplate {
+  id        String   @id @default(cuid())
+  gender    String   @unique // "female" | "male"
+  content   String   @db.Text
+  updatedAt DateTime @updatedAt
+}
