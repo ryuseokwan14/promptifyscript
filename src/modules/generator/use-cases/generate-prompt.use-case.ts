@@ -3,6 +3,7 @@ import { scriptRepository } from "@/modules/scripts/repositories/script.reposito
 import { locationRepository } from "@/modules/locations/repositories/location.repository";
 import { templateRepository } from "@/modules/templates/repositories/template.repository";
 import { GeneratePromptInput, GeneratePromptSchema } from "../schemas/generate-prompt.schema";
+import { deckRotator } from "../utils/deck-rotator";
 
 export class GeneratePromptUseCase {
   async execute(input: GeneratePromptInput) {
@@ -13,38 +14,41 @@ export class GeneratePromptUseCase {
       throw new Error(`Produk dengan ID ${validated.productId} tidak ditemukan.`);
     }
 
-    // 1. Tentukan Vibe Lokasi Berdasarkan Karakter Produk & Gender (3-Mode System)
-    const isUrbanOrAdventure =
-      product.name.toLowerCase().includes("cargo") ||
-      product.name.toLowerCase().includes("boxy") ||
-      product.name.toLowerCase().includes("jacket") ||
-      product.gender === "male";
-
-    const targetVibes = isUrbanOrAdventure
-      ? ["urban_adventure", "universal"]
-      : ["casual_aesthetic", "universal"];
-
-    let eligibleLocations = await locationRepository.findByVibe(targetVibes);
-    if (eligibleLocations.length === 0) {
-      eligibleLocations = await locationRepository.findAll();
+    // 1. Ambil Lokasi dari Seluruh Bank Data (Rotasi Non-Repeating Adil)
+    const allLocations = await locationRepository.findAll();
+    let selectedLocation = validated.overrideLocation;
+    if (!selectedLocation) {
+      if (allLocations.length > 0) {
+        const picked = deckRotator.pickNonRepeating(
+          "server_locations",
+          allLocations,
+          (l) => l.name
+        );
+        selectedLocation = picked ? picked.name : allLocations[0].name;
+      } else {
+        selectedLocation = "clean grey seamless photo studio dengan soft lighting";
+      }
     }
 
-    const selectedLocation =
-      validated.overrideLocation ||
-      (eligibleLocations.length > 0
-        ? eligibleLocations[Math.floor(Math.random() * eligibleLocations.length)].name
-        : "clean grey seamless photo studio dengan soft lighting");
-
-    // 2. Ambil Script Dialog Gerak Bibir Terkait Produk
+    // 2. Ambil Script Dialog Gerak Bibir Terkait Produk (Rotasi Non-Repeating Merata)
     const scripts = await scriptRepository.findByProductId(product.id);
     let selectedScriptText = validated.overrideScriptText || "";
     let selectedScriptId: string | null = null;
 
     if (!selectedScriptText) {
       if (scripts.length > 0) {
-        const picked = scripts[Math.floor(Math.random() * scripts.length)];
-        selectedScriptText = picked.text;
-        selectedScriptId = picked.id;
+        const picked = deckRotator.pickNonRepeating(
+          `server_scripts_${product.id}`,
+          scripts,
+          (s) => s.id
+        );
+        if (picked) {
+          selectedScriptText = picked.text;
+          selectedScriptId = picked.id;
+        } else {
+          selectedScriptText = scripts[0].text;
+          selectedScriptId = scripts[0].id;
+        }
       } else {
         selectedScriptText =
           product.gender === "female"

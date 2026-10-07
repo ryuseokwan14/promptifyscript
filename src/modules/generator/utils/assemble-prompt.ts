@@ -1,4 +1,5 @@
 import { Product, ScriptItem, MasterTemplates, GenerationResult } from "@/types";
+import { deckRotator } from "./deck-rotator";
 
 interface CompilePromptOptions {
   product: Product;
@@ -17,60 +18,41 @@ export function compileVideoPrompt({
   overrideLocation,
   overrideScriptText,
 }: CompilePromptOptions): GenerationResult {
-  // 1. Tentukan Vibe Lokasi Berdasarkan Karakter Produk & Gender
-  const isUrbanOrAdventure =
-    product.name.toLowerCase().includes("cargo") ||
-    product.name.toLowerCase().includes("boxy") ||
-    product.name.toLowerCase().includes("jacket") ||
-    product.gender === "male";
-
-  // Filter lokasi santai vs adventure jika nama mengandung kata kunci
-  let eligibleLocations = locations;
-  if (isUrbanOrAdventure) {
-    const matched = locations.filter(
-      (l) =>
-        l.includes("tunnel") ||
-        l.includes("subway") ||
-        l.includes("skatepark") ||
-        l.includes("rooftop") ||
-        l.includes("industrial") ||
-        l.includes("jembatan") ||
-        l.includes("studio") ||
-        l.includes("living")
-    );
-    if (matched.length > 0) eligibleLocations = matched;
-  } else {
-    const matched = locations.filter(
-      (l) =>
-        l.includes("coffee") ||
-        l.includes("pedestrian") ||
-        l.includes("teras") ||
-        l.includes("taman") ||
-        l.includes("gallery") ||
-        l.includes("studio") ||
-        l.includes("living")
-    );
-    if (matched.length > 0) eligibleLocations = matched;
+  // 1. Pilih Lokasi dari Seluruh Bank Data (Rotasi Non-Repeating Adil)
+  let selectedLocation = overrideLocation;
+  if (!selectedLocation) {
+    if (locations.length > 0) {
+      const picked = deckRotator.pickNonRepeating(
+        "generator_locations",
+        locations,
+        (l) => l
+      );
+      selectedLocation = picked || locations[0];
+    } else {
+      selectedLocation = "clean grey seamless photo studio dengan soft lighting";
+    }
   }
 
-  const selectedLocation =
-    overrideLocation ||
-    (eligibleLocations.length > 0
-      ? eligibleLocations[Math.floor(Math.random() * eligibleLocations.length)]
-      : "clean grey seamless photo studio dengan soft lighting");
-
-  // 2. Ambil Script Dialog Gerak Bibir Terkait Produk
+  // 2. Ambil Script Dialog Gerak Bibir Terkait Produk (Rotasi Non-Repeating Merata)
   const productScripts = scripts.filter((s) => s.productId === product.id);
   const fallbackScript =
     product.gender === "female"
       ? "Bahan ini beneran halus dan adem banget, cuttingannya pas bikin look keliatan effortless!"
       : "Fittingnya beneran pas, bahan kuat dan nyaman banget dipake harian!";
 
-  const selectedScript =
-    overrideScriptText ||
-    (productScripts.length > 0
-      ? productScripts[Math.floor(Math.random() * productScripts.length)].text
-      : fallbackScript);
+  let selectedScript = overrideScriptText;
+  if (!selectedScript) {
+    if (productScripts.length > 0) {
+      const picked = deckRotator.pickNonRepeating(
+        `generator_scripts_${product.id}`,
+        productScripts,
+        (s) => s.id || s.text
+      );
+      selectedScript = picked?.text || fallbackScript;
+    } else {
+      selectedScript = fallbackScript;
+    }
+  }
 
   // 3. Ambil Master Template Sesuai Gender
   const templateText = product.gender === "female" ? templates.female : templates.male;

@@ -8,5 +8,8 @@ export { GeneratedPromptModal } from "./components/generated-prompt-modal";
 export * from "./schemas/generate-prompt.schema";
 export * from "./use-cases/generate-prompt.use-case";
 export * from "./actions/generate-prompt.action";
+export { deckRotator } from "./utils/deck-rotator";
+export { compileVideoPrompt } from "./utils/assemble-prompt";
 export type * from "./types/generator.types";
+
 
