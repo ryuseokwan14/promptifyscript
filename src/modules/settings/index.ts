@@ -7,8 +7,8 @@ export { ScriptsTable } from "./components/scripts-table";
 export { LocationsTab } from "./components/locations-tab";
 export { LocationsTable } from "./components/locations-table";
 export { MasterTemplatesTab } from "./components/master-templates-tab";
+export { SecurityTab } from "./components/security-tab";
 export { EditProductModal } from "./components/edit-product-modal";
 export { EditLocationModal } from "./components/edit-location-modal";
 export { useUnsavedWarning } from "./hooks/use-unsaved-warning";
 export type * from "./types/settings.types";
-

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { Product, ScriptItem, LocationItem, MasterTemplates, User, GenerationResult } from "@/types";
 import { AppContext } from "./app-context";
 import {
@@ -27,29 +28,37 @@ import {
   updateTemplatesAction,
   resetTemplatesAction,
 } from "@/modules/templates";
+import { getCurrentUserAction, logoutAction } from "@/modules/auth";
 import { compileVideoPrompt } from "@/modules/generator/utils/assemble-prompt";
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [scripts, setScripts] = useState<ScriptItem[]>([]);
   const [locations, setLocations] = useState<string[]>([]);
   const [locationItems, setLocationItems] = useState<LocationItem[]>([]);
   const [templates, setTemplates] = useState<MasterTemplates>({ female: "", male: "" });
-  const [user, setUser] = useState<User | null>({
-    email: "creator@promptify.ai",
-    name: "Prompt Creator",
-  });
+  const [user, setUser] = useState<User | null>(null);
+  const [creatorEmail, setCreatorEmail] = useState<string>("najmishfwn@gmail.com");
   const [activeProductId, setActiveProductId] = useState<string>("");
   const [isLoaded, setIsLoaded] = useState(false);
 
   const refreshData = useCallback(async () => {
     try {
-      const [prodRes, scrRes, locRes, tplRes] = await Promise.all([
+      const [prodRes, scrRes, locRes, tplRes, authRes] = await Promise.all([
         getProductsAction(),
         getScriptsAction(),
         getLocationsAction(),
         getTemplatesAction(),
+        getCurrentUserAction(),
       ]);
+
+      if (authRes.user) {
+        setUser(authRes.user);
+      }
+      if (authRes.creatorEmail) {
+        setCreatorEmail(authRes.creatorEmail);
+      }
 
       if (prodRes.success && prodRes.data) {
         const prodList = prodRes.data as unknown as Product[];
@@ -225,13 +234,34 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const login = (email: string) => {
-    const u: User = { email, name: email.split("@")[0] || "Creator" };
+  const login = (email: string, role?: "SUPERADMIN" | "CREATOR") => {
+    const isSuper = role === "SUPERADMIN" || email === "superadmin121";
+    const u: User = {
+      email,
+      name: isSuper ? "Master Superadmin" : email.split("@")[0] || "Creator",
+      role: isSuper ? "SUPERADMIN" : "CREATOR",
+    };
     setUser(u);
   };
 
-  const logout = () => {
-    setUser(null);
+  const logout = async () => {
+    try {
+      await logoutAction();
+    } finally {
+      setUser(null);
+      router.push("/login");
+      router.refresh();
+    }
+  };
+
+  const refreshCurrentUser = async () => {
+    const authRes = await getCurrentUserAction();
+    if (authRes.user) {
+      setUser(authRes.user);
+    }
+    if (authRes.creatorEmail) {
+      setCreatorEmail(authRes.creatorEmail);
+    }
   };
 
   const generatePrompt = (productId?: string): GenerationResult | null => {
@@ -256,6 +286,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         locationItems,
         templates,
         user,
+        creatorEmail,
+        refreshCurrentUser,
         activeProductId,
         setActiveProductId,
         addProduct,

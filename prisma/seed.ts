@@ -159,6 +159,25 @@ async function main() {
     }
   }
 
+  // 4. Seed Default Creator User
+  console.log("Seeding Default Creator User...");
+  const existingCreator = await prisma.appUser.findFirst({
+    where: { role: "CREATOR" },
+  });
+  if (!existingCreator) {
+    const crypto = await import("crypto");
+    const salt = crypto.randomBytes(16).toString("hex");
+    const hash = crypto.createHmac("sha256", salt).update("184004@Najmi").digest("hex");
+    await prisma.appUser.create({
+      data: {
+        email: "najmishfwn@gmail.com",
+        password: `${salt}:${hash}`,
+        role: "CREATOR",
+      },
+    });
+    console.log("Default Creator (najmishfwn@gmail.com) created.");
+  }
+
   console.log("[OK] Database seeding completed successfully!");
 }
 

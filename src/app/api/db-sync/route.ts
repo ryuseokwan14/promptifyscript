@@ -6,6 +6,7 @@ import { productRepository } from "@/modules/products/repositories/product.repos
 import { getLocationsUseCase } from "@/modules/locations/use-cases/get-locations.use-case";
 import { getScriptsUseCase } from "@/modules/scripts/use-cases/get-scripts.use-case";
 import { getTemplatesUseCase } from "@/modules/templates/use-cases/get-templates.use-case";
+import { resetCreatorUseCase } from "@/modules/auth/use-cases/reset-creator.use-case";
 
 export async function GET() {
   try {
@@ -63,6 +64,14 @@ export async function POST(req: Request) {
         imageAtmosphere: product.imageAtmosphere,
       });
       return NextResponse.json({ success: true, data: updated });
+    }
+
+    if (action === "update-creator" && body.password) {
+      const resetRes = await resetCreatorUseCase.execute({
+        email: body.email,
+        newPassword: body.password,
+      });
+      return NextResponse.json({ success: true, data: resetRes });
     }
 
     // Default full sync products

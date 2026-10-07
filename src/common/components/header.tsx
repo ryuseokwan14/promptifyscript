@@ -3,17 +3,15 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useApp } from "@/common/context/app-context";
 
 export function Header() {
   const pathname = usePathname();
-  const router = useRouter();
   const { user, logout } = useApp();
 
-  const handleLogout = () => {
-    logout();
-    router.push("/login");
+  const handleLogout = async () => {
+    await logout();
   };
 
   const isGenerator = pathname === "/";
@@ -70,30 +68,43 @@ export function Header() {
 
         <div className="flex items-center gap-space-sm">
           {user ? (
-            <>
+            <div className="flex items-center gap-2">
+              <div className="hidden sm:flex flex-col text-right">
+                <span className="text-xs font-semibold text-on-surface leading-tight">
+                  {user.role === "SUPERADMIN" ? "superadmin121" : user.name}
+                </span>
+                <span className="text-[10px] text-on-surface-variant font-label-code">
+                  {user.role === "SUPERADMIN" ? "Master Superadmin" : user.email}
+                </span>
+              </div>
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center shadow-md ${
+                  user.role === "SUPERADMIN"
+                    ? "bg-secondary text-surface-container-lowest shadow-[0_0_12px_rgba(76,215,246,0.35)]"
+                    : "bg-primary text-on-primary shadow-[0_0_12px_rgba(128,131,255,0.35)]"
+                }`}
+                title={`${user.email} (${user.role})`}
+              >
+                <span className="material-symbols-outlined text-[18px]">
+                  {user.role === "SUPERADMIN" ? "shield" : "person"}
+                </span>
+              </div>
               <button
                 onClick={handleLogout}
                 className="w-9 h-9 rounded-lg bg-surface-container-low hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant hover:text-error transition-all cursor-pointer"
-                title="Sign Out"
+                title="Keluar (Kick Session)"
                 type="button"
               >
                 <span className="material-symbols-outlined text-[18px]">logout</span>
               </button>
-              <div
-                className="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_0_12px_rgba(192,193,255,0.35)]"
-                title={user.email}
-              >
-                <span className="material-symbols-outlined text-on-primary text-[18px]">
-                  person
-                </span>
-              </div>
-            </>
+            </div>
           ) : (
             <Link
               href="/login"
-              className="px-3 py-1.5 rounded-lg bg-primary-container text-on-primary-container font-headline-sm text-xs hover:brightness-110 transition"
+              className="px-3 py-1.5 rounded-lg bg-primary-container text-on-primary-container font-headline-sm text-xs hover:brightness-110 transition flex items-center gap-1.5"
             >
-              Sign In
+              <span className="material-symbols-outlined text-[16px]">login</span>
+              <span>Masuk</span>
             </Link>
           )}
         </div>

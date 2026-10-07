@@ -24,8 +24,10 @@ export interface AppContextType {
   deleteLocation: (location: string) => Promise<void>;
   updateTemplates: (female: string, male: string) => Promise<void>;
   resetTemplates: () => Promise<void>;
-  login: (email: string) => void;
-  logout: () => void;
+  login: (email: string, role?: "SUPERADMIN" | "CREATOR") => void;
+  logout: () => Promise<void>;
+  creatorEmail: string;
+  refreshCurrentUser: () => Promise<void>;
   generatePrompt: (productId?: string) => GenerationResult | null;
   refreshData: () => Promise<void>;
   isLoaded: boolean;

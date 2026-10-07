@@ -13,6 +13,7 @@ import {
   ScriptsTab,
   LocationsTab,
   MasterTemplatesTab,
+  SecurityTab,
   SettingsTab,
   useUnsavedWarning,
 } from "@/modules/settings";
@@ -24,6 +25,9 @@ export default function DataSettingsPage() {
     locations,
     locationItems,
     templates,
+    user,
+    creatorEmail,
+    refreshCurrentUser,
     addProduct,
     updateProduct,
     deleteProduct,
@@ -163,6 +167,13 @@ export default function DataSettingsPage() {
                 hasUnsavedChanges={hasUnsavedChanges}
                 onDraftChange={handleDraftChange}
                 onSaveTemplates={handleSaveAll}
+              />
+            )}
+            {activeTab === "security" && (
+              <SecurityTab
+                user={user}
+                creatorEmail={creatorEmail}
+                onRefreshUser={refreshCurrentUser}
               />
             )}
           </div>

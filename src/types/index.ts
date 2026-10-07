@@ -36,6 +36,7 @@ export interface MasterTemplates {
 export interface User {
   email: string;
   name: string;
+  role: "SUPERADMIN" | "CREATOR";
 }
 
 export interface GenerationResult {

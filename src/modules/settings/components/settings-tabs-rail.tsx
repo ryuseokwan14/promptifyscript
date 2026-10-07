@@ -81,6 +81,19 @@ export function SettingsTabsRail({
           Live
         </span>
       </button>
+
+      <button
+        type="button"
+        onClick={() => onTabChange("security")}
+        className={`flex items-center gap-space-xs px-space-lg py-2.5 rounded-xl font-headline-sm text-[15px] transition-all cursor-pointer ${
+          activeTab === "security"
+            ? "bg-surface-container-high text-primary font-medium shadow-[0_0_12px_rgba(128,131,255,0.18)]"
+            : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container"
+        }`}
+      >
+        <span className="material-symbols-outlined text-[18px]">shield</span>
+        <span>Security &amp; Auth</span>
+      </button>
     </div>
   );
 }
