@@ -20,14 +20,15 @@ export function compileVideoPrompt({
 }: CompilePromptOptions): GenerationResult {
   // 1. Pilih Lokasi dari Seluruh Bank Data (Rotasi Non-Repeating Adil)
   let selectedLocation = overrideLocation;
+  let locPick = null;
   if (!selectedLocation) {
     if (locations.length > 0) {
-      const picked = deckRotator.pickNonRepeating(
+      locPick = deckRotator.pickNonRepeating(
         "generator_locations",
         locations,
         (l) => l
       );
-      selectedLocation = picked || locations[0];
+      selectedLocation = locPick.item || locations[0];
     } else {
       selectedLocation = "clean grey seamless photo studio dengan soft lighting";
     }
@@ -41,14 +42,15 @@ export function compileVideoPrompt({
       : "Fittingnya beneran pas, bahan kuat dan nyaman banget dipake harian!";
 
   let selectedScript = overrideScriptText;
+  let scriptPick = null;
   if (!selectedScript) {
     if (productScripts.length > 0) {
-      const picked = deckRotator.pickNonRepeating(
+      scriptPick = deckRotator.pickNonRepeating(
         `generator_scripts_${product.id}`,
         productScripts,
         (s) => s.id || s.text
       );
-      selectedScript = picked?.text || fallbackScript;
+      selectedScript = scriptPick.item?.text || fallbackScript;
     } else {
       selectedScript = fallbackScript;
     }
@@ -72,5 +74,16 @@ export function compileVideoPrompt({
     script: selectedScript,
     tokens,
     product,
+    cycleInfo: {
+      scriptCycleReset: scriptPick?.isCycleReset ?? false,
+      scriptIsLastInCycle: scriptPick?.isLastInCycle ?? false,
+      scriptRemaining: scriptPick?.remainingInCycle ?? 0,
+      scriptTotal: scriptPick?.totalCandidates ?? productScripts.length,
+      scriptCycleNumber: scriptPick?.cycleNumber ?? 1,
+      locationCycleReset: locPick?.isCycleReset ?? false,
+      locationIsLastInCycle: locPick?.isLastInCycle ?? false,
+      locationRemaining: locPick?.remainingInCycle ?? 0,
+      locationTotal: locPick?.totalCandidates ?? locations.length,
+    },
   };
 }

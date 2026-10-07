@@ -47,7 +47,7 @@ export function AddProductForm({ onAddProduct }: AddProductFormProps) {
               Tambah Produk Baru
             </h2>
             <p className="font-body-sm text-body-sm text-on-surface-variant">
-              Tentukan nama produk, persona model, dan foto produk di Supabase Storage.
+              Tentukan nama produk, persona model, dan foto produk visual.
             </p>
           </div>
         </div>

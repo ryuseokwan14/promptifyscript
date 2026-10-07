@@ -13,7 +13,7 @@ interface ProductImageUploaderProps {
 export function ProductImageUploader({
   imageUrl,
   onImageChange,
-  label = "Foto Produk (Supabase Storage)",
+  label = "Foto Produk",
   compact = false,
 }: ProductImageUploaderProps) {
   const [isUploading, setIsUploading] = useState(false);

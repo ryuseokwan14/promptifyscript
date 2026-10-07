@@ -39,10 +39,23 @@ export interface User {
   role: "SUPERADMIN" | "CREATOR";
 }
 
+export interface CycleInfo {
+  scriptCycleReset: boolean;
+  scriptIsLastInCycle: boolean;
+  scriptRemaining: number;
+  scriptTotal: number;
+  scriptCycleNumber: number;
+  locationCycleReset: boolean;
+  locationIsLastInCycle: boolean;
+  locationRemaining: number;
+  locationTotal: number;
+}
+
 export interface GenerationResult {
   prompt: string;
   location: string;
   script: string;
   tokens: number;
   product: Product;
+  cycleInfo?: CycleInfo;
 }

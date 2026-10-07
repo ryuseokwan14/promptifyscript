@@ -17,14 +17,15 @@ export class GeneratePromptUseCase {
     // 1. Ambil Lokasi dari Seluruh Bank Data (Rotasi Non-Repeating Adil)
     const allLocations = await locationRepository.findAll();
     let selectedLocation = validated.overrideLocation;
+    let locPick = null;
     if (!selectedLocation) {
       if (allLocations.length > 0) {
-        const picked = deckRotator.pickNonRepeating(
+        locPick = deckRotator.pickNonRepeating(
           "server_locations",
           allLocations,
           (l) => l.name
         );
-        selectedLocation = picked ? picked.name : allLocations[0].name;
+        selectedLocation = locPick.item ? locPick.item.name : allLocations[0].name;
       } else {
         selectedLocation = "clean grey seamless photo studio dengan soft lighting";
       }
@@ -34,17 +35,18 @@ export class GeneratePromptUseCase {
     const scripts = await scriptRepository.findByProductId(product.id);
     let selectedScriptText = validated.overrideScriptText || "";
     let selectedScriptId: string | null = null;
+    let scriptPick = null;
 
     if (!selectedScriptText) {
       if (scripts.length > 0) {
-        const picked = deckRotator.pickNonRepeating(
+        scriptPick = deckRotator.pickNonRepeating(
           `server_scripts_${product.id}`,
           scripts,
           (s) => s.id
         );
-        if (picked) {
-          selectedScriptText = picked.text;
-          selectedScriptId = picked.id;
+        if (scriptPick.item) {
+          selectedScriptText = scriptPick.item.text;
+          selectedScriptId = scriptPick.item.id;
         } else {
           selectedScriptText = scripts[0].text;
           selectedScriptId = scripts[0].id;
@@ -75,7 +77,7 @@ export class GeneratePromptUseCase {
 
     const templateContent = templateRecord?.content || fallbackTemplate;
 
-    // 4. Kompilasi & Rakit Prompt Video Gemini
+    // 4. Kompilasi & Rakit Prompt Video
     const itemDescription = product.itemDesc || product.name;
     const compiled = templateContent
       .replace(/\{tempat\}/gi, selectedLocation)
@@ -91,6 +93,17 @@ export class GeneratePromptUseCase {
       script: selectedScriptText,
       tokens,
       product,
+      cycleInfo: {
+        scriptCycleReset: scriptPick?.isCycleReset ?? false,
+        scriptIsLastInCycle: scriptPick?.isLastInCycle ?? false,
+        scriptRemaining: scriptPick?.remainingInCycle ?? 0,
+        scriptTotal: scriptPick?.totalCandidates ?? scripts.length,
+        scriptCycleNumber: scriptPick?.cycleNumber ?? 1,
+        locationCycleReset: locPick?.isCycleReset ?? false,
+        locationIsLastInCycle: locPick?.isLastInCycle ?? false,
+        locationRemaining: locPick?.remainingInCycle ?? 0,
+        locationTotal: locPick?.totalCandidates ?? allLocations.length,
+      },
     };
   }
 }

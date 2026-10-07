@@ -29,7 +29,7 @@ export function GeneratedPromptModal({
       .writeText(result.prompt)
       .then(() => {
         toast.success("Prompt berhasil disalin ke clipboard!", {
-          description: "Siap digunakan di Google Gemini atau video generator.",
+          description: "Siap digunakan di video generator AI pilihan Anda.",
         });
       })
       .catch(() => {
@@ -67,26 +67,49 @@ export function GeneratedPromptModal({
         </div>
 
         {/* Selected Parameters Badge Summary */}
-        <div className="px-space-lg py-2.5 bg-surface-container-lowest/60 border-b border-surface-container-high/30 flex items-center gap-space-md flex-wrap text-label-code font-label-code text-xs text-on-surface-variant">
-          <div className="flex items-center gap-1">
-            <span className="text-outline">Produk:</span>
-            <span
-              className={`px-2 py-0.5 rounded-md font-medium ${
-                isFemale
-                  ? "bg-tertiary-container/20 text-tertiary"
-                  : "bg-secondary-container/20 text-secondary"
-              }`}
-            >
-              {result.product.name}
-            </span>
+        <div className="px-space-lg py-2.5 bg-surface-container-lowest/60 border-b border-surface-container-high/30 flex items-center justify-between gap-space-md flex-wrap text-label-code font-label-code text-xs text-on-surface-variant">
+          <div className="flex items-center gap-space-md flex-wrap">
+            <div className="flex items-center gap-1">
+              <span className="text-outline">Produk:</span>
+              <span
+                className={`px-2 py-0.5 rounded-md font-medium ${
+                  isFemale
+                    ? "bg-tertiary-container/20 text-tertiary"
+                    : "bg-secondary-container/20 text-secondary"
+                }`}
+              >
+                {result.product.name}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-1">
+              <span className="text-outline">Setting:</span>
+              <span className="text-on-surface truncate max-w-[200px]" title={result.location}>
+                {result.location}
+              </span>
+            </div>
           </div>
 
-          <div className="flex items-center gap-1">
-            <span className="text-outline">Setting:</span>
-            <span className="text-on-surface truncate max-w-[200px]" title={result.location}>
-              {result.location}
-            </span>
-          </div>
+          {result.cycleInfo && (
+            <div className="flex items-center gap-1.5">
+              {result.cycleInfo.scriptIsLastInCycle ? (
+                <span className="text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-medium flex items-center gap-1 text-[11px]">
+                  <span className="material-symbols-outlined text-[14px]">warning</span>
+                  Batas Aman: Naskah Terakhir Siklus #{result.cycleInfo.scriptCycleNumber}
+                </span>
+              ) : result.cycleInfo.scriptCycleReset ? (
+                <span className="text-secondary bg-secondary/10 border border-secondary/30 px-2.5 py-0.5 rounded-md font-medium flex items-center gap-1 text-[11px]">
+                  <span className="material-symbols-outlined text-[14px]">autorenew</span>
+                  Siklus #{result.cycleInfo.scriptCycleNumber} (Mulai Daur Ulang)
+                </span>
+              ) : (
+                <span className="text-on-surface-variant bg-surface-container-high/40 px-2.5 py-0.5 rounded-md text-[11px] flex items-center gap-1">
+                  <span className="material-symbols-outlined text-[14px] text-primary">shuffle</span>
+                  Sisa {result.cycleInfo.scriptRemaining} naskah unik (Siklus #{result.cycleInfo.scriptCycleNumber})
+                </span>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Output Box */}

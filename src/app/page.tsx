@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { toast } from "sonner";
 import { Header } from "@/common/components/header";
 import { Footer } from "@/common/components/footer";
 import { useApp } from "@/common/context/app-context";
@@ -47,6 +48,21 @@ export default function GeneratorPage() {
     return () => clearTimeout(timer);
   }, [activeProductId, isLoaded, products, generatePrompt]);
 
+  // Pemicu notifikasi batas aman siklus unik & awal daur ulang naskah
+  const triggerCycleAlert = (res: GenerationResult) => {
+    if (!res.cycleInfo) return;
+
+    if (res.cycleInfo.scriptCycleReset) {
+      toast.info(`Siklus Baru: Putaran #${res.cycleInfo.scriptCycleNumber}`, {
+        description: `Seluruh ${res.cycleInfo.scriptTotal} naskah produk ini telah terpakai sekali. Putaran daur ulang dimulai.`,
+      });
+    } else if (res.cycleInfo.scriptIsLastInCycle) {
+      toast.warning("Batas Aman Naskah Unik", {
+        description: "Ini naskah unik terakhir di siklus ini. Klik berikutnya akan mulai mendaur ulang naskah yang pernah keluar.",
+      });
+    }
+  };
+
   // Generate Prompt: membuat kompilasi acak baru dan menampilkannya di popup modal
   const handleGenerate = () => {
     setIsRolling(true);
@@ -55,6 +71,7 @@ export default function GeneratorPage() {
       if (res) {
         setGeneratedResult(res);
         setIsModalOpen(true);
+        triggerCycleAlert(res);
       }
       setIsRolling(false);
     }, 250);
@@ -66,6 +83,7 @@ export default function GeneratorPage() {
       const res = generatePrompt(activeProductId);
       if (res) {
         setGeneratedResult(res);
+        triggerCycleAlert(res);
       }
       setIsRolling(false);
     }, 200);

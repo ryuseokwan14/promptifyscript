@@ -24,7 +24,7 @@ export function PromptActions({ promptData }: PromptActionsProps) {
       .writeText(promptData.prompt)
       .then(() => {
         toast.success("Prompt berhasil disalin ke clipboard!", {
-          description: "Siap di-paste ke Google Gemini atau video generator.",
+          description: "Siap di-paste ke generator video AI pilihan Anda.",
         });
       })
       .catch(() => {

@@ -33,7 +33,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 
 export const metadata: Metadata = {
   title: "Promptify Script — AI Prompt Video Automation Engine",
-  description: "Accelerated Video Retaining Engine for Gemini & TikTok/Reels Video Generators",
+  description: "Automated AI Video Prompt Studio & Retention Engine for TikTok & Reels",
   icons: {
     icon: "/logo.svg",
   },
