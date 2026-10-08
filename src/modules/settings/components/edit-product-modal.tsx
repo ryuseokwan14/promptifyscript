@@ -48,18 +48,18 @@ export function EditProductModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
-      <div className="bg-surface-container-low border border-surface-container-high/60 rounded-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col">
-        <div className="p-space-lg border-b border-surface-container-high/40 flex items-center justify-between">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-black/75 backdrop-blur-sm">
+      <div className="bg-surface-container-low border border-surface-container-high/60 rounded-2xl max-w-xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col">
+        <div className="p-4 sm:p-space-lg border-b border-surface-container-high/40 flex items-center justify-between">
           <div className="flex items-center gap-space-sm">
-            <span className="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center">
+            <span className="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center shrink-0">
               <span className="material-symbols-outlined text-[22px]">edit_note</span>
             </span>
             <div>
-              <h3 className="font-headline-sm text-headline-sm text-on-surface font-semibold">
+              <h3 className="font-headline-sm text-[16px] sm:text-headline-sm text-on-surface font-semibold">
                 Edit Data Produk
               </h3>
-              <p className="font-body-sm text-body-sm text-on-surface-variant">
+              <p className="font-body-sm text-[12px] sm:text-body-sm text-on-surface-variant">
                 Perbarui detail produk, foto, &amp; prompt pakaian
               </p>
             </div>
@@ -67,13 +67,13 @@ export function EditProductModal({
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-on-surface cursor-pointer"
+            className="p-1.5 rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-on-surface cursor-pointer shrink-0"
           >
             <span className="material-symbols-outlined text-[20px]">close</span>
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-space-lg flex flex-col gap-space-md">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-space-lg flex flex-col gap-space-md">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-space-md">
             <div className="flex flex-col gap-1.5">
               <label className="font-label-code text-label-code text-on-surface-variant">
@@ -143,18 +143,18 @@ export function EditProductModal({
             />
           </div>
 
-          <div className="pt-space-sm flex items-center justify-end gap-space-sm border-t border-surface-container-high/30">
+          <div className="pt-space-sm flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2 sm:gap-space-sm border-t border-surface-container-high/30">
             <button
               type="button"
               onClick={onClose}
-              className="px-space-md py-2.5 rounded-xl hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-body-md text-body-md cursor-pointer"
+              className="w-full sm:w-auto px-space-md py-2.5 rounded-xl hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-body-md text-body-md text-center cursor-pointer"
             >
               Batal
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-space-lg py-2.5 rounded-xl bg-primary hover:brightness-105 text-primary-foreground font-headline-sm text-headline-sm font-bold flex items-center gap-1.5 shadow-[0_0_16px_rgba(128,131,255,0.3)] cursor-pointer disabled:opacity-50"
+              className="w-full sm:w-auto px-space-lg py-2.5 rounded-xl bg-primary hover:brightness-105 text-primary-foreground font-headline-sm text-headline-sm font-bold flex items-center justify-center gap-1.5 shadow-[0_0_16px_rgba(128,131,255,0.3)] cursor-pointer disabled:opacity-50"
             >
               <span className="material-symbols-outlined text-[18px]">save</span>
               <span>{isSubmitting ? "Menyimpan..." : "Simpan Perubahan"}</span>

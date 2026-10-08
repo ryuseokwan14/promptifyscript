@@ -86,7 +86,7 @@ export function ProductsTable({
 
   return (
     <div className="bg-surface-container-low border border-surface-container-high/40 rounded-2xl shadow-md overflow-hidden">
-      <div className="px-space-lg py-space-md bg-surface-container border-b border-surface-container-high/40 flex items-center justify-between flex-wrap gap-2">
+      <div className="px-3.5 sm:px-space-lg py-3 sm:py-space-md bg-surface-container border-b border-surface-container-high/40 flex items-center justify-between flex-wrap gap-2">
         <div className="flex items-center gap-space-sm">
           <span className="font-headline-sm text-headline-sm text-on-surface font-semibold">
             Registered Video Products
@@ -104,7 +104,7 @@ export function ProductsTable({
       </div>
 
       {selectedIds.length > 0 && (
-        <div className="px-space-lg py-2.5 bg-primary/10 border-b border-primary/25 flex items-center justify-between flex-wrap gap-2 animate-fade-in">
+        <div className="px-3.5 sm:px-space-lg py-2.5 bg-primary/10 border-b border-primary/25 flex items-center justify-between flex-wrap gap-2 animate-fade-in">
           <div className="flex items-center gap-2">
             <span className="material-symbols-outlined text-primary text-[20px]">
               check_box

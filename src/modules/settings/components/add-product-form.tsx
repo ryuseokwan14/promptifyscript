@@ -125,7 +125,7 @@ export function AddProductForm({ onAddProduct }: AddProductFormProps) {
             </label>
             <button
               type="submit"
-              className="w-full py-2.5 px-space-md rounded-xl bg-primary text-primary-foreground font-headline-sm text-headline-sm flex items-center justify-center gap-1 hover:brightness-105 shadow-sm transition-all cursor-pointer font-bold"
+              className="w-full py-3 md:py-2.5 px-space-md rounded-xl bg-primary text-primary-foreground font-headline-sm text-headline-sm flex items-center justify-center gap-1 hover:brightness-105 shadow-sm transition-all cursor-pointer font-bold"
             >
               <span className="material-symbols-outlined text-[18px]">add</span>
               Tambah Produk

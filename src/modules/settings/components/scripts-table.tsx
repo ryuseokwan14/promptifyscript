@@ -93,7 +93,7 @@ export function ScriptsTable({
   return (
     <div className="bg-surface-container-low border border-surface-container-high/40 rounded-2xl shadow-md overflow-hidden flex flex-col">
       {/* Table Header Bar */}
-      <div className="px-space-lg py-space-md bg-surface-container border-b border-surface-container-high/40 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-space-sm">
+      <div className="px-3.5 sm:px-space-lg py-3 sm:py-space-md bg-surface-container border-b border-surface-container-high/40 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-space-sm">
         <div className="flex items-center gap-space-sm">
           <span className="font-headline-sm text-headline-sm text-on-surface font-semibold">
             Daftar Naskah Lip-Sync
@@ -213,7 +213,7 @@ export function ScriptsTable({
                     </button>
                   </div>
                 </div>
-                <p className="font-body-md text-[13px] text-on-surface leading-snug italic pl-6">
+                <p className="font-body-md text-[13.5px] text-on-surface leading-snug italic pl-1">
                   &quot;{script.text}&quot;
                 </p>
               </div>

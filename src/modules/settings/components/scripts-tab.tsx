@@ -69,15 +69,15 @@ export function ScriptsTab({
           </p>
         </div>
 
-        <div className="flex items-center gap-space-sm bg-surface-container-low border border-surface-container-high/40 px-space-md py-2 rounded-xl">
-          <label className="font-label-code text-label-code text-on-surface-variant">
+        <div className="flex items-center justify-between sm:justify-start gap-space-sm bg-surface-container-low border border-surface-container-high/40 px-3.5 sm:px-space-md py-2 rounded-xl w-full sm:w-auto">
+          <label className="font-label-code text-label-code text-on-surface-variant shrink-0">
             Pilih Produk:
           </label>
-          <div className="relative">
+          <div className="relative flex-1 sm:flex-initial">
             <select
               value={selectedProductId}
               onChange={(e) => onFilterChange(e.target.value)}
-              className="appearance-none bg-surface-container-highest text-primary font-headline-sm text-headline-sm pl-space-md pr-8 py-1.5 rounded-lg focus:outline-none cursor-pointer border border-surface-container-high/50"
+              className="w-full appearance-none bg-surface-container-highest text-primary font-headline-sm text-headline-sm pl-space-md pr-8 py-1.5 rounded-lg focus:outline-none cursor-pointer border border-surface-container-high/50"
             >
               {products.map((p) => (
                 <option key={p.id} value={p.id}>
@@ -92,7 +92,7 @@ export function ScriptsTab({
         </div>
       </div>
 
-      <div className="bg-surface-container-low border border-surface-container-high/40 p-space-lg rounded-2xl shadow-md flex flex-col gap-space-sm">
+      <div className="bg-surface-container-low border border-surface-container-high/40 p-4 sm:p-space-lg rounded-2xl shadow-md flex flex-col gap-space-sm">
         <label className="font-headline-sm text-headline-sm text-on-surface flex items-center justify-between font-semibold flex-wrap gap-2">
           <span>Tambah Naskah Lip-Sync untuk &quot;{selectedProduct?.name}&quot;</span>
           {parsedItems.length > 1 && (
@@ -114,7 +114,7 @@ export function ScriptsTab({
           <button
             type="submit"
             disabled={parsedItems.length === 0 || isSubmitting}
-            className="sm:self-stretch px-space-lg rounded-xl bg-primary text-primary-foreground font-headline-sm text-headline-sm flex items-center justify-center gap-1.5 hover:brightness-105 shadow-[0_2px_12px_rgba(128,131,255,0.25)] transition-all cursor-pointer font-bold disabled:opacity-50 disabled:cursor-not-allowed"
+            className="sm:self-stretch px-space-lg py-3 sm:py-2.5 rounded-xl bg-primary text-primary-foreground font-headline-sm text-headline-sm flex items-center justify-center gap-1.5 hover:brightness-105 shadow-[0_2px_12px_rgba(128,131,255,0.25)] transition-all cursor-pointer font-bold disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <span className="material-symbols-outlined text-[20px]">
               {parsedItems.length > 1 ? "library_add" : "add_circle"}

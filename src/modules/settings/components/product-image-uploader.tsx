@@ -100,7 +100,7 @@ export function ProductImageUploader({
           className="hidden"
         />
         {isUploading ? (
-          <div className="flex items-center gap-2 px-3.5 py-1.5 bg-surface-container rounded-xl text-secondary text-xs">
+          <div className="w-full md:w-auto flex items-center justify-center gap-2 px-3.5 py-2 md:py-1.5 bg-surface-container rounded-xl text-secondary text-xs">
             <span className="material-symbols-outlined text-[16px] animate-spin">
               progress_activity
             </span>
@@ -111,7 +111,7 @@ export function ProductImageUploader({
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="px-space-md py-1.5 rounded-xl bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-body-sm text-xs flex items-center gap-1.5 transition-all cursor-pointer border border-surface-container-highest"
+              className="flex-1 md:flex-none px-space-md py-2 md:py-1.5 rounded-xl bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-body-sm text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer border border-surface-container-highest"
             >
               <span className="material-symbols-outlined text-[15px]">
                 {imageUrl ? "sync" : "upload"}
@@ -122,7 +122,7 @@ export function ProductImageUploader({
               <button
                 type="button"
                 onClick={handleRemove}
-                className="p-1.5 rounded-xl hover:bg-error-container/30 text-on-surface-variant hover:text-error transition-all cursor-pointer"
+                className="p-2 md:p-1.5 rounded-xl hover:bg-error-container/30 text-on-surface-variant hover:text-error transition-all cursor-pointer"
                 title="Hapus foto"
               >
                 <span className="material-symbols-outlined text-[16px]">delete</span>

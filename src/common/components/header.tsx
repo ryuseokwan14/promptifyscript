@@ -41,9 +41,9 @@ export function Header() {
       <GlobalCommandMenu open={commandOpen} onOpenChange={setCommandOpen} />
 
       <header className="fixed top-0 left-0 right-0 z-50 h-16 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)] border-b border-surface-container-high/40">
-        <div className="w-full h-full px-gutter flex items-center justify-between max-w-7xl mx-auto">
-          <div className="flex items-center gap-space-md">
-            <Link href="/" className="flex items-center gap-space-sm group">
+        <div className="w-full h-full px-3 sm:px-gutter flex items-center justify-between max-w-7xl mx-auto gap-2">
+          <div className="flex items-center gap-2 sm:gap-space-md shrink-0">
+            <Link href="/" className="flex items-center gap-2 sm:gap-space-sm group">
               <div className="relative flex items-center justify-center">
                 <div className="absolute -inset-1 rounded-full bg-secondary/20 blur-sm group-hover:bg-secondary/40 transition-all"></div>
                 <div className="relative w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center bg-surface-container-low shadow-sm">
@@ -57,7 +57,7 @@ export function Header() {
                   />
                 </div>
               </div>
-              <span className="font-headline-sm text-headline-sm text-on-surface tracking-tight font-semibold">
+              <span className="font-headline-sm text-[15px] sm:text-headline-sm text-on-surface tracking-tight font-semibold truncate max-w-[125px] xs:max-w-none">
                 Promptify Script
               </span>
             </Link>
@@ -238,9 +238,11 @@ export function Header() {
               </DropdownMenu>
             ) : (
               <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center gap-2 p-1.5 px-3 rounded-xl bg-surface-container-low hover:bg-surface-container border border-surface-container-high/50 text-on-surface text-xs font-semibold cursor-pointer transition">
+                <DropdownMenuTrigger className="flex items-center gap-1.5 p-1.5 px-2.5 sm:px-3 rounded-xl bg-surface-container-low hover:bg-surface-container border border-surface-container-high/50 text-on-surface text-xs font-semibold cursor-pointer transition shrink-0">
                   <span className="material-symbols-outlined text-[18px] text-primary">account_circle</span>
-                  <span>Masuk / Opsi</span>
+                  <span>
+                    <span className="hidden xs:inline">Masuk / </span>Opsi
+                  </span>
                   <span className="material-symbols-outlined text-[16px] text-on-surface-variant">expand_more</span>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">

@@ -117,7 +117,7 @@ export function LocationsTable({
 
   return (
     <div className="bg-surface-container-low border border-surface-container-high/40 rounded-2xl shadow-md overflow-hidden flex flex-col">
-      <div className="px-space-lg py-space-md bg-surface-container border-b border-surface-container-high/40 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-space-sm">
+      <div className="px-3.5 sm:px-space-lg py-3 sm:py-space-md bg-surface-container border-b border-surface-container-high/40 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-space-sm">
         <div className="flex items-center gap-space-sm">
           <span className="font-headline-sm text-headline-sm text-on-surface font-semibold">
             Daftar Lokasi Terdaftar
@@ -127,8 +127,8 @@ export function LocationsTable({
           </span>
         </div>
 
-        <div className="flex items-center gap-space-sm flex-wrap">
-          <div className="relative flex-1 sm:w-60">
+        <div className="flex items-center gap-2 flex-wrap">
+          <div className="relative flex-1 sm:w-60 min-w-[140px]">
             <span className="material-symbols-outlined absolute left-2.5 top-2 text-[18px] text-outline">
               search
             </span>
@@ -190,11 +190,16 @@ export function LocationsTable({
         </div>
       )}
 
-      {/* Mobile Locations View (<md) */}
-      <div className="md:hidden p-3 flex flex-wrap gap-2">
+      {/* Mobile Locations Card List View (<md) */}
+      <div className="md:hidden flex flex-col divide-y divide-surface-container-high/30">
         {filteredList.length === 0 ? (
-          <div className="w-full py-8 text-center text-on-surface-variant text-xs">
-            Tidak ada lokasi yang cocok dengan filter pencarian.
+          <div className="p-8 text-center text-on-surface-variant flex flex-col items-center gap-2">
+            <span className="material-symbols-outlined text-[32px] text-outline">
+              location_off
+            </span>
+            <span className="font-body-sm text-xs">
+              Tidak ada lokasi yang cocok dengan filter pencarian.
+            </span>
           </div>
         ) : (
           filteredList.map((item) => {
@@ -205,45 +210,54 @@ export function LocationsTable({
             return (
               <div
                 key={targetKey}
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl border transition-all text-xs ${
-                  isSelected
-                    ? "bg-primary/20 border-primary text-primary"
-                    : "bg-surface-container border-surface-container-high/60 text-on-surface"
+                className={`p-3.5 flex items-center justify-between gap-3 transition-colors ${
+                  isSelected ? "bg-primary/10" : ""
                 }`}
               >
-                <input
-                  type="checkbox"
-                  checked={isSelected}
-                  onChange={() => handleToggleSelectOne(targetKey)}
-                  aria-label={`Pilih ${item.name}`}
-                  className="w-3.5 h-3.5 rounded border-surface-container-high text-primary focus:ring-primary cursor-pointer accent-primary shrink-0"
-                />
-                <span className="material-symbols-outlined text-[15px] text-secondary shrink-0">
-                  location_on
-                </span>
-                <span className="font-medium truncate max-w-[140px]">{item.name}</span>
-                <span
-                  className={`text-[9px] font-label-badge px-1.5 py-0.2 rounded-full border ${vibeCfg.tagClass}`}
-                >
-                  {vibeCfg.label}
-                </span>
+                <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                  <input
+                    type="checkbox"
+                    checked={isSelected}
+                    onChange={() => handleToggleSelectOne(targetKey)}
+                    aria-label={`Pilih ${item.name}`}
+                    className="w-4 h-4 rounded border-surface-container-high text-primary focus:ring-primary cursor-pointer accent-primary shrink-0"
+                  />
+                  <div className="w-9 h-9 rounded-xl bg-surface-container-high flex items-center justify-center shrink-0 text-secondary">
+                    <span className="material-symbols-outlined text-[18px]">
+                      location_on
+                    </span>
+                  </div>
+                  <div className="flex flex-col min-w-0">
+                    <span className="font-headline-sm text-[13.5px] text-on-surface truncate font-semibold">
+                      {item.name}
+                    </span>
+                    <div className="flex items-center gap-1.5 mt-0.5">
+                      <span
+                        className={`text-[10px] font-label-badge px-2 py-0.5 rounded-full border inline-flex items-center gap-1 ${vibeCfg.tagClass}`}
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-current"></span>
+                        {vibeCfg.label}
+                      </span>
+                    </div>
+                  </div>
+                </div>
 
-                <div className="flex items-center gap-0.5 ml-1 border-l border-surface-container-highest/80 pl-1">
+                <div className="flex items-center gap-1 shrink-0">
                   <button
                     type="button"
                     onClick={() => setEditingLocation(item)}
                     aria-label={`Edit ${item.name}`}
-                    className="p-1 text-on-surface-variant hover:text-primary active:scale-95 transition-colors"
+                    className="w-8 h-8 rounded-lg flex items-center justify-center bg-surface-container text-on-surface-variant hover:text-primary active:scale-95 transition-all cursor-pointer"
                   >
-                    <span className="material-symbols-outlined text-[14px]">edit</span>
+                    <span className="material-symbols-outlined text-[16px]">edit</span>
                   </button>
                   <button
                     type="button"
                     onClick={() => handleDelete(item)}
                     aria-label={`Hapus ${item.name}`}
-                    className="p-1 text-outline hover:text-error active:scale-95 transition-colors"
+                    className="w-8 h-8 rounded-lg flex items-center justify-center bg-surface-container text-on-surface-variant hover:text-error active:scale-95 transition-all cursor-pointer"
                   >
-                    <span className="material-symbols-outlined text-[14px]">close</span>
+                    <span className="material-symbols-outlined text-[16px]">delete</span>
                   </button>
                 </div>
               </div>

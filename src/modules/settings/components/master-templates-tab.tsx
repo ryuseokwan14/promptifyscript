@@ -51,7 +51,7 @@ export function MasterTemplatesTab({
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-space-lg">
         {/* Template Cewek */}
-        <div className="bg-surface-container-low border border-surface-container-high/40 p-space-lg rounded-2xl shadow-md flex flex-col gap-space-md">
+        <div className="bg-surface-container-low border border-surface-container-high/40 p-4 sm:p-space-lg rounded-2xl shadow-md flex flex-col gap-space-md">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-space-sm">
               <span className="w-8 h-8 rounded-xl bg-tertiary-container/30 text-tertiary flex items-center justify-center">
@@ -66,15 +66,15 @@ export function MasterTemplatesTab({
           </div>
 
           <div className="relative flex flex-col">
-            <div className="bg-surface-container-lowest border-t border-x border-surface-container-high/40 text-on-surface-variant px-3 py-1.5 rounded-t-xl font-label-code text-label-code flex items-center justify-between">
-              <span>master_prompt_female.prompt</span>
-              <span className="text-tertiary">3 Variable Hooks Detected</span>
+            <div className="bg-surface-container-lowest border-t border-x border-surface-container-high/40 text-on-surface-variant px-3 py-2 rounded-t-xl font-label-code text-[11.5px] sm:text-label-code flex flex-col xs:flex-row xs:items-center justify-between gap-1">
+              <span className="truncate">master_prompt_female.prompt</span>
+              <span className="text-tertiary shrink-0">3 Variable Hooks Detected</span>
             </div>
             <textarea
               value={draftFemale}
               onChange={(e) => onDraftChange(e.target.value, draftMale)}
               rows={10}
-              className="w-full bg-surface-container-lowest border border-surface-container-high/40 p-space-md rounded-b-xl font-label-code text-label-code text-on-surface focus:outline-none focus:ring-1 focus:ring-tertiary shadow-inner resize-y leading-relaxed"
+              className="w-full bg-surface-container-lowest border border-surface-container-high/40 p-3 sm:p-space-md rounded-b-xl font-label-code text-label-code text-on-surface focus:outline-none focus:ring-1 focus:ring-tertiary shadow-inner resize-y leading-relaxed text-xs sm:text-sm"
             />
           </div>
 
@@ -84,7 +84,7 @@ export function MasterTemplatesTab({
         </div>
 
         {/* Template Cowok */}
-        <div className="bg-surface-container-low border border-surface-container-high/40 p-space-lg rounded-2xl shadow-md flex flex-col gap-space-md">
+        <div className="bg-surface-container-low border border-surface-container-high/40 p-4 sm:p-space-lg rounded-2xl shadow-md flex flex-col gap-space-md">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-space-sm">
               <span className="w-8 h-8 rounded-xl bg-secondary-container/30 text-secondary flex items-center justify-center">
@@ -99,15 +99,15 @@ export function MasterTemplatesTab({
           </div>
 
           <div className="relative flex flex-col">
-            <div className="bg-surface-container-lowest border-t border-x border-surface-container-high/40 text-on-surface-variant px-3 py-1.5 rounded-t-xl font-label-code text-label-code flex items-center justify-between">
-              <span>master_prompt_male.prompt</span>
-              <span className="text-secondary">3 Variable Hooks Detected</span>
+            <div className="bg-surface-container-lowest border-t border-x border-surface-container-high/40 text-on-surface-variant px-3 py-2 rounded-t-xl font-label-code text-[11.5px] sm:text-label-code flex flex-col xs:flex-row xs:items-center justify-between gap-1">
+              <span className="truncate">master_prompt_male.prompt</span>
+              <span className="text-secondary shrink-0">3 Variable Hooks Detected</span>
             </div>
             <textarea
               value={draftMale}
               onChange={(e) => onDraftChange(draftFemale, e.target.value)}
               rows={10}
-              className="w-full bg-surface-container-lowest border border-surface-container-high/40 p-space-md rounded-b-xl font-label-code text-label-code text-on-surface focus:outline-none focus:ring-1 focus:ring-secondary shadow-inner resize-y leading-relaxed"
+              className="w-full bg-surface-container-lowest border border-surface-container-high/40 p-3 sm:p-space-md rounded-b-xl font-label-code text-label-code text-on-surface focus:outline-none focus:ring-1 focus:ring-secondary shadow-inner resize-y leading-relaxed text-xs sm:text-sm"
             />
           </div>
 
@@ -122,7 +122,7 @@ export function MasterTemplatesTab({
           type="button"
           onClick={onSaveTemplates}
           disabled={!hasUnsavedChanges}
-          className={`w-full sm:w-auto px-space-lg py-2.5 rounded-xl font-headline-sm text-headline-sm flex items-center justify-center gap-2 transition-all ${
+          className={`w-full sm:w-auto px-space-lg py-3 sm:py-2.5 rounded-xl font-headline-sm text-headline-sm flex items-center justify-center gap-2 transition-all ${
             hasUnsavedChanges
               ? "bg-primary hover:brightness-105 text-primary-foreground shadow-[0_0_16px_rgba(192,193,255,0.3)] cursor-pointer font-bold"
               : "bg-surface-container-high/60 text-on-surface-variant/70 border border-white/10 cursor-not-allowed font-medium"

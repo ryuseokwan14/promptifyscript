@@ -37,11 +37,11 @@ export function PromptActions({ promptData }: PromptActionsProps) {
       <Tooltip>
         <TooltipTrigger
           onClick={handleCopy}
-          className="w-full bg-gradient-to-r from-primary to-primary-container text-white dark:from-primary dark:via-[#b0b2ff] dark:to-secondary dark:text-[#0a0914] hover:brightness-110 active:scale-[0.99] font-headline-sm text-headline-sm py-3.5 px-space-md rounded-xl flex items-center justify-center gap-space-sm shadow-[0_4px_20px_rgba(73,75,214,0.25)] dark:shadow-[0_0_24px_rgba(76,215,246,0.3)] transition-all cursor-pointer font-bold"
+          className="w-full bg-gradient-to-r from-primary to-primary-container text-white dark:from-primary dark:via-[#b0b2ff] dark:to-secondary dark:text-[#0a0914] hover:brightness-110 active:scale-[0.99] font-headline-sm text-[15px] sm:text-headline-sm py-3.5 px-space-md rounded-xl flex items-center justify-center gap-2 sm:gap-space-sm shadow-[0_4px_20px_rgba(73,75,214,0.25)] dark:shadow-[0_0_24px_rgba(76,215,246,0.3)] transition-all cursor-pointer font-bold"
           id="btnCopy"
         >
-          <span className="material-symbols-outlined text-[24px]">content_copy</span>
-          <span>Copy Prompt to Clipboard</span>
+          <span className="material-symbols-outlined text-[22px] sm:text-[24px]">content_copy</span>
+          <span className="truncate">Copy Prompt to Clipboard</span>
         </TooltipTrigger>
         <TooltipContent side="top">
           <span>Salin seluruh instruksi prompt video</span>

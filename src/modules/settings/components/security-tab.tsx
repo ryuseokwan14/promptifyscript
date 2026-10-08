@@ -140,7 +140,7 @@ export function SecurityTab({ user, creatorEmail, onRefreshUser }: SecurityTabPr
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-space-lg">
         {/* Panel 1: Akun Master Superadmin */}
-        <div className="bg-surface-container-low border border-surface-container-high/40 p-space-lg rounded-2xl shadow-md flex flex-col justify-between gap-space-md">
+        <div className="bg-surface-container-low border border-surface-container-high/40 p-4 sm:p-space-lg rounded-2xl shadow-md flex flex-col justify-between gap-space-md">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-space-sm">
@@ -186,7 +186,7 @@ export function SecurityTab({ user, creatorEmail, onRefreshUser }: SecurityTabPr
         {/* Panel 2: Form Sesuai Role yang Login */}
         {isSuperadmin ? (
           /* Form Superadmin: Reset Akun Creator */
-          <div className="bg-surface-container-low border border-secondary/30 p-space-lg rounded-2xl shadow-md flex flex-col gap-space-md">
+          <div className="bg-surface-container-low border border-secondary/30 p-4 sm:p-space-lg rounded-2xl shadow-md flex flex-col gap-space-md">
             <div className="flex items-center gap-space-sm">
               <span className="w-8 h-8 rounded-xl bg-primary-container/30 text-primary flex items-center justify-center">
                 <span className="material-symbols-outlined text-[20px]">manage_accounts</span>
@@ -279,7 +279,7 @@ export function SecurityTab({ user, creatorEmail, onRefreshUser }: SecurityTabPr
           </div>
         ) : (
           /* Form Creator: Ganti Password Akun Sendiri */
-          <div className="bg-surface-container-low border border-surface-container-high/40 p-space-lg rounded-2xl shadow-md flex flex-col gap-space-md">
+          <div className="bg-surface-container-low border border-surface-container-high/40 p-4 sm:p-space-lg rounded-2xl shadow-md flex flex-col gap-space-md">
             <div className="flex items-center gap-space-sm">
               <span className="w-8 h-8 rounded-xl bg-primary-container/30 text-primary flex items-center justify-center">
                 <span className="material-symbols-outlined text-[20px]">password</span>

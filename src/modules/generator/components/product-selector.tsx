@@ -48,17 +48,17 @@ export function ProductSelector({
 
   return (
     <section className="flex flex-col gap-space-md">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-space-xs">
-          <span className="font-headline-sm text-headline-sm text-on-surface font-semibold">
+      <div className="flex items-center justify-between flex-wrap gap-1.5">
+        <div className="flex items-center gap-1.5 flex-wrap">
+          <span className="font-headline-sm text-[15px] sm:text-headline-sm text-on-surface font-semibold">
             1. Pilih Target Produk
           </span>
-          <span className="font-label-code text-label-code text-primary bg-primary-container/20 border border-primary/20 px-2 py-0.5 rounded-full">
-            ({products.length} Produk Aktif)
+          <span className="font-label-code text-[11px] sm:text-label-code text-primary bg-primary-container/20 border border-primary/20 px-2 py-0.5 rounded-full">
+            ({products.length} Produk)
           </span>
         </div>
-        <span className="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
-          <span className="material-symbols-outlined text-[15px]">touch_app</span>
+        <span className="font-body-sm text-[11.5px] sm:text-body-sm text-on-surface-variant flex items-center gap-1">
+          <span className="material-symbols-outlined text-[14px]">touch_app</span>
           Klik untuk Pilih
         </span>
       </div>
@@ -69,7 +69,7 @@ export function ProductSelector({
             <span className="material-symbols-outlined text-[16px]">female</span>
             <span>Koleksi Wanita ({femaleProducts.length} Produk)</span>
           </div>
-          <div className="flex sm:grid sm:grid-cols-2 overflow-x-auto sm:overflow-x-visible no-scrollbar gap-3 sm:gap-space-md pb-2 sm:pb-0 -mx-3 px-3 sm:mx-0 sm:px-0">
+          <div className="flex sm:grid sm:grid-cols-2 overflow-x-auto sm:overflow-x-visible no-scrollbar gap-3 sm:gap-space-md py-2.5 sm:py-0 -mx-3 px-3 sm:mx-0 sm:px-0 items-stretch">
             {femaleProducts.map((product) => {
               const scriptCount = scripts.filter((s) => s.productId === product.id).length;
               return (
@@ -92,7 +92,7 @@ export function ProductSelector({
             <span className="material-symbols-outlined text-[16px]">male</span>
             <span>Koleksi Pria ({maleProducts.length} Produk)</span>
           </div>
-          <div className="flex sm:grid sm:grid-cols-2 overflow-x-auto sm:overflow-x-visible no-scrollbar gap-3 sm:gap-space-md pb-2 sm:pb-0 -mx-3 px-3 sm:mx-0 sm:px-0">
+          <div className="flex sm:grid sm:grid-cols-2 overflow-x-auto sm:overflow-x-visible no-scrollbar gap-3 sm:gap-space-md py-2.5 sm:py-0 -mx-3 px-3 sm:mx-0 sm:px-0 items-stretch">
             {maleProducts.map((product) => {
               const scriptCount = scripts.filter((s) => s.productId === product.id).length;
               return (

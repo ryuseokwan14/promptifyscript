@@ -100,7 +100,7 @@ export function LocationsTab({
       {/* Form Tambah Lokasi */}
       <form
         onSubmit={handleSubmit}
-        className="bg-surface-container-low border border-surface-container-high/40 p-space-lg rounded-2xl shadow-md flex flex-col gap-space-sm"
+        className="bg-surface-container-low border border-surface-container-high/40 p-4 sm:p-space-lg rounded-2xl shadow-md flex flex-col gap-space-sm"
       >
         <div className="flex items-center justify-between flex-wrap gap-2">
           <label className="font-label-code text-label-code text-on-surface-variant">
@@ -155,7 +155,7 @@ export function LocationsTab({
           <button
             type="submit"
             disabled={parsedItems.length === 0 || isSubmitting}
-            className="px-space-lg py-2.5 rounded-xl bg-primary text-primary-foreground font-headline-sm text-headline-sm flex items-center justify-center gap-1.5 hover:brightness-105 shadow-sm transition-all whitespace-nowrap cursor-pointer font-bold disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full md:w-auto px-space-lg py-3 md:py-2.5 rounded-xl bg-primary text-primary-foreground font-headline-sm text-headline-sm flex items-center justify-center gap-1.5 hover:brightness-105 shadow-sm transition-all whitespace-nowrap cursor-pointer font-bold disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <span className="material-symbols-outlined text-[18px]">
               {parsedItems.length > 1 ? "library_add" : "add"}
