@@ -13,6 +13,7 @@ export function AddProductForm({ onAddProduct }: AddProductFormProps) {
   const [newProdName, setNewProdName] = useState("");
   const [newProdGender, setNewProdGender] = useState<"female" | "male">("female");
   const [imageUrl, setImageUrl] = useState<string>("");
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,27 +37,41 @@ export function AddProductForm({ onAddProduct }: AddProductFormProps) {
   };
 
   return (
-    <div className="bg-surface-container-low border border-surface-container-high/40 p-space-lg rounded-2xl shadow-md flex flex-col gap-space-md">
-      <div className="flex items-center justify-between">
+    <div className="bg-surface-container-low border border-surface-container-high/40 p-4 sm:p-space-lg rounded-2xl shadow-md flex flex-col gap-space-md">
+      <div
+        onClick={() => setIsMobileOpen((prev) => !prev)}
+        className="flex items-center justify-between cursor-pointer md:cursor-default"
+      >
         <div className="flex items-center gap-space-sm">
-          <span className="w-8 h-8 rounded-xl bg-primary-container/20 flex items-center justify-center text-primary">
+          <span className="w-8 h-8 rounded-xl bg-primary-container/20 flex items-center justify-center text-primary shrink-0">
             <span className="material-symbols-outlined text-[20px]">add_box</span>
           </span>
           <div>
-            <h2 className="font-headline-sm text-headline-sm text-on-surface font-semibold">
+            <h2 className="font-headline-sm text-[15px] sm:text-headline-sm text-on-surface font-semibold">
               Tambah Produk Baru
             </h2>
-            <p className="font-body-sm text-body-sm text-on-surface-variant">
+            <p className="font-body-sm text-[11.5px] sm:text-body-sm text-on-surface-variant line-clamp-1">
               Tentukan nama produk, persona model, dan foto produk visual.
             </p>
           </div>
         </div>
-        <span className="font-label-badge text-label-badge bg-surface-container-highest px-space-sm py-1 rounded-md text-on-surface-variant uppercase font-medium">
-          Instant Feed
-        </span>
+        <div className="flex items-center gap-1.5 shrink-0">
+          <span className="hidden sm:inline-block font-label-badge text-label-badge bg-surface-container-highest px-space-sm py-1 rounded-md text-on-surface-variant uppercase font-medium">
+            Instant Feed
+          </span>
+          <button
+            type="button"
+            className="md:hidden w-8 h-8 rounded-lg flex items-center justify-center bg-surface-container text-on-surface-variant"
+          >
+            <span className="material-symbols-outlined text-[18px] transition-transform duration-200">
+              {isMobileOpen ? "expand_less" : "expand_more"}
+            </span>
+          </button>
+        </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-space-md">
+      <div className={isMobileOpen ? "block" : "hidden md:block"}>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-space-md pt-2 md:pt-0">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-space-md items-start">
           <div className="md:col-span-5 flex flex-col gap-1.5">
             <label className="font-label-code text-label-code text-on-surface-variant">
@@ -123,6 +138,7 @@ export function AddProductForm({ onAddProduct }: AddProductFormProps) {
           onImageChange={setImageUrl}
         />
       </form>
+      </div>
     </div>
   );
 }

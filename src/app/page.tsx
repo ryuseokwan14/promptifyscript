@@ -93,8 +93,8 @@ export default function GeneratorPage() {
     <div className="bg-background font-body-md text-on-surface antialiased min-h-screen flex flex-col">
       <Header />
 
-      <main className="w-full pt-16 flex-1 px-gutter max-w-7xl mx-auto">
-        <div className="flex flex-col w-full pb-space-xl">
+      <main className="w-full pt-16 flex-1 px-3 sm:px-gutter max-w-7xl mx-auto pb-24 sm:pb-space-xl">
+        <div className="flex flex-col w-full">
           <LiveStudioBar />
 
           <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start mt-2">

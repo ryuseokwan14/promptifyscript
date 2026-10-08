@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary-fixed": "#001f26", "secondary-fixed-dim": "#4cd7f6", "secondary-container": "#03b5d3", "on-error": "#690005", "inverse-primary": "#494bd6", "on-primary": "#1000a9", "surface-container": "#1f1f24", "tertiary": "#ffb2b7", "tertiary-fixed": "#ffdadb", "on-tertiary-fixed-variant": "#92002a", "on-error-container": "#ffdad6", "surface-container-highest": "#353439", "primary-fixed-dim": "#c0c1ff", "on-secondary-container": "#00424e", "surface-bright": "#39393d", "on-tertiary": "#67001b", "on-surface": "#e4e1e7", "surface-container-high": "#2a292e", "primary": "#c0c1ff", "error": "#ffb4ab", "primary-container": "#8083ff", "secondary": "#4cd7f6", "on-secondary-fixed-variant": "#004e5c", "outline-variant": "#464554", "inverse-surface": "#e4e1e7", "tertiary-fixed-dim": "#ffb2b7", "on-primary-container": "#0d0096", "surface-dim": "#131317", "surface-container-low": "#1b1b1f", "on-surface-variant": "#c7c4d7", "surface-variant": "#353439", "on-background": "#e4e1e7", "surface-container-lowest": "#0e0e12", "background": "#131317", "surface": "#131317", "on-tertiary-container": "#5b0017", "tertiary-container": "#ff516a", "error-container": "#93000a", "on-secondary": "#003640", "on-tertiary-fixed": "#40000d", "inverse-on-surface": "#303034", "surface-tint": "#c0c1ff", "on-primary-fixed-variant": "#2f2ebe", "on-primary-fixed": "#07006c", "secondary-fixed": "#acedff", "primary-fixed": "#e1e0ff", "outline": "#908fa0" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "2rem", "space-sm": "0.5rem", "space-xl": "2.5rem", "space-xs": "0.25rem", "space-md": "1rem", "margin-mobile": "1rem", "gutter-mobile": "0.75rem", "gutter": "1.5rem", "space-lg": "1.5rem" }, "fontFamily": { "headline-sm": ["Space Grotesk"], "headline-lg-mobile": ["Space Grotesk"], "headline-xl": ["Space Grotesk"], "headline-xl-mobile": ["Space Grotesk"], "label-badge": ["JetBrains Mono"], "body-md": ["Plus Jakarta Sans"], "headline-md": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "body-lg": ["Plus Jakarta Sans"], "label-code": ["JetBrains Mono"], "body-sm": ["Plus Jakarta Sans"] }, "fontSize": { "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}], "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}], "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "700"}], "headline-xl-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}], "label-badge": ["11px", {"lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600"}], "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}], "headline-md": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}], "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}], "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}], "label-code": ["13px", {"lineHeight": "18px", "fontWeight": "500"}], "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#131317;color:#e4e1e7;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 0.5rem);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface font-body-md text-on-surface min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 w-full z-50 bg-surface-dim/80 backdrop-blur-xl pt-safe shadow-[0_1px_12px_rgba(0,0,0,0.3)]"><div class="h-16 px-margin-mobile flex items-center justify-between gap-gutter-mobile"><div class="flex items-center gap-space-sm min-w-0 flex-1"><img alt="Promptify Script official logo mark with 100% transparent background (no dark container rect). Futuristic 3D glassmorphic vertical 9:16 mobile frame with neon gradient border (Electric Indigo #6366F1, Cyber Cyan #06B6D4, Neon Rose #F43F5E), cyber cursor (&gt;_), and cosmic glowing star sparkle (✦). Rendered to transparent PNG and raw vector SVG." class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1WgPIdzNA87ObRvxrYn_RAS9tYh_QtQAFEECBVh1tSd-lbt42iXcNHnapZGV9Nm7eueBD1rtFcP_YcsJdD9TeRXpwhCkzSgTDzM65LHedsUwew-mrmqnU_8ed7UVpa1i199QT_WEY8lLHV-qntxgGOUni2-74wocny1V2mbwKcQQq99Z-Y92wObWDM2zHWHfjjsrAtrfJoaNHyiyk602sfEfMhZ6GU_nrdhv2Y_NYDgUQ"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight truncate">Promptify Script</span><span class="font-label-badge text-label-badge uppercase px-1.5 py-0.5 rounded-full bg-secondary-container/20 text-secondary border border-secondary/30 shrink-0">AI</span></div><span class="font-body-sm text-body-sm text-on-surface-variant truncate">Generator</span></div></div><div class="flex items-center gap-space-sm shrink-0"><div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high/80 backdrop-blur-md"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span></span><span class="font-label-badge text-label-badge text-secondary font-medium tracking-wide">GEMINI 1.5</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface"><div class="flex flex-col w-full px-margin-mobile pb-space-lg gap-space-md">
+<!-- Ambient Glow Background Decor -->
+<div class="relative w-full overflow-hidden">
+<div class="absolute -top-16 -left-12 w-44 h-44 rounded-full bg-primary-container/15 blur-3xl pointer-events-none"></div>
+<div class="absolute -top-12 -right-8 w-44 h-44 rounded-full bg-secondary-container/15 blur-3xl pointer-events-none"></div>
+<!-- Mode Selector & Quick Metrics -->
+<div class="flex items-center justify-between pt-space-xs pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]" style="font-variation-settings: 'FILL' 1;">dataset</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Target Produk</span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-badge text-label-badge">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span>4 MODEL SIAP</span>
+</div>
+</div>
+</div>
+<!-- 1. Horizontal Scrollable Product Selector Cards -->
+<div class="relative -mx-margin-mobile px-margin-mobile overflow-x-auto flex gap-space-sm no-scrollbar py-1" id="productScroller">
+<!-- Item 1: Active -->
+<div class="product-card shrink-0 w-[156px] rounded-xl bg-surface-container-high p-space-sm flex flex-col gap-2 relative shadow-lg cursor-pointer transition-all duration-200" data-active="true" data-product="Celana Kulot Linen" data-target="Cewek" data-tokens="138">
+<div class="absolute -inset-[1px] rounded-xl bg-gradient-to-r from-primary via-secondary to-primary opacity-90 -z-10 blur-[1px] active-glow"></div>
+<div class="relative h-20 w-full rounded-lg overflow-hidden bg-surface-container-lowest">
+<img class="w-full h-full object-cover" data-alt="Minimalist aesthetic catalog shot of female model wearing airy natural beige linen wide-leg culotte trousers in sunlit studio, high-fashion creator editorial, deep dark obsidian backdrop accents, moody soft spotlight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPSmt5IiVifVNfU4o-dkzaHU7f_Mr1z51kAHHN2NBXkt109ewhbbAjzqjvrzG1M6cvnt63Qvdm1iEd3LH4iSuamATWW6IyKkyP5PsId8HQYiSMgHx3LnM3c221ikF0GgnBGvBU_G1Jort7xyyH2bN20gJ2EaY8BVjm19XGZwSyuazogpQjm6XWoYnwAJUrU79-lHnELwUFoqzKaazizt5BDBRu6iWmu3fXSZC2Koga"/>
+<div class="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-tertiary font-label-badge text-[10px] flex items-center gap-1">
+<span>👩</span><span>Cewek</span>
+</div>
+<div class="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[11px] font-bold">check</span>
+</div>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-[13px] leading-tight text-on-surface font-semibold truncate">Celana Kulot Linen</span>
+<span class="font-label-code text-body-sm text-secondary font-medium mt-0.5">High-Waist Flow</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="product-card shrink-0 w-[156px] rounded-xl bg-surface-container p-space-sm flex flex-col gap-2 relative shadow-md cursor-pointer transition-all duration-200 opacity-80" data-active="false" data-product="Celana Cargo Pria" data-target="Cowok" data-tokens="142">
+<div class="relative h-20 w-full rounded-lg overflow-hidden bg-surface-container-lowest">
+<img class="w-full h-full object-cover" data-alt="Tactical modern relaxed charcoal grey cargo pants on male streetwear creator, urban dusk environment with subtle cyan neon reflections, premium apparel presentation, cinematic rim lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfOmMy1o8HXZmbshTOZnNUtSjkigILj_oQkNfZ_ObERVOTZuyE8d_I978tBgYnEl42CK6pP1R5cqSWxZ9ehjfLtqKxMQreRD7T9xmDNBUn0RdPXOjJU73aPLyk-VT_a9v3ElNure8daO1JfIrN-2wZHPp0ij0picq4kxlfkOHoUirdvPzqnqyBiAKbAqZ_qtmdsLKX3wfqdSAb92V-_xMTm7C6gze_Fh8uVPTsf7U7"/>
+<div class="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-secondary font-label-badge text-[10px] flex items-center gap-1">
+<span>👨</span><span>Cowok</span>
+</div>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-[13px] leading-tight text-on-surface font-semibold truncate">Celana Cargo Pria</span>
+<span class="font-label-code text-body-sm text-on-surface-variant mt-0.5">Tactical Relaxed</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="product-card shrink-0 w-[156px] rounded-xl bg-surface-container p-space-sm flex flex-col gap-2 relative shadow-md cursor-pointer transition-all duration-200 opacity-80" data-active="false" data-product="Oversized Shirt Boxy" data-target="Cowok" data-tokens="129">
+<div class="relative h-20 w-full rounded-lg overflow-hidden bg-surface-container-lowest">
+<img class="w-full h-full object-cover" data-alt="Clean drop-shoulder oversized boxy fit heavy cotton shirt in off-black color on male model, minimalist cyber-chic interior studio aesthetic, high contrast dramatic studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWJWc9iFyFBnXMO1ELR3wMtfGT3DBe5iGKjquCfouToi3p6mSKocvu0CqhZyu1U5QpvfAyGPmFnTsALLO6Eln5RZCsycxQK6sJHJsTgDNrx05Q6Zvk3k9jAnqndvA-kX5YDAZSY0ccV1tEb1C808wmj2pziNoaV8xFhubWAXoSbG4o-lfun0Cp8eAm0qVyJTHkZLJj1Z-raHIHqPQ31SDRXtP2kPdzh8lWYV6q5t6C"/>
+<div class="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-secondary font-label-badge text-[10px] flex items-center gap-1">
+<span>👨</span><span>Cowok</span>
+</div>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-[13px] leading-tight text-on-surface font-semibold truncate">Oversized Shirt Boxy</span>
+<span class="font-label-code text-body-sm text-on-surface-variant mt-0.5">Heavy Drop 240gsm</span>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="product-card shrink-0 w-[156px] rounded-xl bg-surface-container p-space-sm flex flex-col gap-2 relative shadow-md cursor-pointer transition-all duration-200 opacity-80" data-active="false" data-product="Pleated Midi Skirt" data-target="Cewek" data-tokens="134">
+<div class="relative h-20 w-full rounded-lg overflow-hidden bg-surface-container-lowest">
+<img class="w-full h-full object-cover" data-alt="Elegant metallic dusty lilac pleated midi skirt with natural movement dynamic motion blur flare on female model walking, modern boutique warm mood lighting with deep shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-JFoWCuCuZQJPibNsvMARDkblJBKf25DNAfeiHAk9y13tfhtxgW1fdIMmUrRS3JZdlP7QWPJnHSD44EbAxjAKgK3FdE28Uil-XUcPbdvyrA68RsUDgtuRP2GhCr7gL4dFtbM5yN4you3hiZ0usqQKli78QcFtrCyVvrd_XfgiT8zuKwq4L2PzcfT3VKLYADq5KAeiZ-QG8ZDv031u5cPEBK3YzF2fLcccVwvhbgzW"/>
+<div class="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-tertiary font-label-badge text-[10px] flex items-center gap-1">
+<span>👩</span><span>Cewek</span>
+</div>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-[13px] leading-tight text-on-surface font-semibold truncate">Pleated Midi Skirt</span>
+<span class="font-label-code text-body-sm text-on-surface-variant mt-0.5">Micro Accordion</span>
+</div>
+</div>
+</div>
+<!-- 2. Action Bar (Large Tap Target Generator + Quick Re-roll) -->
+<div class="grid grid-cols-12 gap-space-xs items-stretch pt-0.5">
+<button class="col-span-8 h-12 rounded-xl bg-gradient-to-r from-primary-container via-primary to-secondary-container text-on-primary-fixed flex items-center justify-center gap-2 shadow-lg shadow-primary-container/20 active:scale-[0.98] transition-transform font-headline-sm text-[15px] font-bold tracking-tight" id="btnGenerate">
+<span class="material-symbols-outlined text-[20px] animate-pulse">bolt</span>
+<span>Generate Prompt</span>
+</button>
+<button class="col-span-4 h-12 rounded-xl bg-surface-container-high active:bg-surface-bright text-on-surface flex items-center justify-center gap-1.5 shadow-md active:scale-[0.98] transition-all font-body-sm font-semibold" id="btnReroll">
+<span class="material-symbols-outlined text-secondary text-[18px]" id="rerollIcon">casino</span>
+<span class="truncate">Re-roll</span>
+</button>
+</div>
+<!-- 3. Live Assembled Prompt Output Card (Glassmorphic) -->
+<div class="w-full rounded-2xl bg-surface-container-low p-space-md shadow-xl flex flex-col gap-space-sm relative overflow-hidden backdrop-blur-md">
+<!-- Header meta -->
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<div class="w-2.5 h-2.5 rounded-full bg-secondary shadow-[0_0_8px_rgba(76,215,246,0.8)]"></div>
+<span class="font-headline-sm text-[14px] text-on-surface tracking-tight font-semibold">Live Assembled Prompt</span>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-highest text-secondary-fixed-dim font-label-badge text-label-badge">
+<span class="material-symbols-outlined text-[12px]">token</span>
+<span id="tokenCounter">138 tokens</span>
+</div>
+</div>
+<!-- Assembled Prompt Preformatted Display -->
+<div class="rounded-xl bg-surface-container-lowest/90 p-space-sm font-label-code text-[12px] leading-[22px] text-on-surface select-all overflow-hidden flex flex-col gap-1.5 shadow-inner" id="promptOutput">
+<p class="text-on-surface-variant">
+        "Format video vertikal 9:16 UGC review realistis. Subjek creator wanita muda berbicara santai di 
+        <span class="inline-flex items-center px-1.5 py-0.5 rounded-md bg-secondary-container/25 text-secondary font-medium tracking-wide">
+          {tempat: coffee shop outdoor bernuansa kayu minimalis}
+        </span>
+        menyoroti detail jahitan pinggang, potongan jatuh, dan tekstur kain. Dialog mikrofon clip-on berujar: 
+        <span class="inline-flex items-center px-1.5 py-0.5 rounded-md bg-tertiary-container/30 text-tertiary font-medium tracking-wide">
+          {"Bahan linennya bener-bener adem dan jatuh banget pas dipake jalan..."}
+        </span>
+        dengan gestur natural merapikan saku celana. Pencahayaan natural golden hour, tanpa noise sintetis."
+      </p>
+</div>
+<!-- Micro Indicators Bar -->
+<div class="flex items-center justify-between pt-1 text-[11px] font-label-badge text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-secondary">sync_saved_locally</span>
+<span>Auto-injection active</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-primary">graphic_eq</span>
+<span>Lip-sync: <span class="text-primary-fixed-dim font-semibold">99.4%</span></span>
+</div>
+</div>
+</div>
+<!-- 4. Quick Action Content Footer -->
+<div class="flex flex-col gap-space-xs w-full">
+<!-- Main Copy Button -->
+<button class="w-full h-12 rounded-xl bg-primary text-on-primary font-headline-sm text-[15px] font-bold flex items-center justify-center gap-2 shadow-lg active:scale-[0.98] transition-all duration-150" id="btnCopy">
+<span class="material-symbols-outlined text-[20px]" id="copyIcon">content_copy</span>
+<span id="copyText">Copy Prompt to Clipboard</span>
+</button>
+<!-- Quick Utility Links Row -->
+<div class="grid grid-cols-3 gap-space-xs pt-1">
+<button class="h-9 px-2 rounded-lg bg-surface-container flex items-center justify-center gap-1 text-on-surface-variant active:text-on-surface active:bg-surface-container-high transition-colors font-body-sm text-[11px]">
+<span class="material-symbols-outlined text-[14px] text-secondary">open_in_new</span>
+<span class="truncate">Gemini App</span>
+</button>
+<button class="h-9 px-2 rounded-lg bg-surface-container flex items-center justify-center gap-1 text-on-surface-variant active:text-on-surface active:bg-surface-container-high transition-colors font-body-sm text-[11px]" id="btnSavePreset">
+<span class="material-symbols-outlined text-[14px] text-primary">bookmark_add</span>
+<span class="truncate">Save Preset</span>
+</button>
+<button class="h-9 px-2 rounded-lg bg-surface-container flex items-center justify-center gap-1 text-on-surface-variant active:text-on-surface active:bg-surface-container-high transition-colors font-body-sm text-[11px]" id="btnTestAudio">
+<span class="material-symbols-outlined text-[14px] text-tertiary">volume_up</span>
+<span class="truncate">Test Audio</span>
+</button>
+</div>
+</div>
+<!-- 5. Visual Context Thumbnail Row -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-[12px] text-on-surface-variant tracking-wider uppercase">Visual References (AI Anchor)</span>
+<span class="font-label-badge text-label-badge text-secondary font-medium">3 STYLES SYNCED</span>
+</div>
+<div class="grid grid-cols-3 gap-space-xs">
+<!-- Thumbnail 1: Silhouette -->
+<div class="flex flex-col rounded-xl overflow-hidden bg-surface-container-low shadow-sm">
+<div class="h-20 w-full relative bg-surface-container-lowest">
+<img class="w-full h-full object-cover" data-alt="High contrast studio silhouette framing of model moving naturally with breezy trousers, emphasizing structural cut and flow ratio in dramatic noir lighting with cyber cyan rim light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBt-KbV_uMNGHT5CftY_w0C8u-TOSdYxt_nVKkBnKDRdrZh4SyTIcUgNp1_quqsFKY-ZICQeMkwmAcJjKHieeJsIsOkwTqVe5uHHHszKdKS4ZFkTRWVTZTW-wWDoaFqzOCtVMVyo1T2zX9oJvd1CpXbq3jn2HQQHCj7LOC_xyfQRtRBRWT_FjZqixIr7fdppcuRWjn32ZoTQ_Bgx8mPOvHlde1mNqvED8O9ZTMOoh1J"/>
+<span class="absolute bottom-1 right-1 px-1 py-0.2 rounded bg-surface-container-lowest/80 text-secondary font-label-badge text-[9px]">9:16</span>
+</div>
+<div class="p-1.5 flex items-center justify-between">
+<span class="font-headline-sm text-[11px] text-on-surface font-semibold truncate">Silhouette</span>
+<span class="material-symbols-outlined text-[13px] text-secondary">check_circle</span>
+</div>
+</div>
+<!-- Thumbnail 2: Fabric Texture -->
+<div class="flex flex-col rounded-xl overflow-hidden bg-surface-container-low shadow-sm">
+<div class="h-20 w-full relative bg-surface-container-lowest">
+<img class="w-full h-full object-cover" data-alt="Macro extreme close-up of premium raw woven organic linen fabric texture, subtle weave slubs, earthy warm tones, soft directional afternoon daylight revealing tactile threads." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB31sYVUXGYHN_BdpUOzpEhpvyzP-k48hkJfen5zdPmIT4r9BW7UqHHGNnA73zWlFu1fwIJ7ndX8agMB4gRX68XLUjv6T_NP4ib06dchbpBHhYddjmdWGWMeFrUgBEi86vGITMCMOA6HDl-EZLm51IbanIHq6n0URr0XroYg_2d8c-wvOWJ38Cpe9ngxBX-jBamrxYFSnS2m6Sa4KgaFX25wULUhhU2zSf8-VhEVtMy"/>
+<span class="absolute bottom-1 right-1 px-1 py-0.2 rounded bg-surface-container-lowest/80 text-secondary font-label-badge text-[9px]">MACRO</span>
+</div>
+<div class="p-1.5 flex items-center justify-between">
+<span class="font-headline-sm text-[11px] text-on-surface font-semibold truncate">Fabric Texture</span>
+<span class="material-symbols-outlined text-[13px] text-secondary">check_circle</span>
+</div>
+</div>
+<!-- Thumbnail 3: Atmosphere -->
+<div class="flex flex-col rounded-xl overflow-hidden bg-surface-container-low shadow-sm">
+<div class="h-20 w-full relative bg-surface-container-lowest">
+<img class="w-full h-full object-cover" data-alt="Atmospheric warm aesthetic outdoor cafe corner with Scandinavian raw oak tables, soft lush green fiddle fig plants, golden sunbeam dappled lighting on floor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5nZ155nKGhfGFNlqG3OO9Ov-9lVqHxcl4IJk849sp5tesH4szCCDDMQNCqbazi66fk6bXIft0PckhTDHGGfqvqzheHVRvHHYIfwuX8DlkqVSbLNnuuypyrdlIWDwyehm1TX-dXWXyoA1v_rFts-DwqN2rm0SWgbMHq8QPGsQfcWxym2-ALpOWZAmMQ0TvZ9zn-ftFoWBWZ-1KZXXXx--1J4G00yU14fbpZdoqNX4t"/>
+<span class="absolute bottom-1 right-1 px-1 py-0.2 rounded bg-surface-container-lowest/80 text-secondary font-label-badge text-[9px]">AMB</span>
+</div>
+<div class="p-1.5 flex items-center justify-between">
+<span class="font-headline-sm text-[11px] text-on-surface font-semibold truncate">Atmosphere</span>
+<span class="material-symbols-outlined text-[13px] text-secondary">check_circle</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Client-side Interactive Behaviors -->
+<script>
+  (function initDashboard() {
+    const cards = document.querySelectorAll('.product-card');
+    const promptContainer = document.getElementById('promptOutput');
+    const tokenDisplay = document.getElementById('tokenCounter');
+    const btnGenerate = document.getElementById('btnGenerate');
+    const btnReroll = document.getElementById('btnReroll');
+    const rerollIcon = document.getElementById('rerollIcon');
+    const btnCopy = document.getElementById('btnCopy');
+    const copyIcon = document.getElementById('copyIcon');
+    const copyText = document.getElementById('copyText');
+
+    const productTemplates = {
+      'Celana Kulot Linen': {
+        gender: 'wanita',
+        place: 'coffee shop outdoor bernuansa kayu minimalis',
+        quote: 'Bahan linennya bener-bener adem dan jatuh banget pas dipake jalan...',
+        action: 'merapikan saku celana',
+        tokens: '138'
+      },
+      'Celana Cargo Pria': {
+        gender: 'pria',
+        place: 'rooftop industrial saat senja temaram kota modern',
+        quote: 'Kantong taktikalnya muat banyak tapi tetep keliatan rapi dan stylish...',
+        action: 'menepuk saku samping celana',
+        tokens: '142'
+      },
+      'Oversized Shirt Boxy': {
+        gender: 'pria',
+        place: 'galeri seni kontemporer bertembok monokrom bersih',
+        quote: 'Kerahnya tebel nggak gampang letoy, fitting boxy-nya bikin pundak keliatan tegap...',
+        action: 'menarik ujung lengan baju',
+        tokens: '129'
+      },
+      'Pleated Midi Skirt': {
+        gender: 'wanita',
+        place: 'toko bunga estetik dengan jendela kaca besar bersinar',
+        quote: 'Lipatan plisketnya rapi banget dan waktu muter flow-nya anggun pol...',
+        action: 'melakukan half-turn swing natural',
+        tokens: '134'
+      }
+    };
+
+    function updatePrompt(productName) {
+      const data = productTemplates[productName] || productTemplates['Celana Kulot Linen'];
+      tokenDisplay.textContent = data.tokens + ' tokens';
+      promptContainer.innerHTML = `
+        <p class="text-on-surface-variant">
+          "Format video vertikal 9:16 UGC review realistis. Subjek creator ${data.gender} muda berbicara santai di 
+          <span class="inline-flex items-center px-1.5 py-0.5 rounded-md bg-secondary-container/25 text-secondary font-medium tracking-wide">
+            {tempat: ${data.place}}
+          </span>
+          menyoroti detail jahitan pinggang, potongan jatuh, dan tekstur kain. Dialog mikrofon clip-on berujar: 
+          <span class="inline-flex items-center px-1.5 py-0.5 rounded-md bg-tertiary-container/30 text-tertiary font-medium tracking-wide">
+            {"${data.quote}"}
+          </span>
+          dengan gestur natural ${data.action}. Pencahayaan natural golden hour, tanpa noise sintetis."
+        </p>
+      `;
+    }
+
+    // Product Card Selection
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        cards.forEach(c => {
+          c.classList.remove('bg-surface-container-high');
+          c.classList.add('bg-surface-container', 'opacity-80');
+          const glow = c.querySelector('.active-glow');
+          if (glow) glow.remove();
+          const check = c.querySelector('.material-symbols-outlined');
+          if (check && check.innerText === 'check') check.parentElement.remove();
+        });
+
+        card.classList.remove('bg-surface-container', 'opacity-80');
+        card.classList.add('bg-surface-container-high');
+        
+        // Add glowing ring element
+        const glowDiv = document.createElement('div');
+        glowDiv.className = 'absolute -inset-[1px] rounded-xl bg-gradient-to-r from-primary via-secondary to-primary opacity-90 -z-10 blur-[1px] active-glow';
+        card.appendChild(glowDiv);
+
+        // Add check icon
+        const thumbBox = card.querySelector('.relative.h-20');
+        if (thumbBox && !thumbBox.querySelector('.w-4.h-4')) {
+          const badge = document.createElement('div');
+          badge.className = 'absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-primary flex items-center justify-center text-on-primary';
+          badge.innerHTML = '<span class="material-symbols-outlined text-[11px] font-bold">check</span>';
+          thumbBox.appendChild(badge);
+        }
+
+        const prod = card.getAttribute('data-product');
+        updatePrompt(prod);
+      });
+    });
+
+    // Generate CTA feedback
+    btnGenerate.addEventListener('click', () => {
+      btnGenerate.classList.add('scale-95');
+      setTimeout(() => btnGenerate.classList.remove('scale-95'), 150);
+      promptContainer.classList.add('bg-primary-container/20');
+      setTimeout(() => promptContainer.classList.remove('bg-primary-container/20'), 300);
+    });
+
+    // Re-roll button rotation animation & variation shift
+    const variations = [
+      { place: 'kafe minimalis di rooftop sore', quote: 'Jujur ini celana ternyaman yang pernah gue pake seharian...' },
+      { place: 'area co-working space industrial estetik', quote: 'Fittingnya pas bgt di pinggang, ga perlu ribet pake ikat pinggang lagi!' },
+      { place: 'teras studio foto dengan skylight alami', quote: 'Tekstur kain aslinya jauh lebih mewah daripada di foto katalognya...' }
+    ];
+    let vIndex = 0;
+
+    btnReroll.addEventListener('click', () => {
+      rerollIcon.classList.add('rotate-180', 'transition-transform', 'duration-300');
+      setTimeout(() => rerollIcon.classList.remove('rotate-180'), 300);
+
+      const varItem = variations[vIndex % variations.length];
+      vIndex++;
+
+      const placeTag = promptContainer.querySelector('.bg-secondary-container\\/25');
+      const quoteTag = promptContainer.querySelector('.bg-tertiary-container\\/30');
+      if (placeTag) placeTag.textContent = `{tempat: ${varItem.place}}`;
+      if (quoteTag) quoteTag.textContent = `{"${varItem.quote}"}`;
+    });
+
+    // Copy to clipboard with success state
+    btnCopy.addEventListener('click', () => {
+      const textToCopy = promptContainer.innerText.trim();
+      navigator.clipboard?.writeText(textToCopy);
+
+      const origText = copyText.textContent;
+      btnCopy.classList.remove('bg-primary', 'text-on-primary');
+      btnCopy.classList.add('bg-secondary-container', 'text-on-secondary-container');
+      copyIcon.textContent = 'done_all';
+      copyText.textContent = 'Prompt Copied!';
+
+      setTimeout(() => {
+        btnCopy.classList.remove('bg-secondary-container', 'text-on-secondary-container');
+        btnCopy.classList.add('bg-primary', 'text-on-primary');
+        copyIcon.textContent = 'content_copy';
+        copyText.textContent = origText;
+      }, 2000);
+    });
+
+    // Simple toast feedback for save preset
+    document.getElementById('btnSavePreset').addEventListener('click', function() {
+      const orig = this.innerHTML;
+      this.innerHTML = '<span class="material-symbols-outlined text-[14px] text-primary">check</span><span class="text-primary font-medium">Saved</span>';
+      setTimeout(() => this.innerHTML = orig, 1800);
+    });
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-dim/85 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,0,0,0.45)]" data-active-classes="text-primary font-headline-sm"><div class="h-16 px-margin-mobile grid grid-cols-3 items-center max-w-md mx-auto"><a aria-current="page" class="flex flex-col items-center justify-center gap-1 transition-colors min-h-[44px] min-w-[44px] group text-primary font-headline-sm" data-path="generator" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[22px] transition-transform group-hover:scale-110">auto_awesome</span><span class="absolute -top-1 -right-2 px-1 py-0.2 rounded-full bg-tertiary-container text-on-tertiary-container font-label-badge text-[9px] font-bold leading-tight">HOT</span></div><span class="font-body-sm text-body-sm leading-none">Generator</span></a><a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant transition-colors min-h-[44px] min-w-[44px] group" data-path="hook-lab" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[22px] transition-transform group-hover:scale-110">bolt</span><span class="absolute -top-1 -right-2.5 px-1 py-0.2 rounded-full bg-secondary/20 text-secondary border border-secondary/40 font-label-badge text-[9px] font-bold leading-tight">LAB</span></div><span class="font-body-sm text-body-sm leading-none">Hooks</span></a><a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant transition-colors min-h-[44px] min-w-[44px] group" data-path="data-settings" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[22px] transition-transform group-hover:scale-110">tune</span></div><span class="font-body-sm text-body-sm leading-none">Settings</span></a></div></nav></body></html>

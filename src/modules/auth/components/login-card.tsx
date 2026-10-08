@@ -93,7 +93,7 @@ export function LoginCard() {
                   type="text"
                   value={identifier}
                   onChange={(e) => setIdentifier(e.target.value)}
-                  placeholder="superadmin121 atau email creator"
+                  placeholder="Username atau Email"
                   required
                   className="bg-surface-container text-on-surface border-surface-container-high/60 h-10 px-3 rounded-xl focus:border-primary"
                 />
@@ -152,10 +152,6 @@ export function LoginCard() {
               </Field>
             </FieldGroup>
           </form>
-
-          <FieldDescription className="text-center text-xs text-on-surface-variant">
-            Sesi terenkripsi &bull; Logout otomatis saat browser ditutup
-          </FieldDescription>
         </CardContent>
       </Card>
 
@@ -174,7 +170,7 @@ export function LoginCard() {
                 Sistem dilindungi kunci induk terpusat:
               </span>
               <span className="block font-medium text-on-surface">
-                1. Masuk menggunakan akun superadmin121.
+                1. Masuk menggunakan akun administrator.
               </span>
               <span className="block font-medium text-on-surface">
                 2. Buka menu Data &amp; Settings &gt; Security &amp; Auth.

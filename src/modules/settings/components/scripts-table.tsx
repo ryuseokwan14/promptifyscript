@@ -158,8 +158,72 @@ export function ScriptsTable({
         </div>
       )}
 
-      {/* Table Content */}
-      <div className="w-full overflow-x-auto">
+      {/* Mobile Card List View (<md) */}
+      <div className="md:hidden flex flex-col divide-y divide-surface-container-high/30">
+        {filteredScripts.length === 0 ? (
+          <div className="p-8 text-center text-on-surface-variant flex flex-col items-center gap-2">
+            <span className="material-symbols-outlined text-[32px] text-outline">
+              chat_bubble_outline
+            </span>
+            <span className="font-body-sm text-xs">
+              {scripts.length === 0
+                ? "Belum ada naskah dialog untuk produk ini."
+                : "Tidak ada naskah dialog yang cocok dengan pencarian."}
+            </span>
+          </div>
+        ) : (
+          filteredScripts.map((script, idx) => {
+            const isSelected = selectedIds.includes(script.id);
+            return (
+              <div
+                key={script.id}
+                className={`p-3 flex flex-col gap-2 transition-colors ${
+                  isSelected ? "bg-primary/10" : ""
+                }`}
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={isSelected}
+                      onChange={() => handleToggleSelectOne(script.id)}
+                      aria-label={`Pilih naskah ${idx + 1}`}
+                      className="w-4 h-4 rounded border-surface-container-high text-primary focus:ring-primary cursor-pointer accent-primary shrink-0 mt-0.5"
+                    />
+                    <span className="font-label-code text-[11px] text-on-surface-variant">
+                      #{idx + 1 < 10 ? `0${idx + 1}` : idx + 1}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <button
+                      type="button"
+                      onClick={() => handleCopy(script.text)}
+                      aria-label="Salin naskah"
+                      className="w-8 h-8 rounded-lg flex items-center justify-center bg-surface-container text-on-surface-variant hover:text-primary active:scale-95 transition-all"
+                    >
+                      <span className="material-symbols-outlined text-[16px]">content_copy</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(script.id)}
+                      aria-label="Hapus naskah"
+                      className="w-8 h-8 rounded-lg flex items-center justify-center bg-surface-container text-on-surface-variant hover:text-error active:scale-95 transition-all"
+                    >
+                      <span className="material-symbols-outlined text-[16px]">delete</span>
+                    </button>
+                  </div>
+                </div>
+                <p className="font-body-md text-[13px] text-on-surface leading-snug italic pl-6">
+                  &quot;{script.text}&quot;
+                </p>
+              </div>
+            );
+          })
+        )}
+      </div>
+
+      {/* Desktop Table Content (>=md) */}
+      <div className="hidden md:block w-full overflow-x-auto">
         <table className="w-full text-left font-body-md text-body-md">
           <thead className="bg-surface-container-lowest text-on-surface-variant font-label-code text-label-code uppercase tracking-wider border-b border-surface-container-high/30">
             <tr>
@@ -216,21 +280,21 @@ export function ScriptsTable({
                       />
                     </td>
                     <td className="px-space-md py-space-md text-center font-label-code text-label-code text-on-surface-variant">
-                    {idx + 1 < 10 ? `0${idx + 1}` : idx + 1}
-                  </td>
+                      {idx + 1 < 10 ? `0${idx + 1}` : idx + 1}
+                    </td>
 
-                  <td className="px-space-lg py-space-md">
-                    <p className="font-body-md text-[14.5px] text-on-surface leading-relaxed italic">
-                      &quot;{script.text}&quot;
-                    </p>
-                  </td>
+                    <td className="px-space-lg py-space-md">
+                      <p className="font-body-md text-[14.5px] text-on-surface leading-relaxed italic">
+                        &quot;{script.text}&quot;
+                      </p>
+                    </td>
 
-                  <td className="px-space-lg py-space-md text-right">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger className="w-8 h-8 rounded-lg hover:bg-surface-container-highest flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-all cursor-pointer">
-                        <span className="material-symbols-outlined text-[20px]">more_vert</span>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="w-48">
+                    <td className="px-space-lg py-space-md text-right">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger className="w-8 h-8 rounded-lg hover:bg-surface-container-highest flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-all cursor-pointer">
+                          <span className="material-symbols-outlined text-[20px]">more_vert</span>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end" className="w-48">
                           <DropdownMenuItem
                             onClick={() => handleCopy(script.text)}
                             className="gap-2 cursor-pointer"

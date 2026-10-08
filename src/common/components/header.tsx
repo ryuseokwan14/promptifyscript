@@ -63,32 +63,52 @@ export function Header() {
             </Link>
           </div>
 
-          <div className="flex items-center gap-space-sm">
+          <div className="hidden md:flex items-center gap-space-sm">
             <nav className="flex items-center gap-1 bg-surface-container-lowest/60 p-1 rounded-xl border border-surface-container-high/30 backdrop-blur-md">
               <Link
                 href="/"
-                className={`px-space-md py-1.5 rounded-lg font-headline-sm text-[14px] transition-all flex items-center gap-1.5 ${
+                className={`px-3 py-1.5 rounded-lg font-headline-sm text-[13px] transition-all flex items-center gap-1.5 ${
                   isGenerator
                     ? "bg-surface-container-high text-primary font-medium shadow-[0_0_12px_rgba(128,131,255,0.18)]"
                     : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container"
                 }`}
               >
-                <span className="material-symbols-outlined text-[18px]">bolt</span>
+                <span className="material-symbols-outlined text-[17px]">auto_awesome</span>
                 <span>Generator</span>
               </Link>
               <Link
                 href="/data-settings"
-                className={`px-space-md py-1.5 rounded-lg font-headline-sm text-[14px] transition-all flex items-center gap-1.5 ${
+                className={`px-3 py-1.5 rounded-lg font-headline-sm text-[13px] transition-all flex items-center gap-1.5 ${
                   isSettings
                     ? "bg-surface-container-high text-primary font-medium shadow-[0_0_12px_rgba(128,131,255,0.18)]"
                     : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container"
                 }`}
               >
-                <span className="material-symbols-outlined text-[18px]">tune</span>
+                <span className="material-symbols-outlined text-[17px]">tune</span>
                 <span>Data &amp; Settings</span>
               </Link>
             </nav>
+          </div>
 
+          <div className="flex md:hidden items-center gap-1.5">
+            <button
+              type="button"
+              aria-label="Cari Cepat"
+              onClick={() => setCommandOpen(true)}
+              className="w-9 h-9 rounded-xl bg-surface-container-low border border-surface-container-high/50 text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors"
+            >
+              <span className="material-symbols-outlined text-[18px]">search</span>
+            </button>
+            <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-surface-container-high/70 backdrop-blur-md">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+              </span>
+              <span className="font-label-badge text-[10px] text-secondary font-medium tracking-wide">AI</span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-space-sm">
             <button
               type="button"
               onClick={() => setCommandOpen(true)}
@@ -97,21 +117,16 @@ export function Header() {
               <span className="material-symbols-outlined text-[16px]">search</span>
               <span className="font-body-sm text-[13px]">Cari...</span>
               <kbd className="font-label-code text-[10px] bg-surface-container-highest px-1.5 py-0.5 rounded border border-surface-container-high/60 text-outline">
-                ⌘K
+                Win + K
               </kbd>
             </button>
-          </div>
 
-          <div className="flex items-center gap-space-sm">
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger className="flex items-center gap-2 p-1 pl-2 rounded-xl hover:bg-surface-container-low transition-colors cursor-pointer">
                   <div className="hidden sm:flex flex-col text-right">
                     <span className="text-xs font-semibold text-on-surface leading-tight">
                       {user.role === "SUPERADMIN" ? "superadmin121" : user.name}
-                    </span>
-                    <span className="text-[10px] text-on-surface-variant font-label-code">
-                      {user.role === "SUPERADMIN" ? "Master Superadmin" : user.email}
                     </span>
                   </div>
                   <div
@@ -133,9 +148,6 @@ export function Header() {
                   <div className="px-2 py-1.5 text-xs text-on-surface-variant">
                     <p className="font-medium text-on-surface truncate">
                       {user.role === "SUPERADMIN" ? "superadmin121" : user.name}
-                    </p>
-                    <p className="font-label-code text-[11px] truncate text-outline">
-                      {user.email}
                     </p>
                   </div>
                   <DropdownMenuSeparator />

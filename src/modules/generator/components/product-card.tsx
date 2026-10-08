@@ -15,7 +15,7 @@ export function ProductCard({ product, isActive, scriptCount, onSelect }: Produc
   return (
     <div
       onClick={() => onSelect(product.id)}
-      className={`product-card group relative flex flex-col rounded-2xl cursor-pointer transition-all duration-300 overflow-hidden border ${
+      className={`product-card group relative flex flex-col rounded-2xl cursor-pointer transition-all duration-300 overflow-hidden border shrink-0 w-[165px] sm:w-auto ${
         isActive
           ? "bg-surface-container ring-2 ring-primary-container border-primary-container shadow-[0_0_28px_rgba(128,131,255,0.28)] -translate-y-0.5"
           : "bg-surface-container-low border-surface-container-high/50 hover:bg-surface-container hover:border-surface-container-highest hover:shadow-xl hover:-translate-y-0.5"

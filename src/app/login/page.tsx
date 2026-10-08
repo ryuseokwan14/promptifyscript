@@ -28,16 +28,6 @@ export default function LoginPage() {
         </Link>
 
         <LoginCard />
-
-        <div className="text-center text-xs text-on-surface-variant">
-          <Link
-            href="/"
-            className="hover:text-primary transition-colors inline-flex items-center gap-1 font-medium"
-          >
-            <span className="material-symbols-outlined text-[15px]">arrow_back</span>
-            <span>Kembali ke Beranda Generator</span>
-          </Link>
-        </div>
       </div>
     </div>
   );

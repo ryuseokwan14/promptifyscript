@@ -30,6 +30,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { MobileBottomNav } from "@/common/components/mobile-bottom-nav";
 
 export const metadata: Metadata = {
   title: "Promptify Script — AI Prompt Video Automation Engine",
@@ -68,6 +69,7 @@ export default function RootLayout({
           <AppProvider>
             <TooltipProvider delay={150}>
               {children}
+              <MobileBottomNav />
               <Toaster position="top-right" richColors />
             </TooltipProvider>
           </AppProvider>

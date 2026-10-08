@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary-fixed": "#001f26", "secondary-fixed-dim": "#4cd7f6", "secondary-container": "#03b5d3", "on-error": "#690005", "inverse-primary": "#494bd6", "on-primary": "#1000a9", "surface-container": "#1f1f24", "tertiary": "#ffb2b7", "tertiary-fixed": "#ffdadb", "on-tertiary-fixed-variant": "#92002a", "on-error-container": "#ffdad6", "surface-container-highest": "#353439", "primary-fixed-dim": "#c0c1ff", "on-secondary-container": "#00424e", "surface-bright": "#39393d", "on-tertiary": "#67001b", "on-surface": "#e4e1e7", "surface-container-high": "#2a292e", "primary": "#c0c1ff", "error": "#ffb4ab", "primary-container": "#8083ff", "secondary": "#4cd7f6", "on-secondary-fixed-variant": "#004e5c", "outline-variant": "#464554", "inverse-surface": "#e4e1e7", "tertiary-fixed-dim": "#ffb2b7", "on-primary-container": "#0d0096", "surface-dim": "#131317", "surface-container-low": "#1b1b1f", "on-surface-variant": "#c7c4d7", "surface-variant": "#353439", "on-background": "#e4e1e7", "surface-container-lowest": "#0e0e12", "background": "#131317", "surface": "#131317", "on-tertiary-container": "#5b0017", "tertiary-container": "#ff516a", "error-container": "#93000a", "on-secondary": "#003640", "on-tertiary-fixed": "#40000d", "inverse-on-surface": "#303034", "surface-tint": "#c0c1ff", "on-primary-fixed-variant": "#2f2ebe", "on-primary-fixed": "#07006c", "secondary-fixed": "#acedff", "primary-fixed": "#e1e0ff", "outline": "#908fa0" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "2rem", "space-sm": "0.5rem", "space-xl": "2.5rem", "space-xs": "0.25rem", "space-md": "1rem", "margin-mobile": "1rem", "gutter-mobile": "0.75rem", "gutter": "1.5rem", "space-lg": "1.5rem" }, "fontFamily": { "headline-sm": ["Space Grotesk"], "headline-lg-mobile": ["Space Grotesk"], "headline-xl": ["Space Grotesk"], "headline-xl-mobile": ["Space Grotesk"], "label-badge": ["JetBrains Mono"], "body-md": ["Plus Jakarta Sans"], "headline-md": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "body-lg": ["Plus Jakarta Sans"], "label-code": ["JetBrains Mono"], "body-sm": ["Plus Jakarta Sans"] }, "fontSize": { "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}], "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}], "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "700"}], "headline-xl-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}], "label-badge": ["11px", {"lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600"}], "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}], "headline-md": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}], "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}], "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}], "label-code": ["13px", {"lineHeight": "18px", "fontWeight": "500"}], "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#131317;color:#e4e1e7;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 0.5rem);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface font-body-md text-on-surface min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 w-full z-50 bg-surface-dim/80 backdrop-blur-xl pt-safe shadow-[0_1px_12px_rgba(0,0,0,0.3)]"><div class="h-16 px-margin-mobile flex items-center justify-between gap-gutter-mobile"><div class="flex items-center gap-space-sm min-w-0 flex-1"><img alt="Promptify Script official logo mark with 100% transparent background (no dark container rect). Futuristic 3D glassmorphic vertical 9:16 mobile frame with neon gradient border (Electric Indigo #6366F1, Cyber Cyan #06B6D4, Neon Rose #F43F5E), cyber cursor (&gt;_), and cosmic glowing star sparkle (✦). Rendered to transparent PNG and raw vector SVG." class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1WgPIdzNA87ObRvxrYn_RAS9tYh_QtQAFEECBVh1tSd-lbt42iXcNHnapZGV9Nm7eueBD1rtFcP_YcsJdD9TeRXpwhCkzSgTDzM65LHedsUwew-mrmqnU_8ed7UVpa1i199QT_WEY8lLHV-qntxgGOUni2-74wocny1V2mbwKcQQq99Z-Y92wObWDM2zHWHfjjsrAtrfJoaNHyiyk602sfEfMhZ6GU_nrdhv2Y_NYDgUQ"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight truncate">Promptify Script</span><span class="font-label-badge text-label-badge uppercase px-1.5 py-0.5 rounded-full bg-secondary-container/20 text-secondary border border-secondary/30 shrink-0">AI</span></div><span class="font-body-sm text-body-sm text-on-surface-variant truncate">Hook Lab</span></div></div><div class="flex items-center gap-space-sm shrink-0"><div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high/80 backdrop-blur-md"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span></span><span class="font-label-badge text-label-badge text-secondary font-medium tracking-wide">GEMINI 1.5</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface"><div class="flex flex-col w-full px-margin-mobile gap-space-lg">
+<!-- Conception Lab Header & Mini Stats -->
+<section class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="flex h-2.5 w-2.5 rounded-full bg-secondary shadow-[0_0_8px_rgba(76,215,246,0.8)]"></span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface tracking-tight">Viral Hook Lab</h1>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-tertiary">bolt</span>
+<span class="font-label-badge text-label-badge text-tertiary uppercase">14 Credits left</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+      Algorithmic reverse-engineering for the critical first 3 seconds of TikTok &amp; Reels.
+    </p>
+</section>
+<!-- Concepción Form Container -->
+<section class="flex flex-col p-4 rounded-xl bg-surface-container gap-space-md shadow-md relative overflow-hidden">
+<div class="absolute -right-10 -top-10 w-32 h-32 bg-primary-container/10 rounded-full blur-2xl pointer-events-none"></div>
+<!-- Topic Input -->
+<div class="flex flex-col gap-1.5 relative">
+<label class="font-label-badge text-label-badge uppercase tracking-wider text-on-surface-variant flex items-center justify-between" for="hook-topic">
+<span>Topic / Core Tension</span>
+<span class="text-secondary font-label-code text-label-code">3s Hook Angle</span>
+</label>
+<div class="relative flex items-center">
+<input class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md rounded-lg px-3.5 py-3 pr-10 focus:outline-none focus:bg-surface-container-low transition-all placeholder:text-outline" id="hook-topic" placeholder="e.g. 3 brutal reasons your side hustle fails" type="text" value="5 AI Tools that feel illegal to know"/>
+<button aria-label="Clear field" class="absolute right-2.5 p-1 rounded-full text-outline-variant hover:text-on-surface transition-colors" id="clear-topic-btn">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+</button>
+</div>
+</div>
+<!-- Swipeable Framework Chips -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-badge text-label-badge uppercase tracking-wider text-on-surface-variant">Psychology Model</span>
+<span class="font-body-sm text-body-sm text-outline-variant">Swipe presets</span>
+</div>
+<div class="flex gap-2 overflow-x-auto pb-1 -mx-4 px-4 scrollbar-none items-center" id="framework-chips">
+<button class="framework-chip shrink-0 px-3.5 py-2 rounded-full font-label-code text-label-code flex items-center gap-1.5 bg-primary-container text-on-primary-container shadow-[0_0_12px_rgba(128,131,255,0.35)] transition-transform active:scale-95" data-framework="curiosity" type="button">
+<span class="material-symbols-outlined text-[14px]">psychology</span>
+          Curiosity Gap
+        </button>
+<button class="framework-chip shrink-0 px-3.5 py-2 rounded-full font-label-code text-label-code flex items-center gap-1.5 bg-surface-container-high text-on-surface transition-transform active:scale-95" data-framework="controversial" type="button">
+<span class="material-symbols-outlined text-[14px]">local_fire_department</span>
+          Controversial
+        </button>
+<button class="framework-chip shrink-0 px-3.5 py-2 rounded-full font-label-code text-label-code flex items-center gap-1.5 bg-surface-container-high text-on-surface transition-transform active:scale-95" data-framework="fomo" type="button">
+<span class="material-symbols-outlined text-[14px]">hourglass_empty</span>
+          FOMO &amp; Urgency
+        </button>
+<button class="framework-chip shrink-0 px-3.5 py-2 rounded-full font-label-code text-label-code flex items-center gap-1.5 bg-surface-container-high text-on-surface transition-transform active:scale-95" data-framework="tutorial" type="button">
+<span class="material-symbols-outlined text-[14px]">speed</span>
+          Fast Tutorial
+        </button>
+</div>
+</div>
+<!-- Primary Generator CTA -->
+<button class="w-full mt-1 py-3.5 px-4 rounded-xl bg-primary-container text-on-primary-container font-headline-sm text-headline-sm flex items-center justify-center gap-2 shadow-[0_4px_24px_rgba(128,131,255,0.45)] active:scale-98 transition-all hover:bg-primary-fixed duration-150" id="generate-hooks-cta">
+<span class="material-symbols-outlined text-[20px] animate-pulse">offline_bolt</span>
+<span>Generate Viral Hooks (3 cr)</span>
+</button>
+</section>
+<!-- Live 3-Second Retention Benchmark Banner -->
+<section class="p-3.5 rounded-xl bg-surface-container-low shadow-sm flex items-center justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary text-[22px]">ssid_chart</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface leading-tight flex items-center gap-1.5">
+          94.2% <span class="font-label-badge text-label-badge text-secondary font-bold">TOP 1%</span>
+</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">0–3s Algorithmic Survival Rate</span>
+</div>
+</div>
+<!-- Mini Retention Curve Sparkline -->
+<div class="w-24 h-9 shrink-0 flex items-center justify-end">
+<svg class="w-full h-full" fill="none" preserveaspectratio="none" viewbox="0 0 96 36">
+<path d="M0 4 C 18 6, 26 8, 45 10 C 65 11, 78 12, 96 14" stroke="#4cd7f6" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M0 4 C 18 6, 26 8, 45 10 C 65 11, 78 12, 96 14 L 96 36 L 0 36 Z" fill="url(#retention-gradient)" opacity="0.3"></path>
+<circle cx="94" cy="14" fill="#4cd7f6" r="3"></circle>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="retention-gradient" x1="0" x2="0" y1="0" y2="36">
+<stop stop-color="#4cd7f6"></stop>
+<stop offset="1" stop-color="#4cd7f6" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+</section>
+<!-- Hook Evaluation Feed -->
+<section class="flex flex-col gap-3.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">Tested Variations</span>
+<span class="font-label-badge text-label-badge px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant">3 READY</span>
+</div>
+<button class="font-label-code text-label-code text-secondary flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-[15px]">auto_fix_high</span>
+        Batch A/B Test
+      </button>
+</div>
+<!-- Hook Card 1: HIGHEST RETENTION (Champion) -->
+<article class="p-4 rounded-xl bg-surface-container flex flex-col gap-3 shadow-md relative overflow-hidden transition-all duration-200">
+<div class="flex items-center justify-between gap-2">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-tertiary-container text-on-tertiary-container font-label-badge text-label-badge font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">emoji_events</span>
+            #1 HIGHEST RETENTION
+          </span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-lowest px-2 py-0.5 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"></span>
+<span class="font-label-code text-label-code text-secondary font-bold">94.2%</span>
+<span class="font-body-sm text-[11px] text-outline-variant">retain</span>
+</div>
+</div>
+<blockquote class="font-headline-md text-headline-md text-on-surface tracking-tight leading-snug">
+        “Stop using ChatGPT like an amateur. These 3 hidden prompts will replace your entire 9-to-5 workflow by midnight.”
+      </blockquote>
+<!-- Psychological breakdown bar -->
+<div class="flex items-center gap-2 pt-1">
+<div class="flex-1 flex flex-col gap-1">
+<div class="flex justify-between text-on-surface-variant font-label-badge text-label-badge">
+<span>Pattern Interrupt</span>
+<span class="text-tertiary">98/100</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-lowest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container rounded-full" style="width: 98%;"></div>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-1">
+<div class="flex justify-between text-on-surface-variant font-label-badge text-label-badge">
+<span>Pacing Urgency</span>
+<span class="text-secondary">91/100</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-lowest rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full" style="width: 91%;"></div>
+</div>
+</div>
+</div>
+<!-- Action Tray -->
+<div class="flex items-center gap-2 pt-2">
+<button class="action-copy flex-1 py-2 px-3 rounded-lg bg-surface-container-high text-on-surface font-body-sm text-body-sm flex items-center justify-center gap-1.5 active:bg-surface-bright transition-colors" data-copy="Stop using ChatGPT like an amateur. These 3 hidden prompts will replace your entire 9-to-5 workflow by midnight.">
+<span class="material-symbols-outlined text-[17px]">content_copy</span>
+<span>Copy</span>
+</button>
+<button aria-label="Favorite hook" class="action-fav w-10 h-10 rounded-lg bg-surface-container-high text-on-surface flex items-center justify-center shrink-0 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[19px]">star</span>
+</button>
+<button class="flex-1 py-2 px-3 rounded-lg bg-primary-container text-on-primary-container font-headline-sm text-[13px] flex items-center justify-center gap-1 active:scale-98 shadow-sm">
+<span>Promote to Script</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Hook Card 2: CONTROVERSIAL -->
+<article class="p-4 rounded-xl bg-surface-container flex flex-col gap-3 shadow-md relative overflow-hidden transition-all duration-200">
+<div class="flex items-center justify-between gap-2">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-secondary/20 text-secondary font-label-badge text-label-badge font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">flash_on</span>
+            #2 CONTROVERSIAL
+          </span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-lowest px-2 py-0.5 rounded-full">
+<span class="font-label-code text-label-code text-secondary font-bold">91.8%</span>
+<span class="font-body-sm text-[11px] text-outline-variant">retain</span>
+</div>
+</div>
+<blockquote class="font-headline-md text-headline-md text-on-surface tracking-tight leading-snug">
+        “Nobody is telling you the truth about AI video tools in 2025. Here is the dirty secret big marketing agencies are hiding.”
+      </blockquote>
+<!-- Micro tags -->
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-code text-[11px]">Polarizing Claim</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-code text-[11px]">Behind-The-Scenes</span>
+</div>
+<!-- Action Tray -->
+<div class="flex items-center gap-2 pt-1">
+<button class="action-copy flex-1 py-2 px-3 rounded-lg bg-surface-container-high text-on-surface font-body-sm text-body-sm flex items-center justify-center gap-1.5 active:bg-surface-bright transition-colors" data-copy="Nobody is telling you the truth about AI video tools in 2025. Here is the dirty secret big marketing agencies are hiding.">
+<span class="material-symbols-outlined text-[17px]">content_copy</span>
+<span>Copy</span>
+</button>
+<button aria-label="Favorite hook" class="action-fav w-10 h-10 rounded-lg bg-surface-container-high text-on-surface flex items-center justify-center shrink-0 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[19px]">star</span>
+</button>
+<button class="flex-1 py-2 px-3 rounded-lg bg-surface-container-highest text-on-surface font-body-md text-body-md flex items-center justify-center gap-1 active:bg-primary-container active:text-on-primary-container transition-colors">
+<span>Promote →</span>
+</button>
+</div>
+</article>
+<!-- Hook Card 3: HIGH VIRALITY -->
+<article class="p-4 rounded-xl bg-surface-container flex flex-col gap-3 shadow-md relative overflow-hidden transition-all duration-200">
+<div class="flex items-center justify-between gap-2">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-tertiary/20 text-tertiary font-label-badge text-label-badge font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">local_fire_department</span>
+            #3 HIGH VIRALITY
+          </span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-lowest px-2 py-0.5 rounded-full">
+<span class="font-label-code text-label-code text-secondary font-bold">89.5%</span>
+<span class="font-body-sm text-[11px] text-outline-variant">retain</span>
+</div>
+</div>
+<blockquote class="font-headline-md text-headline-md text-on-surface tracking-tight leading-snug">
+        “If you are not using this free website to automate your faceless TikToks, you are leaving $5,000 on the table.”
+      </blockquote>
+<!-- Micro tags -->
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-code text-[11px]">Loss Aversion</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-code text-[11px]">Dollar Anchor</span>
+</div>
+<!-- Action Tray -->
+<div class="flex items-center gap-2 pt-1">
+<button class="action-copy flex-1 py-2 px-3 rounded-lg bg-surface-container-high text-on-surface font-body-sm text-body-sm flex items-center justify-center gap-1.5 active:bg-surface-bright transition-colors" data-copy="If you are not using this free website to automate your faceless TikToks, you are leaving $5,000 on the table.">
+<span class="material-symbols-outlined text-[17px]">content_copy</span>
+<span>Copy</span>
+</button>
+<button aria-label="Favorite hook" class="action-fav w-10 h-10 rounded-lg bg-surface-container-high text-on-surface flex items-center justify-center shrink-0 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[19px]">star</span>
+</button>
+<button class="flex-1 py-2 px-3 rounded-lg bg-surface-container-highest text-on-surface font-body-md text-body-md flex items-center justify-center gap-1 active:bg-primary-container active:text-on-primary-container transition-colors">
+<span>Promote →</span>
+</button>
+</div>
+</article>
+</section>
+<!-- Quick Teleprompter Prep Drawer Preview -->
+<section class="p-4 rounded-xl bg-surface-container-low flex flex-col gap-3 shadow-sm mb-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">videocam</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Camera Speed Read</span>
+</div>
+<span class="font-label-badge text-label-badge text-on-surface-variant">EST. 3.4 SEC</span>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-lowest flex items-center justify-between gap-3">
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-primary">Target Pacing: 165 wpm</span>
+<span class="font-body-sm text-body-sm text-outline">Optimized for TikTok energetic opening delivery</span>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-body-sm text-body-sm flex items-center gap-1 shrink-0">
+<span class="material-symbols-outlined text-[16px] text-tertiary">mic</span>
+        Test
+      </button>
+</div>
+</section>
+</div>
+<script>
+  // Micro-interaction handlers for Hook Lab
+  (function initHookLab() {
+    // 1. Psychological Framework Chip Toggles
+    const chips = document.querySelectorAll('.framework-chip');
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => {
+          c.classList.remove('bg-primary-container', 'text-on-primary-container', 'shadow-[0_0_12px_rgba(128,131,255,0.35)]');
+          c.classList.add('bg-surface-container-high', 'text-on-surface');
+        });
+        chip.classList.remove('bg-surface-container-high', 'text-on-surface');
+        chip.classList.add('bg-primary-container', 'text-on-primary-container', 'shadow-[0_0_12px_rgba(128,131,255,0.35)]');
+      });
+    });
+
+    // 2. Clear topic field
+    const clearBtn = document.getElementById('clear-topic-btn');
+    const topicInput = document.getElementById('hook-topic');
+    if (clearBtn && topicInput) {
+      clearBtn.addEventListener('click', () => {
+        topicInput.value = '';
+        topicInput.focus();
+      });
+    }
+
+    // 3. Fast Copy to Clipboard Toast Simulation
+    const copyButtons = document.querySelectorAll('.action-copy');
+    copyButtons.forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const textToCopy = btn.getAttribute('data-copy');
+        try {
+          if (navigator.clipboard) {
+            await navigator.clipboard.writeText(textToCopy);
+          }
+        } catch (err) {}
+        const originalContent = btn.innerHTML;
+        btn.innerHTML = `<span class="material-symbols-outlined text-[17px] text-secondary">check</span><span class="text-secondary">Copied!</span>`;
+        setTimeout(() => {
+          btn.innerHTML = originalContent;
+        }, 1600);
+      });
+    });
+
+    // 4. Favorite Toggle
+    const favButtons = document.querySelectorAll('.action-fav');
+    favButtons.forEach(fav => {
+      fav.addEventListener('click', () => {
+        const icon = fav.querySelector('.material-symbols-outlined');
+        if (icon) {
+          const isFilled = icon.style.fontVariationSettings?.includes("'FILL' 1");
+          if (isFilled) {
+            icon.style.fontVariationSettings = "'FILL' 0";
+            icon.classList.remove('text-tertiary');
+            fav.classList.remove('bg-tertiary-container/20');
+          } else {
+            icon.style.fontVariationSettings = "'FILL' 1";
+            icon.classList.add('text-tertiary');
+            fav.classList.add('bg-tertiary-container/20');
+          }
+        }
+      });
+    });
+
+    // 5. Generate CTA Pulse feedback
+    const genBtn = document.getElementById('generate-hooks-cta');
+    if (genBtn) {
+      genBtn.addEventListener('click', () => {
+        const originalHtml = genBtn.innerHTML;
+        genBtn.innerHTML = `
+          <span class="material-symbols-outlined text-[20px] animate-spin">refresh</span>
+          <span>Synthesizing Angles...</span>
+        `;
+        genBtn.disabled = true;
+        setTimeout(() => {
+          genBtn.innerHTML = originalHtml;
+          genBtn.disabled = false;
+        }, 1200);
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-dim/85 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,0,0,0.45)]" data-active-classes="text-primary font-headline-sm"><div class="h-16 px-margin-mobile grid grid-cols-3 items-center max-w-md mx-auto"><a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant transition-colors min-h-[44px] min-w-[44px] group" data-path="generator" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[22px] transition-transform group-hover:scale-110">auto_awesome</span><span class="absolute -top-1 -right-2 px-1 py-0.2 rounded-full bg-tertiary-container text-on-tertiary-container font-label-badge text-[9px] font-bold leading-tight">HOT</span></div><span class="font-body-sm text-body-sm leading-none">Generator</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-1 transition-colors min-h-[44px] min-w-[44px] group text-primary font-headline-sm" data-path="hook-lab" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[22px] transition-transform group-hover:scale-110">bolt</span><span class="absolute -top-1 -right-2.5 px-1 py-0.2 rounded-full bg-secondary/20 text-secondary border border-secondary/40 font-label-badge text-[9px] font-bold leading-tight">LAB</span></div><span class="font-body-sm text-body-sm leading-none">Hooks</span></a><a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant transition-colors min-h-[44px] min-w-[44px] group" data-path="data-settings" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[22px] transition-transform group-hover:scale-110">tune</span></div><span class="font-body-sm text-body-sm leading-none">Settings</span></a></div></nav></body></html>

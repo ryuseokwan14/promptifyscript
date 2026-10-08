@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary-fixed": "#001f26", "secondary-fixed-dim": "#4cd7f6", "secondary-container": "#03b5d3", "on-error": "#690005", "inverse-primary": "#494bd6", "on-primary": "#1000a9", "surface-container": "#1f1f24", "tertiary": "#ffb2b7", "tertiary-fixed": "#ffdadb", "on-tertiary-fixed-variant": "#92002a", "on-error-container": "#ffdad6", "surface-container-highest": "#353439", "primary-fixed-dim": "#c0c1ff", "on-secondary-container": "#00424e", "surface-bright": "#39393d", "on-tertiary": "#67001b", "on-surface": "#e4e1e7", "surface-container-high": "#2a292e", "primary": "#c0c1ff", "error": "#ffb4ab", "primary-container": "#8083ff", "secondary": "#4cd7f6", "on-secondary-fixed-variant": "#004e5c", "outline-variant": "#464554", "inverse-surface": "#e4e1e7", "tertiary-fixed-dim": "#ffb2b7", "on-primary-container": "#0d0096", "surface-dim": "#131317", "surface-container-low": "#1b1b1f", "on-surface-variant": "#c7c4d7", "surface-variant": "#353439", "on-background": "#e4e1e7", "surface-container-lowest": "#0e0e12", "background": "#131317", "surface": "#131317", "on-tertiary-container": "#5b0017", "tertiary-container": "#ff516a", "error-container": "#93000a", "on-secondary": "#003640", "on-tertiary-fixed": "#40000d", "inverse-on-surface": "#303034", "surface-tint": "#c0c1ff", "on-primary-fixed-variant": "#2f2ebe", "on-primary-fixed": "#07006c", "secondary-fixed": "#acedff", "primary-fixed": "#e1e0ff", "outline": "#908fa0" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "2rem", "space-sm": "0.5rem", "space-xl": "2.5rem", "space-xs": "0.25rem", "space-md": "1rem", "margin-mobile": "1rem", "gutter-mobile": "0.75rem", "gutter": "1.5rem", "space-lg": "1.5rem" }, "fontFamily": { "headline-sm": ["Space Grotesk"], "headline-lg-mobile": ["Space Grotesk"], "headline-xl": ["Space Grotesk"], "headline-xl-mobile": ["Space Grotesk"], "label-badge": ["JetBrains Mono"], "body-md": ["Plus Jakarta Sans"], "headline-md": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "body-lg": ["Plus Jakarta Sans"], "label-code": ["JetBrains Mono"], "body-sm": ["Plus Jakarta Sans"] }, "fontSize": { "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}], "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}], "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "700"}], "headline-xl-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}], "label-badge": ["11px", {"lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600"}], "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}], "headline-md": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}], "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}], "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}], "label-code": ["13px", {"lineHeight": "18px", "fontWeight": "500"}], "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#131317;color:#e4e1e7;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 0.5rem);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface font-body-md text-on-surface min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 w-full z-50 bg-surface-dim/80 backdrop-blur-xl pt-safe shadow-[0_1px_12px_rgba(0,0,0,0.3)]"><div class="h-16 px-margin-mobile flex items-center justify-between gap-gutter-mobile"><div class="flex items-center gap-space-sm min-w-0 flex-1"><img alt="Promptify Script official logo mark with 100% transparent background (no dark container rect). Futuristic 3D glassmorphic vertical 9:16 mobile frame with neon gradient border (Electric Indigo #6366F1, Cyber Cyan #06B6D4, Neon Rose #F43F5E), cyber cursor (&gt;_), and cosmic glowing star sparkle (✦). Rendered to transparent PNG and raw vector SVG." class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1WgPIdzNA87ObRvxrYn_RAS9tYh_QtQAFEECBVh1tSd-lbt42iXcNHnapZGV9Nm7eueBD1rtFcP_YcsJdD9TeRXpwhCkzSgTDzM65LHedsUwew-mrmqnU_8ed7UVpa1i199QT_WEY8lLHV-qntxgGOUni2-74wocny1V2mbwKcQQq99Z-Y92wObWDM2zHWHfjjsrAtrfJoaNHyiyk602sfEfMhZ6GU_nrdhv2Y_NYDgUQ"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight truncate">Promptify Script</span><span class="font-label-badge text-label-badge uppercase px-1.5 py-0.5 rounded-full bg-secondary-container/20 text-secondary border border-secondary/30 shrink-0">AI</span></div><span class="font-body-sm text-body-sm text-on-surface-variant truncate">Data &amp; Settings</span></div></div><div class="flex items-center gap-space-sm shrink-0"><div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high/80 backdrop-blur-md"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span></span><span class="font-label-badge text-label-badge text-secondary font-medium tracking-wide">GEMINI 1.5</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface"><div class="flex flex-col w-full px-margin-mobile pb-8 space-y-space-md">
+<!-- Segmented Sticky Filter Pills -->
+<div class="sticky top-0 z-20 py-2.5 -mx-margin-mobile px-margin-mobile bg-surface-dim/95 backdrop-blur-md">
+<div class="flex items-center gap-space-xs overflow-x-auto no-scrollbar scroll-smooth">
+<button class="tab-btn flex items-center gap-1.5 px-3 py-2 rounded-xl bg-primary-container text-on-primary-container font-headline-sm text-headline-sm shadow-md whitespace-nowrap min-h-[44px]" type="button">
+<span>📦</span>
+<span>Products (4)</span>
+</button>
+<button class="tab-btn flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface-container-high text-on-surface-variant hover:text-on-surface font-body-md text-body-md whitespace-nowrap min-h-[44px] transition-colors" type="button">
+<span>🗣️</span>
+<span>Lip-Sync (26)</span>
+</button>
+<button class="tab-btn flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface-container-high text-on-surface-variant hover:text-on-surface font-body-md text-body-md whitespace-nowrap min-h-[44px] transition-colors" type="button">
+<span>📍</span>
+<span>Locations (12)</span>
+</button>
+<button class="tab-btn flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface-container-high text-on-surface-variant hover:text-on-surface font-body-md text-body-md whitespace-nowrap min-h-[44px] transition-colors" type="button">
+<span>⚡</span>
+<span>Master</span>
+</button>
+</div>
+</div>
+<!-- Quick Add Drawer / Accordion Card -->
+<div class="rounded-xl bg-surface-container-low overflow-hidden shadow-lg transition-all duration-300">
+<button class="w-full px-4 py-3.5 flex items-center justify-between text-left bg-surface-container hover:bg-surface-container-high transition-colors min-h-[48px]" id="toggle-add-product" type="button">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-secondary-container/20 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Quick Add Product</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Expand creative repository database</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary transition-transform duration-300" id="accordion-icon">expand_more</span>
+</button>
+<div class="p-4 space-y-4" id="add-product-body">
+<div class="space-y-1.5">
+<label class="block font-label-badge text-label-badge text-on-surface-variant uppercase tracking-wider">Product Name</label>
+<div class="relative flex items-center">
+<input class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md placeholder:text-outline rounded-lg px-3.5 py-3 outline-none focus:bg-surface-container transition-all" id="input-prod-name" placeholder="e.g. Cardigan Knit Retro" type="text"/>
+<span class="material-symbols-outlined absolute right-3 text-outline text-[18px]">apparel</span>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="block font-label-badge text-label-badge text-on-surface-variant uppercase tracking-wider">Target Demographic</label>
+<div class="grid grid-cols-2 gap-2 p-1 rounded-xl bg-surface-container-lowest">
+<button class="gender-btn flex items-center justify-center gap-2 py-2.5 rounded-lg bg-tertiary-container text-on-tertiary-container font-headline-sm text-headline-sm min-h-[44px] transition-all" id="btn-gender-cewek" type="button">
+<span>👩</span>
+<span>Cewek</span>
+</button>
+<button class="gender-btn flex items-center justify-center gap-2 py-2.5 rounded-lg bg-transparent text-on-surface-variant font-body-md text-body-md min-h-[44px] transition-all" id="btn-gender-cowok" type="button">
+<span>👨</span>
+<span>Cowok</span>
+</button>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="block font-label-badge text-label-badge text-on-surface-variant uppercase tracking-wider">Category &amp; Tag</label>
+<div class="relative flex items-center">
+<select class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md rounded-lg px-3.5 py-3 outline-none appearance-none focus:bg-surface-container transition-all">
+<option value="fashion-bottoms">Bottoms &amp; Pants</option>
+<option value="fashion-tops">Tops &amp; Outerwear</option>
+<option value="footwear">Footwear &amp; Sneakers</option>
+<option value="accessories">Accessories &amp; Bags</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 text-on-surface-variant pointer-events-none text-[20px]">unfold_more</span>
+</div>
+</div>
+<div class="pt-1 flex items-center gap-2">
+<button class="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-primary-container text-on-primary-container font-headline-sm text-headline-sm min-h-[44px] shadow-md active:scale-[0.98] transition-transform" id="btn-save-product" type="button">
+<span class="material-symbols-outlined text-[18px]">bookmark_add</span>
+<span>Save to Catalog</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Mobile Products Collection List -->
+<div class="space-y-2.5">
+<div class="flex items-center justify-between px-1">
+<span class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span>Active Catalog</span>
+<span class="font-label-badge text-label-badge px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary">4 ITEMS</span>
+</span>
+<span class="font-label-code text-label-code text-secondary font-medium">Synced Cloud</span>
+</div>
+<!-- Product Card 1 -->
+<div class="product-item rounded-xl bg-surface-container-low p-3.5 shadow-md flex items-center justify-between gap-3 transition-transform active:scale-[0.99]">
+<div class="flex items-center gap-3 min-w-0 flex-1">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest overflow-hidden shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="Close up photography of wide leg breathable beige linen trousers culottes on wooden floor studio light aesthetic minimal fashion shot in soft warm tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAumYVmmgcHVrjVrRqOxJlTuXUF7463nYFfdxZidimjTliBREwiqhx7wglRjqzTwImM87RDTKkgmAe0ho1vgq33LtQuDdpiLrvDDXZmijxnuUvYdrkLbATj87w-kF7icrbhxSooYD0UREo-o8RwnYMN2P-8wgntaId1LOaA-s68-3mxf3JOS93RFAVfHp1Q7hnZ7YkqFm7-B11Y0ikaIgaU-ao9PXxEWKSJfjuZ6hoZ"/>
+<div class="absolute bottom-1 right-1 w-2.5 h-2.5 rounded-full bg-secondary shadow-sm"></div>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Celana Kulot Linen</span>
+<span class="font-label-badge text-label-badge px-2 py-0.5 rounded-full bg-tertiary-container/30 text-tertiary">Cewek</span>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">description</span>
+              8 Linked Scripts
+            </span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-code text-label-code text-secondary">92% Ret</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button aria-label="Edit product" class="w-10 h-10 rounded-lg flex items-center justify-center bg-surface-container text-on-surface-variant hover:text-secondary active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button aria-label="Delete product" class="w-10 h-10 rounded-lg flex items-center justify-center bg-surface-container text-on-surface-variant hover:text-error active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">delete_sweep</span>
+</button>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="product-item rounded-xl bg-surface-container-low p-3.5 shadow-md flex items-center justify-between gap-3 transition-transform active:scale-[0.99]">
+<div class="flex items-center gap-3 min-w-0 flex-1">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest overflow-hidden shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="Tactical street style black cargo pants for men styled with combat sneakers studio rim lighting cyber aesthetic moody shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfOEamFTVLgEEpJ8CPVgJFTWBvbzbPYhm7yH7i05uTh92uI9IFVfqRCNACsjhTa3dok4jAuQzsuBVpEyqacgGo3aep8K5e8dKnEnp1l_Ta5qEp88m3tEib6k35Mr9aphFn03lsIVGABEPJtH4p2J1wCgTABfKFQfpJsEAbFc6N4IOqkCyRTGOFLRUgrnh-jVoNld1ajtePuALmoUA4AhMp3vV6vI_uCiyT6uoGq23l"/>
+<div class="absolute bottom-1 right-1 w-2.5 h-2.5 rounded-full bg-secondary shadow-sm"></div>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Celana Cargo Pria</span>
+<span class="font-label-badge text-label-badge px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary">Cowok</span>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">description</span>
+              6 Linked Scripts
+            </span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-code text-label-code text-secondary">88% Ret</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button aria-label="Edit product" class="w-10 h-10 rounded-lg flex items-center justify-center bg-surface-container text-on-surface-variant hover:text-secondary active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button aria-label="Delete product" class="w-10 h-10 rounded-lg flex items-center justify-center bg-surface-container text-on-surface-variant hover:text-error active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">delete_sweep</span>
+</button>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="product-item rounded-xl bg-surface-container-low p-3.5 shadow-md flex items-center justify-between gap-3 transition-transform active:scale-[0.99]">
+<div class="flex items-center gap-3 min-w-0 flex-1">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest overflow-hidden shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="Heavyweight cotton boxy oversized t-shirt in washed charcoal grey colorway clean minimalist streetwear studio product shot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhbkdYDRfQzlTGUMCu0kOUujpdAjsdyQce1cTnzK5aYNhbM6mTtKIH_0gvyyal5B9bXNjN9Xscv-Tdvwg7k2tD3eVxalVesTMcGaQ1W8Y2wEBWV9Qf5JMZ4BcV2Rinp_yAQBaO-bVJBcqYdbBFWhCXGbDK71thiBpIdbTJLScwj98xk5P3ZNcV-CqCFeIBMlrWceah-Wy4Jr8yTAZT3ncHsB_ddZrif2CLjEBi27uY"/>
+<div class="absolute bottom-1 right-1 w-2.5 h-2.5 rounded-full bg-secondary shadow-sm"></div>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Oversized Shirt Boxy</span>
+<span class="font-label-badge text-label-badge px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary">Cowok</span>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">description</span>
+              5 Linked Scripts
+            </span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-code text-label-code text-secondary">85% Ret</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button aria-label="Edit product" class="w-10 h-10 rounded-lg flex items-center justify-center bg-surface-container text-on-surface-variant hover:text-secondary active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button aria-label="Delete product" class="w-10 h-10 rounded-lg flex items-center justify-center bg-surface-container text-on-surface-variant hover:text-error active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">delete_sweep</span>
+</button>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="product-item rounded-xl bg-surface-container-low p-3.5 shadow-md flex items-center justify-between gap-3 transition-transform active:scale-[0.99]">
+<div class="flex items-center gap-3 min-w-0 flex-1">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest overflow-hidden shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="High waist pleated midi skirt in emerald green flowing fabric high fashion lookbook photography dynamic movement" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAghxKru2sQAbx3cIchRSbTcWsa0ZRozvCs5o-hUupWXL3XV0o89fXaRYJyMR3qDMDhN_pXbuVsNEzO7qJdQ4DWHMzu5VrJeGwWTqxAwKjidpbosfKLXM2PGhZdC1KpSiqx8Vz60EmO-Q6NTBgRFslQqJlrbtDRHCIZiHW3FKE3prEJVYJsN82AcFCWH9nQxHIouwhv_Eaq0H5aBNMVeWy62eg2dlVMQd0goEDWsyG"/>
+<div class="absolute bottom-1 right-1 w-2.5 h-2.5 rounded-full bg-secondary shadow-sm"></div>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Pleated Midi Skirt</span>
+<span class="font-label-badge text-label-badge px-2 py-0.5 rounded-full bg-tertiary-container/30 text-tertiary">Cewek</span>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">description</span>
+              7 Linked Scripts
+            </span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-code text-label-code text-secondary">90% Ret</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button aria-label="Edit product" class="w-10 h-10 rounded-lg flex items-center justify-center bg-surface-container text-on-surface-variant hover:text-secondary active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button aria-label="Delete product" class="w-10 h-10 rounded-lg flex items-center justify-center bg-surface-container text-on-surface-variant hover:text-error active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">delete_sweep</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Spoken Dialogue Variation Card for Active Product -->
+<div class="rounded-xl bg-surface-container-low p-4 shadow-lg space-y-3.5">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[20px]">graphic_eq</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Spoken Audio Bank</span>
+</div>
+<span class="font-label-badge text-label-badge text-secondary bg-secondary-container/20 px-2 py-0.5 rounded-full font-bold">2 AUDIO STEMS</span>
+</div>
+<!-- Filter Dropdown Styled -->
+<div class="relative">
+<select class="w-full bg-surface-container-highest text-on-surface font-headline-sm text-headline-sm rounded-lg px-3 py-2.5 appearance-none outline-none">
+<option selected="">Celana Kulot Linen (Cewek)</option>
+<option>Celana Cargo Pria (Cowok)</option>
+<option>Oversized Shirt Boxy (Cowok)</option>
+<option>Pleated Midi Skirt (Cewek)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-secondary pointer-events-none text-[18px]">tune</span>
+</div>
+</div>
+<!-- Dialogue item 1 -->
+<div class="rounded-lg bg-surface-container p-3 space-y-2 relative overflow-hidden">
+<div class="flex items-start justify-between gap-2">
+<p class="font-body-md text-body-md text-on-surface italic leading-snug">
+          “Kalian yang nyari celana kulot yang gak bikin keliatan bantet, nih liat deh cuttingan yang ini...”
+        </p>
+<button class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0 active:scale-95" type="button">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+</button>
+</div>
+<div class="flex items-center justify-between pt-1 font-label-code text-label-code">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[14px]">timer</span>
+<span>4.2s speech</span>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded bg-tertiary-container/30 text-tertiary font-bold">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span>89% Retention</span>
+</div>
+</div>
+</div>
+<!-- Dialogue item 2 -->
+<div class="rounded-lg bg-surface-container p-3 space-y-2 relative overflow-hidden">
+<div class="flex items-start justify-between gap-2">
+<p class="font-body-md text-body-md text-on-surface italic leading-snug">
+          “Bahan linennya beneran premium import, gak nerawang sama sekali pas kena backlight matahari...”
+        </p>
+<button class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0 active:scale-95" type="button">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+</button>
+</div>
+<div class="flex items-center justify-between pt-1 font-label-code text-label-code">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[14px]">timer</span>
+<span>3.8s speech</span>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded bg-secondary-container/20 text-secondary font-bold">
+<span class="material-symbols-outlined text-[14px]">local_fire_department</span>
+<span>92% Retention</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Location Badges Cloud -->
+<div class="rounded-xl bg-surface-container-low p-4 shadow-lg space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[20px]">pin_drop</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Location Cue Badges</span>
+</div>
+<span class="font-label-badge text-label-badge text-on-surface-variant">TAP × TO REMOVE</span>
+</div>
+<div class="flex flex-wrap gap-2 pt-1" id="location-cloud">
+<div class="location-tag flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-highest text-on-surface font-body-md text-body-md">
+<span>☕ coffee shop outdoor</span>
+<button aria-label="Remove coffee shop" class="remove-tag flex items-center justify-center text-outline hover:text-error transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="location-tag flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-highest text-on-surface font-body-md text-body-md">
+<span>🌆 trotoar kota senja</span>
+<button aria-label="Remove trotoar kota" class="remove-tag flex items-center justify-center text-outline hover:text-error transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="location-tag flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-highest text-on-surface font-body-md text-body-md">
+<span>🎨 studio aesthetic</span>
+<button aria-label="Remove studio" class="remove-tag flex items-center justify-center text-outline hover:text-error transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="location-tag flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-highest text-on-surface font-body-md text-body-md">
+<span>🛋️ living room minimalis</span>
+<button aria-label="Remove living room" class="remove-tag flex items-center justify-center text-outline hover:text-error transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<!-- Add Tag Interactive Chip -->
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-full bg-secondary-container/20 text-secondary hover:bg-secondary-container/30 font-headline-sm text-headline-sm transition-all active:scale-95" id="add-location-chip" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>Add Tag</span>
+</button>
+</div>
+</div>
+<!-- Bottom Action Bar -->
+<div class="pt-2 space-y-2">
+<button class="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-primary-container text-on-primary-container font-headline-sm text-headline-sm min-h-[48px] shadow-lg active:scale-[0.98] transition-all" id="save-all-btn" type="button">
+<span class="material-symbols-outlined text-[20px]">save</span>
+<span>Save All Changes</span>
+</button>
+<div class="grid grid-cols-2 gap-2">
+<button class="flex items-center justify-center gap-1.5 py-3 rounded-xl bg-surface-container-high text-on-surface font-headline-sm text-headline-sm min-h-[44px] hover:bg-surface-bright active:scale-95 transition-all" id="export-json-btn" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">file_download</span>
+<span>Export JSON</span>
+</button>
+<button class="flex items-center justify-center gap-1.5 py-3 rounded-xl bg-surface-container-high text-on-surface-variant hover:text-on-surface font-headline-sm text-headline-sm min-h-[44px] hover:bg-surface-bright active:scale-95 transition-all" id="reset-defaults-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">restore</span>
+<span>Sync Cloud</span>
+</button>
+</div>
+</div>
+<!-- Micro-interaction Notification Toast -->
+<div class="fixed bottom-20 left-4 right-4 z-50 pointer-events-none opacity-0 translate-y-3 transition-all duration-300" id="toast-msg">
+<div class="mx-auto max-w-sm rounded-xl bg-primary-container text-on-primary-container px-4 py-3 shadow-2xl flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+<span class="font-body-md text-body-md font-semibold" id="toast-text">Changes synced to Gemini Script Engine!</span>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    // Accordion Toggle
+    const accordionToggle = document.getElementById('toggle-add-product');
+    const accordionBody = document.getElementById('add-product-body');
+    const accordionIcon = document.getElementById('accordion-icon');
+    let isOpen = true;
+
+    accordionToggle.addEventListener('click', () => {
+      isOpen = !isOpen;
+      if (isOpen) {
+        accordionBody.style.display = 'block';
+        accordionIcon.style.transform = 'rotate(0deg)';
+      } else {
+        accordionBody.style.display = 'none';
+        accordionIcon.style.transform = 'rotate(-90deg)';
+      }
+    });
+
+    // Gender Switcher
+    const cewekBtn = document.getElementById('btn-gender-cewek');
+    const cowokBtn = document.getElementById('btn-gender-cowok');
+
+    cewekBtn.addEventListener('click', () => {
+      cewekBtn.className = 'gender-btn flex items-center justify-center gap-2 py-2.5 rounded-lg bg-tertiary-container text-on-tertiary-container font-headline-sm text-headline-sm min-h-[44px] transition-all';
+      cowokBtn.className = 'gender-btn flex items-center justify-center gap-2 py-2.5 rounded-lg bg-transparent text-on-surface-variant font-body-md text-body-md min-h-[44px] transition-all';
+    });
+
+    cowokBtn.addEventListener('click', () => {
+      cowokBtn.className = 'gender-btn flex items-center justify-center gap-2 py-2.5 rounded-lg bg-secondary-container text-on-secondary-container font-headline-sm text-headline-sm min-h-[44px] transition-all';
+      cewekBtn.className = 'gender-btn flex items-center justify-center gap-2 py-2.5 rounded-lg bg-transparent text-on-surface-variant font-body-md text-body-md min-h-[44px] transition-all';
+    });
+
+    // Tag Removal Micro-interaction
+    const locationCloud = document.getElementById('location-cloud');
+    locationCloud.addEventListener('click', (e) => {
+      const btn = e.target.closest('.remove-tag');
+      if (btn) {
+        const tag = btn.closest('.location-tag');
+        tag.classList.add('scale-75', 'opacity-0');
+        setTimeout(() => tag.remove(), 150);
+      }
+    });
+
+    // Add Location Chip
+    const addLocationChip = document.getElementById('add-location-chip');
+    addLocationChip.addEventListener('click', () => {
+      const defaultLocations = ['roof top city view', 'fitting room mirror', 'lift modern mall', 'pantai pasir putih'];
+      const randomLoc = defaultLocations[Math.floor(Math.random() * defaultLocations.length)];
+      
+      const newTag = document.createElement('div');
+      newTag.className = 'location-tag flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-highest text-on-surface font-body-md text-body-md transition-all';
+      newTag.innerHTML = `<span>📍 ${randomLoc}</span><button type="button" aria-label="Remove tag" class="remove-tag flex items-center justify-center text-outline hover:text-error transition-colors"><span class="material-symbols-outlined text-[16px]">close</span></button>`;
+      
+      locationCloud.insertBefore(newTag, addLocationChip);
+    });
+
+    // Toast Feedback
+    const toast = document.getElementById('toast-msg');
+    const toastText = document.getElementById('toast-text');
+    let toastTimeout;
+
+    function showToast(message) {
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastText.textContent = message;
+      toast.classList.remove('opacity-0', 'translate-y-3');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'translate-y-3');
+      }, 2500);
+    }
+
+    // Save All Button
+    document.getElementById('save-all-btn').addEventListener('click', () => {
+      showToast('All Product & Cue modifications saved!');
+    });
+
+    // Export JSON Button
+    document.getElementById('export-json-btn').addEventListener('click', () => {
+      showToast('Exported config.json copied to device!');
+    });
+
+    // Save Single Product
+    document.getElementById('btn-save-product').addEventListener('click', () => {
+      const input = document.getElementById('input-prod-name');
+      const val = input.value.trim();
+      if (val) {
+        showToast(`Saved "${val}" to Promptify catalog!`);
+        input.value = '';
+      } else {
+        showToast('Please enter a product name first.');
+      }
+    });
+
+    // Segmented tab active status toggle
+    const tabs = document.querySelectorAll('.tab-btn');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => {
+          t.className = 'tab-btn flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface-container-high text-on-surface-variant hover:text-on-surface font-body-md text-body-md whitespace-nowrap min-h-[44px] transition-colors';
+        });
+        tab.className = 'tab-btn flex items-center gap-1.5 px-3 py-2 rounded-xl bg-primary-container text-on-primary-container font-headline-sm text-headline-sm shadow-md whitespace-nowrap min-h-[44px]';
+      });
+    });
+
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-dim/85 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,0,0,0.45)]" data-active-classes="text-primary font-headline-sm"><div class="h-16 px-margin-mobile grid grid-cols-3 items-center max-w-md mx-auto"><a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant transition-colors min-h-[44px] min-w-[44px] group" data-path="generator" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[22px] transition-transform group-hover:scale-110">auto_awesome</span><span class="absolute -top-1 -right-2 px-1 py-0.2 rounded-full bg-tertiary-container text-on-tertiary-container font-label-badge text-[9px] font-bold leading-tight">HOT</span></div><span class="font-body-sm text-body-sm leading-none">Generator</span></a><a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant transition-colors min-h-[44px] min-w-[44px] group" data-path="hook-lab" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[22px] transition-transform group-hover:scale-110">bolt</span><span class="absolute -top-1 -right-2.5 px-1 py-0.2 rounded-full bg-secondary/20 text-secondary border border-secondary/40 font-label-badge text-[9px] font-bold leading-tight">LAB</span></div><span class="font-body-sm text-body-sm leading-none">Hooks</span></a><a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant transition-colors min-h-[44px] min-w-[44px] group" data-path="data-settings" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[22px] transition-transform group-hover:scale-110">tune</span></div><span class="font-body-sm text-body-sm leading-none">Settings</span></a></div></nav></body></html>

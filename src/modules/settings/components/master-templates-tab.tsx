@@ -3,7 +3,6 @@ import { MasterTemplates } from "@/types";
 
 interface MasterTemplatesTabProps {
   templates: MasterTemplates;
-  lastSynced: string;
   draftFemale: string;
   draftMale: string;
   hasUnsavedChanges: boolean;
@@ -12,7 +11,6 @@ interface MasterTemplatesTabProps {
 }
 
 export function MasterTemplatesTab({
-  lastSynced,
   draftFemale,
   draftMale,
   hasUnsavedChanges,
@@ -119,12 +117,7 @@ export function MasterTemplatesTab({
         </div>
       </div>
 
-      <div className="bg-surface-container-low border border-surface-container-high/40 p-space-md rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-space-md shadow-md">
-        <div className="flex items-center gap-space-sm text-on-surface-variant font-body-sm text-body-sm">
-          <span className="font-label-code text-label-code text-on-surface" id="sync-timestamp">
-            Last synced: {lastSynced}
-          </span>
-        </div>
+      <div className="flex items-center justify-end">
         <button
           type="button"
           onClick={onSaveTemplates}
@@ -136,8 +129,8 @@ export function MasterTemplatesTab({
           }`}
           id="btn-recompile"
         >
-          <span className="material-symbols-outlined text-[18px]">electric_bolt</span>
-          Save &amp; Recompile All Templates
+          <span className="material-symbols-outlined text-[18px]">verified</span>
+          Save Changes
         </button>
       </div>
     </section>

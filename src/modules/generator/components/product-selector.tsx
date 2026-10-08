@@ -69,7 +69,7 @@ export function ProductSelector({
             <span className="material-symbols-outlined text-[16px]">female</span>
             <span>Koleksi Wanita ({femaleProducts.length} Produk)</span>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+          <div className="flex sm:grid sm:grid-cols-2 overflow-x-auto sm:overflow-x-visible no-scrollbar gap-3 sm:gap-space-md pb-2 sm:pb-0 -mx-3 px-3 sm:mx-0 sm:px-0">
             {femaleProducts.map((product) => {
               const scriptCount = scripts.filter((s) => s.productId === product.id).length;
               return (
@@ -92,7 +92,7 @@ export function ProductSelector({
             <span className="material-symbols-outlined text-[16px]">male</span>
             <span>Koleksi Pria ({maleProducts.length} Produk)</span>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+          <div className="flex sm:grid sm:grid-cols-2 overflow-x-auto sm:overflow-x-visible no-scrollbar gap-3 sm:gap-space-md pb-2 sm:pb-0 -mx-3 px-3 sm:mx-0 sm:px-0">
             {maleProducts.map((product) => {
               const scriptCount = scripts.filter((s) => s.productId === product.id).length;
               return (

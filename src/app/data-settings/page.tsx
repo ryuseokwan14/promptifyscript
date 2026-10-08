@@ -47,7 +47,6 @@ export default function DataSettingsPage() {
   const [activeTab, setActiveTab] = useState<SettingsTab>("products");
   const [selectedProductId, setSelectedProductId] = useState<string>("");
   const [saveStatus, setSaveStatus] = useState<string | null>(null);
-  const [lastSynced, setLastSynced] = useState("Just now");
 
   const [prevTemplates, setPrevTemplates] = useState(templates);
   const [draftFemale, setDraftFemale] = useState(templates.female);
@@ -84,7 +83,6 @@ export default function DataSettingsPage() {
       setHasEdited(false);
     }
     setSaveStatus("Semua perubahan berhasil disimpan & disinkronkan!");
-    setLastSynced("Baru saja");
     setTimeout(() => setSaveStatus(null), 2500);
   };
 
@@ -105,14 +103,10 @@ export default function DataSettingsPage() {
   return (
     <div className="bg-background font-body-md text-on-surface antialiased min-h-screen flex flex-col">
       <Header />
-      <main className="w-full pt-16 flex-1 px-gutter max-w-7xl mx-auto">
-        <div className="flex flex-col w-full py-space-md gap-space-lg">
+      <main className="w-full pt-16 flex-1 px-3 sm:px-gutter max-w-7xl mx-auto pb-24 sm:pb-space-xl">
+        <div className="flex flex-col w-full py-space-sm sm:py-space-md gap-space-md sm:gap-space-lg">
           <SettingsSyncBar productsCount={products.length} />
-          <SettingsHeader
-            onExportJSON={handleExportJSON}
-            onSaveAll={handleSaveAll}
-            hasUnsavedChanges={hasUnsavedChanges}
-          />
+          <SettingsHeader onExportJSON={handleExportJSON} />
           {saveStatus && (
             <div className="bg-secondary-container/20 border border-secondary/40 text-secondary px-4 py-2.5 rounded-xl flex items-center gap-2 animate-fade-in">
               <span className="material-symbols-outlined text-[20px]">check_circle</span>
@@ -167,7 +161,6 @@ export default function DataSettingsPage() {
             {activeTab === "templates" && (
               <MasterTemplatesTab
                 templates={templates}
-                lastSynced={lastSynced}
                 draftFemale={draftFemale}
                 draftMale={draftMale}
                 hasUnsavedChanges={hasUnsavedChanges}

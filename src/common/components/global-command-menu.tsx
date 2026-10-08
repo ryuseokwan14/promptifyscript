@@ -68,7 +68,7 @@ export function GlobalCommandMenu({
             onSelect={() => handleSelect(() => router.push("/"))}
             className="flex items-center gap-2 cursor-pointer"
           >
-            <span className="material-symbols-outlined text-[18px] text-primary">bolt</span>
+            <span className="material-symbols-outlined text-[18px] text-primary">auto_awesome</span>
             <span>AI Prompt Generator</span>
             <CommandShortcut>G</CommandShortcut>
           </CommandItem>

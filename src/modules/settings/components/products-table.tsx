@@ -139,7 +139,115 @@ export function ProductsTable({
         </div>
       )}
 
-      <div className="w-full overflow-x-auto">
+      {/* Mobile Card List View (<md) */}
+      <div className="md:hidden flex flex-col divide-y divide-surface-container-high/30">
+        {products.map((product) => {
+          const isFemale = product.gender === "female";
+          const linkedCount = scripts.filter((s) => s.productId === product.id).length;
+          const isSelected = selectedIds.includes(product.id);
+
+          return (
+            <div
+              key={product.id}
+              className={`p-3.5 flex items-center justify-between gap-3 transition-colors ${
+                isSelected ? "bg-primary/10" : ""
+              }`}
+            >
+              <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                <input
+                  type="checkbox"
+                  checked={isSelected}
+                  onChange={() => handleToggleSelectOne(product.id)}
+                  aria-label={`Pilih ${product.name}`}
+                  className="w-4 h-4 rounded border-surface-container-high text-primary focus:ring-primary cursor-pointer accent-primary shrink-0"
+                />
+                <div className="w-11 h-11 rounded-xl bg-surface-container-highest overflow-hidden shrink-0 relative border border-white/5">
+                  {product.imageUrl ? (
+                    <img
+                      src={product.imageUrl}
+                      alt={product.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div
+                      className={`w-full h-full flex items-center justify-center ${
+                        isFemale ? "text-tertiary" : "text-secondary"
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-[18px]">
+                        {product.icon || (isFemale ? "checkroom" : "man")}
+                      </span>
+                    </div>
+                  )}
+                  <div
+                    className={`absolute bottom-0.5 right-0.5 w-2 h-2 rounded-full ${
+                      isFemale ? "bg-tertiary" : "bg-secondary"
+                    }`}
+                  />
+                </div>
+
+                <div className="flex flex-col min-w-0">
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <span className="font-headline-sm text-[13.5px] text-on-surface truncate font-semibold">
+                      {product.name}
+                    </span>
+                    <span
+                      className={`font-label-badge text-[10px] px-1.5 py-0.2 rounded-full inline-flex items-center gap-0.5 ${
+                        isFemale
+                          ? "bg-tertiary-container/30 text-tertiary"
+                          : "bg-secondary-container/20 text-secondary"
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-[11px]">
+                        {isFemale ? "female" : "male"}
+                      </span>
+                      <span>{isFemale ? "Cewek" : "Cowok"}</span>
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 mt-0.5">
+                    <span className="font-body-sm text-[11px] text-on-surface-variant flex items-center gap-1">
+                      <span className="material-symbols-outlined text-[13px] text-secondary">
+                        graphic_eq
+                      </span>
+                      {linkedCount} Scripts
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-1 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => onSelectProductForScripts(product.id)}
+                  aria-label="Kelola Lip-Sync"
+                  className="w-8 h-8 rounded-lg flex items-center justify-center bg-surface-container text-on-surface-variant hover:text-secondary active:scale-95 transition-all"
+                >
+                  <span className="material-symbols-outlined text-[16px]">record_voice_over</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setEditingProduct(product)}
+                  aria-label="Edit product"
+                  className="w-8 h-8 rounded-lg flex items-center justify-center bg-surface-container text-on-surface-variant hover:text-primary active:scale-95 transition-all"
+                >
+                  <span className="material-symbols-outlined text-[16px]">edit</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDelete(product)}
+                  aria-label="Delete product"
+                  className="w-8 h-8 rounded-lg flex items-center justify-center bg-surface-container text-on-surface-variant hover:text-error active:scale-95 transition-all"
+                >
+                  <span className="material-symbols-outlined text-[16px]">delete</span>
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Desktop Table View (>=md) */}
+      <div className="hidden md:block w-full overflow-x-auto">
         <table className="w-full text-left font-body-md text-body-md">
           <thead className="bg-surface-container-lowest text-on-surface-variant font-label-code text-label-code uppercase tracking-wider border-b border-surface-container-high/30">
             <tr>

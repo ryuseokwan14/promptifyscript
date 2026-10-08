@@ -190,7 +190,70 @@ export function LocationsTable({
         </div>
       )}
 
-      <div className="w-full overflow-x-auto">
+      {/* Mobile Locations View (<md) */}
+      <div className="md:hidden p-3 flex flex-wrap gap-2">
+        {filteredList.length === 0 ? (
+          <div className="w-full py-8 text-center text-on-surface-variant text-xs">
+            Tidak ada lokasi yang cocok dengan filter pencarian.
+          </div>
+        ) : (
+          filteredList.map((item) => {
+            const vibeCfg = getVibeConfig(item.vibe);
+            const targetKey = item.id || item.name;
+            const isSelected = selectedIds.includes(targetKey);
+
+            return (
+              <div
+                key={targetKey}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl border transition-all text-xs ${
+                  isSelected
+                    ? "bg-primary/20 border-primary text-primary"
+                    : "bg-surface-container border-surface-container-high/60 text-on-surface"
+                }`}
+              >
+                <input
+                  type="checkbox"
+                  checked={isSelected}
+                  onChange={() => handleToggleSelectOne(targetKey)}
+                  aria-label={`Pilih ${item.name}`}
+                  className="w-3.5 h-3.5 rounded border-surface-container-high text-primary focus:ring-primary cursor-pointer accent-primary shrink-0"
+                />
+                <span className="material-symbols-outlined text-[15px] text-secondary shrink-0">
+                  location_on
+                </span>
+                <span className="font-medium truncate max-w-[140px]">{item.name}</span>
+                <span
+                  className={`text-[9px] font-label-badge px-1.5 py-0.2 rounded-full border ${vibeCfg.tagClass}`}
+                >
+                  {vibeCfg.label}
+                </span>
+
+                <div className="flex items-center gap-0.5 ml-1 border-l border-surface-container-highest/80 pl-1">
+                  <button
+                    type="button"
+                    onClick={() => setEditingLocation(item)}
+                    aria-label={`Edit ${item.name}`}
+                    className="p-1 text-on-surface-variant hover:text-primary active:scale-95 transition-colors"
+                  >
+                    <span className="material-symbols-outlined text-[14px]">edit</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(item)}
+                    aria-label={`Hapus ${item.name}`}
+                    className="p-1 text-outline hover:text-error active:scale-95 transition-colors"
+                  >
+                    <span className="material-symbols-outlined text-[14px]">close</span>
+                  </button>
+                </div>
+              </div>
+            );
+          })
+        )}
+      </div>
+
+      {/* Desktop Table View (>=md) */}
+      <div className="hidden md:block w-full overflow-x-auto">
         <table className="w-full text-left font-body-md text-body-md">
           <thead className="bg-surface-container-lowest text-on-surface-variant font-label-code text-label-code uppercase tracking-wider border-b border-surface-container-high/30">
             <tr>
