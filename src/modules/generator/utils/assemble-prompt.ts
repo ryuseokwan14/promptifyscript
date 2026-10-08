@@ -1,4 +1,4 @@
-import { Product, ScriptItem, MasterTemplates, GenerationResult } from "@/types";
+import { Product, ScriptItem, MasterTemplates, GenerationResult, VibeType } from "@/types";
 import { deckRotator } from "./deck-rotator";
 
 interface CompilePromptOptions {
@@ -8,6 +8,9 @@ interface CompilePromptOptions {
   templates: MasterTemplates;
   overrideLocation?: string;
   overrideScriptText?: string;
+  locationPoolKey?: string;
+  scriptPoolKey?: string;
+  vibe?: VibeType;
 }
 
 export function compileVideoPrompt({
@@ -17,14 +20,18 @@ export function compileVideoPrompt({
   templates,
   overrideLocation,
   overrideScriptText,
+  locationPoolKey,
+  scriptPoolKey,
+  vibe,
 }: CompilePromptOptions): GenerationResult {
   // 1. Pilih Lokasi dari Seluruh Bank Data (Rotasi Non-Repeating Adil)
   let selectedLocation = overrideLocation;
   let locPick = null;
   if (!selectedLocation) {
     if (locations.length > 0) {
+      const locKey = locationPoolKey || "generator_locations";
       locPick = deckRotator.pickNonRepeating(
-        "generator_locations",
+        locKey,
         locations,
         (l) => l
       );
@@ -45,8 +52,9 @@ export function compileVideoPrompt({
   let scriptPick = null;
   if (!selectedScript) {
     if (productScripts.length > 0) {
+      const scrKey = scriptPoolKey || `generator_scripts_${product.id}`;
       scriptPick = deckRotator.pickNonRepeating(
-        `generator_scripts_${product.id}`,
+        scrKey,
         productScripts,
         (s) => s.id || s.text
       );
@@ -74,6 +82,7 @@ export function compileVideoPrompt({
     script: selectedScript,
     tokens,
     product,
+    vibe,
     cycleInfo: {
       scriptCycleReset: scriptPick?.isCycleReset ?? false,
       scriptIsLastInCycle: scriptPick?.isLastInCycle ?? false,

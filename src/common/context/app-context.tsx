@@ -1,17 +1,25 @@
 "use client";
 
 import { createContext, useContext } from "react";
-import { Product, ScriptItem, LocationItem, MasterTemplates, User, GenerationResult } from "@/types";
+import { Product, ScriptItem, LocationItem, MasterTemplates, User, GenerationResult, VibeType } from "@/types";
 
 export interface AppContextType {
   products: Product[];
   scripts: ScriptItem[];
   locations: string[];
   locationItems: LocationItem[];
+  universalLocations: string[];
+  locationCounts: {
+    universal: number;
+    casual_aesthetic: number;
+    urban_adventure: number;
+  };
   templates: MasterTemplates;
   user: User | null;
   activeProductId: string;
   setActiveProductId: (id: string) => void;
+  activeVibe: VibeType | null;
+  setActiveVibe: (vibe: VibeType | null) => void;
   addProduct: (product: Omit<Product, "id">) => Promise<Product | null>;
   updateProduct: (product: Partial<Product> & { id: string }) => Promise<void>;
   deleteProduct: (id: string) => Promise<void>;
@@ -31,7 +39,8 @@ export interface AppContextType {
   logout: () => Promise<void>;
   creatorEmail: string;
   refreshCurrentUser: () => Promise<void>;
-  generatePrompt: (productId?: string) => GenerationResult | null;
+  generatePrompt: (productId?: string, vibe?: VibeType | null) => GenerationResult | null;
+  compileLivePrompt: (productId: string) => GenerationResult | null;
   refreshData: () => Promise<void>;
   isLoaded: boolean;
 }

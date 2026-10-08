@@ -51,6 +51,8 @@ export interface CycleInfo {
   locationTotal: number;
 }
 
+export type VibeType = "universal" | "casual_aesthetic" | "urban_adventure";
+
 export interface GenerationResult {
   prompt: string;
   location: string;
@@ -58,4 +60,5 @@ export interface GenerationResult {
   tokens: number;
   product: Product;
   cycleInfo?: CycleInfo;
+  vibe?: VibeType;
 }

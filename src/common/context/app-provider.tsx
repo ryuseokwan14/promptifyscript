@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { Product, ScriptItem, LocationItem, MasterTemplates, User, GenerationResult } from "@/types";
+import { Product, ScriptItem, LocationItem, MasterTemplates, User, GenerationResult, VibeType } from "@/types";
 import { AppContext } from "./app-context";
 import {
   getProductsAction,
@@ -44,6 +44,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [creatorEmail, setCreatorEmail] = useState<string>("najmishfwn@gmail.com");
   const [activeProductId, setActiveProductId] = useState<string>("");
+  const [activeVibe, setActiveVibe] = useState<VibeType | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const refreshData = useCallback(async () => {
@@ -309,16 +310,72 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const generatePrompt = (productId?: string): GenerationResult | null => {
+  const universalLocations = React.useMemo(
+    () => locationItems.filter((l) => l.vibe === "universal").map((l) => l.name),
+    [locationItems]
+  );
+
+  const locationCounts = React.useMemo(() => {
+    let universal = 0;
+    let casual_aesthetic = 0;
+    let urban_adventure = 0;
+    for (const item of locationItems) {
+      if (item.vibe === "casual_aesthetic") casual_aesthetic++;
+      else if (item.vibe === "urban_adventure") urban_adventure++;
+      else universal++;
+    }
+    return { universal, casual_aesthetic, urban_adventure };
+  }, [locationItems]);
+
+  const generatePrompt = (
+    productId?: string,
+    vibe?: VibeType | null
+  ): GenerationResult | null => {
     const targetId = productId || activeProductId;
     const product = products.find((p) => p.id === targetId) || products[0];
     if (!product) return null;
 
+    const chosenVibe = vibe !== undefined ? vibe : activeVibe;
+    let targetLocations: string[] = [];
+    let poolKey = "generator_locations";
+
+    if (chosenVibe) {
+      targetLocations = locationItems
+        .filter((l) => l.vibe === chosenVibe)
+        .map((l) => l.name);
+      poolKey = `generator_locations_${chosenVibe}`;
+    }
+
+    if (targetLocations.length === 0) {
+      targetLocations = locations;
+    }
+
     return compileVideoPrompt({
       product,
       scripts,
-      locations,
+      locations: targetLocations,
       templates,
+      locationPoolKey: poolKey,
+      scriptPoolKey: `generator_scripts_${product.id}`,
+      vibe: chosenVibe || undefined,
+    });
+  };
+
+  const compileLivePrompt = (productId: string): GenerationResult | null => {
+    const product = products.find((p) => p.id === productId);
+    if (!product) return null;
+
+    const targetLocations =
+      universalLocations.length > 0 ? universalLocations : locations;
+
+    return compileVideoPrompt({
+      product,
+      scripts,
+      locations: targetLocations,
+      templates,
+      locationPoolKey: `live_locations_${product.id}_universal`,
+      scriptPoolKey: `live_scripts_${product.id}`,
+      vibe: "universal",
     });
   };
 
@@ -329,12 +386,16 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         scripts,
         locations,
         locationItems,
+        universalLocations,
+        locationCounts,
         templates,
         user,
         creatorEmail,
         refreshCurrentUser,
         activeProductId,
         setActiveProductId,
+        activeVibe,
+        setActiveVibe,
         addProduct,
         updateProduct,
         deleteProduct,
@@ -353,6 +414,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         login,
         logout,
         generatePrompt,
+        compileLivePrompt,
         refreshData,
         isLoaded,
       }}
@@ -361,3 +423,4 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     </AppContext.Provider>
   );
 }
+
