@@ -9,7 +9,13 @@ export async function middleware(request: NextRequest) {
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/favicon.ico") ||
-    pathname.startsWith("/logo.svg")
+    pathname.startsWith("/icon") ||
+    pathname.startsWith("/apple-icon") ||
+    pathname.startsWith("/logo") ||
+    pathname.endsWith(".ico") ||
+    pathname.endsWith(".svg") ||
+    pathname.endsWith(".png") ||
+    pathname.endsWith(".webp")
   ) {
     return NextResponse.next();
   }
@@ -41,9 +47,8 @@ export const config = {
      * Match all request paths except for:
      * - _next/static (static files)
      * - _next/image (image optimization files)
-     * - favicon.ico
-     * - logo.svg
+     * - favicon.ico, icons, logos, dan static media files
      */
-    "/((?!_next/static|_next/image|favicon.ico|logo.svg).*)",
+    "/((?!_next/static|_next/image|favicon.ico|icon.*|apple-icon.*|logo.*|.*\\.(?:svg|png|jpg|jpeg|ico|webp)$).*)",
   ],
 };

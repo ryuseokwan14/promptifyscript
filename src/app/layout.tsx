@@ -36,7 +36,13 @@ export const metadata: Metadata = {
   title: "Promptify Script — AI Prompt Video Automation Engine",
   description: "Automated AI Video Prompt Studio & Retention Engine for TikTok & Reels",
   icons: {
-    icon: "/logo.svg",
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icon.png", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: "/apple-icon.png",
+    shortcut: "/favicon.ico",
   },
 };
 

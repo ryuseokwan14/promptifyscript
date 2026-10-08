@@ -20,7 +20,7 @@ export function VisualContextGallery({ product }: VisualContextGalleryProps) {
         <div className="h-28 rounded-xl overflow-hidden relative group border border-surface-container-high/40">
           <img
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            src={product?.imageFit || product?.imageUrl || "/next.svg"}
+            src={product?.imageFit || product?.imageUrl || "/logo.svg"}
             alt="Fit & Silhouette"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-transparent to-transparent flex items-end p-2">
@@ -33,7 +33,7 @@ export function VisualContextGallery({ product }: VisualContextGalleryProps) {
         <div className="h-28 rounded-xl overflow-hidden relative group border border-surface-container-high/40">
           <img
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            src={product?.imageTexture || "/next.svg"}
+            src={product?.imageTexture || "/logo.svg"}
             alt="Fabric Texture"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-transparent to-transparent flex items-end p-2">
@@ -46,7 +46,7 @@ export function VisualContextGallery({ product }: VisualContextGalleryProps) {
         <div className="h-28 rounded-xl overflow-hidden relative group border border-surface-container-high/40">
           <img
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            src={product?.imageAtmosphere || "/next.svg"}
+            src={product?.imageAtmosphere || "/logo.svg"}
             alt="Location Atmosphere"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-transparent to-transparent flex items-end p-2">
