@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { toast } from "sonner";
 import { Header } from "@/common/components/header";
 import { Footer } from "@/common/components/footer";
@@ -45,7 +45,7 @@ export default function GeneratorPage() {
     }
   };
 
-  const handleGenerate = () => {
+  const handleGenerate = useCallback(() => {
     if (!activeVibe) {
       toast.warning("Pilih Vibe Terlebih Dahulu", {
         description: "Silakan pilih salah satu vibe tempat di Langkah 2 sebelum generate.",
@@ -64,9 +64,9 @@ export default function GeneratorPage() {
       }
       setIsRolling(false);
     }, 250);
-  };
+  }, [activeVibe, activeProductId, generatePrompt]);
 
-  const handleReroll = () => {
+  const handleReroll = useCallback(() => {
     if (!activeVibe) return;
     setIsRolling(true);
     setTimeout(() => {
@@ -77,7 +77,7 @@ export default function GeneratorPage() {
       }
       setIsRolling(false);
     }, 200);
-  };
+  }, [activeVibe, activeProductId, generatePrompt]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -88,7 +88,7 @@ export default function GeneratorPage() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [activeVibe, isRolling, activeProductId]);
+  }, [activeVibe, isRolling, handleGenerate]);
 
   return (
     <div className="bg-background font-body-md text-on-surface antialiased min-h-screen flex flex-col">
@@ -96,8 +96,9 @@ export default function GeneratorPage() {
       <main className="w-full pt-16 flex-1 px-3 sm:px-gutter max-w-7xl mx-auto pb-24 sm:pb-space-xl">
         <div className="flex flex-col w-full">
           <LiveStudioBar />
-          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start mt-2">
-            <div className="lg:col-span-7 flex flex-col gap-space-lg">
+          <div className="w-full flex flex-col gap-4 mt-2">
+            {/* Layer 1: Konfigurasi 2 Kolom (Target Produk & Vibe Tempat) */}
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
               <ProductSelector
                 products={products}
                 scripts={scripts}
@@ -110,20 +111,22 @@ export default function GeneratorPage() {
                 onSelectVibe={setActiveVibe}
                 locationCounts={locationCounts}
               />
-              <GeneratorControls
-                isRolling={isRolling}
-                canGenerate={activeVibe !== null}
-                onGenerate={handleGenerate}
-                onReroll={handleReroll}
-              />
             </div>
-            <div className="lg:col-span-5 flex flex-col">
-              <GeneratedPromptStudio
-                result={generatedResult}
-                onReroll={handleReroll}
-                isRolling={isRolling}
-              />
-            </div>
+
+            {/* Layer 2: Tombol Aksi Kompilasi & Re-roll */}
+            <GeneratorControls
+              isRolling={isRolling}
+              canGenerate={activeVibe !== null}
+              onGenerate={handleGenerate}
+              onReroll={handleReroll}
+            />
+
+            {/* Layer 3: Studio Output Hasil Prompt */}
+            <GeneratedPromptStudio
+              result={generatedResult}
+              onReroll={handleReroll}
+              isRolling={isRolling}
+            />
           </div>
           <LiveAssembledCatalog
             products={products}

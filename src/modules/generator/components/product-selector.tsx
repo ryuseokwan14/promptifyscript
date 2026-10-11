@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import { Product, ScriptItem } from "@/types";
 import { ProductCard } from "./product-card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -18,28 +18,27 @@ export function ProductSelector({
   onSelectProduct,
   isLoading = false,
 }: ProductSelectorProps) {
-  const femaleProducts = products.filter((p) => p.gender === "female");
-  const maleProducts = products.filter((p) => p.gender === "male");
+  const [genderFilter, setGenderFilter] = useState<"all" | "female" | "male">("all");
+
+  const femaleCount = useMemo(() => products.filter((p) => p.gender === "female").length, [products]);
+  const maleCount = useMemo(() => products.filter((p) => p.gender === "male").length, [products]);
+
+  const filteredProducts = useMemo(() => {
+    if (genderFilter === "female") return products.filter((p) => p.gender === "female");
+    if (genderFilter === "male") return products.filter((p) => p.gender === "male");
+    return products;
+  }, [products, genderFilter]);
 
   if (isLoading || products.length === 0) {
     return (
-      <section className="flex flex-col gap-space-md">
-        <div className="flex items-center justify-between">
-          <Skeleton className="h-6 w-48 bg-surface-container-high/60" />
-          <Skeleton className="h-5 w-24 bg-surface-container-high/60" />
+      <section className="bg-surface-container-low border border-surface-container-high/40 p-3 sm:p-space-md rounded-2xl flex flex-col gap-3 shadow-sm h-[350px]">
+        <div className="flex items-center justify-between pb-2 border-b border-surface-container-high/30">
+          <Skeleton className="h-5 w-40 bg-surface-container-high/60" />
+          <Skeleton className="h-5 w-20 bg-surface-container-high/60" />
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+        <div className="flex-1 flex flex-col gap-2 overflow-hidden">
           {[1, 2, 3, 4].map((i) => (
-            <div
-              key={i}
-              className="bg-surface-container-low border border-surface-container-high/40 rounded-2xl overflow-hidden p-0 flex flex-col"
-            >
-              <Skeleton className="w-full aspect-[16/10] bg-surface-container-high/40" />
-              <div className="p-space-md flex flex-col gap-2">
-                <Skeleton className="h-5 w-3/4 bg-surface-container-high/60" />
-                <Skeleton className="h-4 w-1/2 bg-surface-container-high/40" />
-              </div>
-            </div>
+            <Skeleton key={i} className="h-14 w-full rounded-xl bg-surface-container-high/40" />
           ))}
         </div>
       </section>
@@ -47,67 +46,73 @@ export function ProductSelector({
   }
 
   return (
-    <section className="flex flex-col gap-space-md">
-      <div className="flex items-center justify-between flex-wrap gap-1.5">
-        <div className="flex items-center gap-1.5 flex-wrap">
+    <section className="bg-surface-container-low border border-surface-container-high/40 p-3 sm:p-space-md rounded-2xl flex flex-col gap-3 shadow-sm h-[350px]">
+      {/* Header Bar */}
+      <div className="flex items-center justify-between flex-wrap gap-2 pb-2 border-b border-surface-container-high/30">
+        <div className="flex items-center gap-2">
           <span className="font-headline-sm text-[15px] sm:text-headline-sm text-on-surface font-semibold">
-            1. Pilih Target Produk
+            1. Target Produk
           </span>
-          <span className="font-label-code text-[11px] sm:text-label-code text-primary bg-primary-container/20 border border-primary/20 px-2 py-0.5 rounded-full">
-            ({products.length} Produk)
+          <span className="font-label-code text-[11px] text-primary bg-primary-container/20 border border-primary/20 px-2 py-0.5 rounded-full font-medium">
+            {products.length}
           </span>
         </div>
-        <span className="font-body-sm text-[11.5px] sm:text-body-sm text-on-surface-variant flex items-center gap-1">
-          <span className="material-symbols-outlined text-[14px]">touch_app</span>
-          Klik untuk Pilih
-        </span>
+
+        {/* Gender Filter Pills */}
+        <div className="flex items-center gap-1 bg-surface-container-lowest/80 p-0.5 rounded-lg border border-surface-container-high/40 text-[11.5px] font-label-code">
+          <button
+            type="button"
+            onClick={() => setGenderFilter("all")}
+            className={`px-2 py-1 rounded-md transition-all cursor-pointer ${
+              genderFilter === "all"
+                ? "bg-surface-container-highest text-on-surface font-semibold shadow-xs"
+                : "text-on-surface-variant hover:text-on-surface"
+            }`}
+          >
+            Semua
+          </button>
+          <button
+            type="button"
+            onClick={() => setGenderFilter("female")}
+            className={`px-2 py-1 rounded-md flex items-center gap-1 transition-all cursor-pointer ${
+              genderFilter === "female"
+                ? "bg-tertiary-container/30 text-tertiary font-semibold border border-tertiary/30 shadow-xs"
+                : "text-on-surface-variant hover:text-tertiary"
+            }`}
+          >
+            <span className="material-symbols-outlined text-[13px]">female</span>
+            <span>{femaleCount}</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setGenderFilter("male")}
+            className={`px-2 py-1 rounded-md flex items-center gap-1 transition-all cursor-pointer ${
+              genderFilter === "male"
+                ? "bg-secondary-container/30 text-secondary font-semibold border border-secondary/30 shadow-xs"
+                : "text-on-surface-variant hover:text-secondary"
+            }`}
+          >
+            <span className="material-symbols-outlined text-[13px]">male</span>
+            <span>{maleCount}</span>
+          </button>
+        </div>
       </div>
 
-      {femaleProducts.length > 0 && (
-        <div className="flex flex-col gap-space-xs">
-          <div className="flex items-center gap-1.5 text-tertiary font-label-code text-label-code px-1 font-medium">
-            <span className="material-symbols-outlined text-[16px]">female</span>
-            <span>Koleksi Wanita ({femaleProducts.length} Produk)</span>
-          </div>
-          <div className="flex sm:grid sm:grid-cols-2 overflow-x-auto sm:overflow-x-visible no-scrollbar gap-3 sm:gap-space-md py-2.5 sm:py-0 -mx-3 px-3 sm:mx-0 sm:px-0 items-stretch">
-            {femaleProducts.map((product) => {
-              const scriptCount = scripts.filter((s) => s.productId === product.id).length;
-              return (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  isActive={product.id === activeProductId}
-                  scriptCount={scriptCount}
-                  onSelect={onSelectProduct}
-                />
-              );
-            })}
-          </div>
-        </div>
-      )}
-
-      {maleProducts.length > 0 && (
-        <div className="flex flex-col gap-space-xs pt-space-xs">
-          <div className="flex items-center gap-1.5 text-secondary font-label-code text-label-code px-1 font-medium">
-            <span className="material-symbols-outlined text-[16px]">male</span>
-            <span>Koleksi Pria ({maleProducts.length} Produk)</span>
-          </div>
-          <div className="flex sm:grid sm:grid-cols-2 overflow-x-auto sm:overflow-x-visible no-scrollbar gap-3 sm:gap-space-md py-2.5 sm:py-0 -mx-3 px-3 sm:mx-0 sm:px-0 items-stretch">
-            {maleProducts.map((product) => {
-              const scriptCount = scripts.filter((s) => s.productId === product.id).length;
-              return (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  isActive={product.id === activeProductId}
-                  scriptCount={scriptCount}
-                  onSelect={onSelectProduct}
-                />
-              );
-            })}
-          </div>
-        </div>
-      )}
+      {/* Fixed Scrollable List Container */}
+      <div className="flex-1 overflow-y-auto space-y-2 pr-1.5 focus:outline-none">
+        {filteredProducts.map((product) => {
+          const scriptCount = scripts.filter((s) => s.productId === product.id).length;
+          return (
+            <ProductCard
+              key={product.id}
+              product={product}
+              isActive={product.id === activeProductId}
+              scriptCount={scriptCount}
+              onSelect={onSelectProduct}
+            />
+          );
+        })}
+      </div>
     </section>
   );
 }

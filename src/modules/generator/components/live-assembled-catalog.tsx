@@ -16,7 +16,10 @@ export function LiveAssembledCatalog({
   const [promptMap, setPromptMap] = useState<Record<string, LiveCardData>>({});
   const [isTransitioning, setIsTransitioning] = useState(false);
   const compileRef = useRef(compileLivePrompt);
-  compileRef.current = compileLivePrompt;
+
+  useEffect(() => {
+    compileRef.current = compileLivePrompt;
+  }, [compileLivePrompt]);
 
   // Initial populate when products or isLoaded changes
   useEffect(() => {
@@ -34,6 +37,7 @@ export function LiveAssembledCatalog({
         };
       }
     }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPromptMap(initialMap);
   }, [products, isLoaded]);
 

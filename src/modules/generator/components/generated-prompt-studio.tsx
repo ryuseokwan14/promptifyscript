@@ -36,7 +36,7 @@ export function GeneratedPromptStudio({
   };
 
   return (
-    <section className="bg-surface-container-low border border-surface-container-high/40 p-3 sm:p-space-md rounded-2xl flex flex-col gap-space-md shadow-md min-h-[440px]">
+    <section className="bg-surface-container-low border border-surface-container-high/40 p-3 sm:p-space-md rounded-2xl flex flex-col gap-3 shadow-md min-h-[260px]">
       <div className="flex items-center justify-between flex-wrap gap-2 pb-2 border-b border-surface-container-high/30">
         <div className="flex items-center gap-2">
           <span
@@ -59,16 +59,16 @@ export function GeneratedPromptStudio({
 
       {!result ? (
         <div className="flex-1 flex flex-col items-center justify-center text-center p-6 sm:p-8 rounded-xl border border-dashed border-surface-container-high/60 bg-surface-container-lowest/40 gap-3">
-          <div className="w-14 h-14 rounded-2xl bg-surface-container-high/50 border border-surface-container-highest/60 flex items-center justify-center text-outline">
-            <span className="material-symbols-outlined text-[32px]">auto_awesome</span>
+          <div className="w-12 h-12 rounded-2xl bg-surface-container-high/50 border border-surface-container-highest/60 flex items-center justify-center text-outline">
+            <span className="material-symbols-outlined text-[28px]">auto_awesome</span>
           </div>
-          <div className="max-w-sm flex flex-col gap-1">
+          <div className="max-w-md flex flex-col gap-1">
             <p className="font-headline-sm text-[14px] sm:text-[15px] text-on-surface font-semibold">
               Prompt Belum Dihasilkan
             </p>
             <p className="font-body-sm text-[12px] sm:text-body-sm text-on-surface-variant leading-relaxed">
-              Pilih target produk dan tentukan vibe tempat di sebelah kiri, lalu klik{" "}
-              <span className="text-primary font-medium">Generate Prompt</span> untuk memunculkan teks prompt.
+              Pilih target produk dan tentukan vibe tempat di atas, lalu klik{" "}
+              <span className="text-primary font-medium">Generate Prompt</span> untuk memunculkan teks prompt video vertikal 9:16.
             </p>
           </div>
         </div>
