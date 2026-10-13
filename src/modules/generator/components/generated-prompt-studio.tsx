@@ -2,6 +2,7 @@ import React from "react";
 import { toast } from "sonner";
 import { GenerationResult } from "@/types";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { HighlightedPromptText } from "./highlighted-prompt-text";
 
 interface GeneratedPromptStudioProps {
   result: GenerationResult | null;
@@ -101,12 +102,16 @@ export function GeneratedPromptStudio({
             className="flex-1 bg-surface-container-lowest border border-surface-container-high/50 rounded-xl p-3 sm:p-space-md font-body-md text-[14px] sm:text-[14.5px] text-on-surface leading-relaxed select-all shadow-inner whitespace-pre-wrap min-h-[160px] max-h-[340px] overflow-y-auto"
             id="promptOutput"
           >
-            {result.prompt}
+            <HighlightedPromptText
+              prompt={result.prompt}
+              location={result.location}
+              script={result.script}
+            />
           </div>
 
-          {result.cycleInfo && (
-            <div className="flex items-center justify-between text-[11px] font-label-code px-1 text-on-surface-variant">
-              {result.cycleInfo.scriptIsLastInCycle ? (
+          <div className="flex items-center justify-between flex-wrap gap-2 text-[11px] font-label-code px-1 text-on-surface-variant">
+            {result.cycleInfo ? (
+              result.cycleInfo.scriptIsLastInCycle ? (
                 <span className="text-amber-400 flex items-center gap-1">
                   <span className="material-symbols-outlined text-[13px]">warning</span>
                   Batas aman: Naskah terakhir siklus #{result.cycleInfo.scriptCycleNumber}
@@ -116,9 +121,23 @@ export function GeneratedPromptStudio({
                   <span className="material-symbols-outlined text-[13px] text-primary">shuffle</span>
                   Sisa {result.cycleInfo.scriptRemaining} naskah unik (Siklus #{result.cycleInfo.scriptCycleNumber})
                 </span>
-              )}
+              )
+            ) : (
+              <span />
+            )}
+
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-1 text-[10.5px] text-secondary font-medium">
+                <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
+                Tempat
+              </span>
+              <span className="text-outline/40">•</span>
+              <span className="inline-flex items-center gap-1 text-[10.5px] text-tertiary font-medium">
+                <span className="w-1.5 h-1.5 rounded-full bg-tertiary" />
+                Lip-Sync
+              </span>
             </div>
-          )}
+          </div>
         </div>
       )}
 

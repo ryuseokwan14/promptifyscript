@@ -6,6 +6,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { HighlightedPromptText } from "./highlighted-prompt-text";
 
 interface GeneratedPromptModalProps {
   isOpen: boolean;
@@ -123,7 +124,11 @@ export function GeneratedPromptModal({
           </div>
 
           <div className="bg-surface-container-lowest border border-surface-container-high/50 rounded-xl p-3.5 sm:p-space-md font-body-md text-[14px] sm:text-[15px] text-on-surface leading-relaxed select-all shadow-inner whitespace-pre-wrap min-h-[140px] sm:min-h-[160px]">
-            {result.prompt}
+            <HighlightedPromptText
+              prompt={result.prompt}
+              location={result.location}
+              script={result.script}
+            />
           </div>
         </div>
 

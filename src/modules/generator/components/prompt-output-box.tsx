@@ -1,6 +1,7 @@
 import React from "react";
 import { PromptState } from "../types/generator.types";
 import { Skeleton } from "@/components/ui/skeleton";
+import { HighlightedPromptText } from "./highlighted-prompt-text";
 
 interface PromptOutputBoxProps {
   promptData: PromptState | null;
@@ -22,7 +23,11 @@ export function PromptOutputBox({ promptData }: PromptOutputBoxProps) {
         id="promptOutput"
       >
         {promptData ? (
-          promptData.prompt
+          <HighlightedPromptText
+            prompt={promptData.prompt}
+            location={promptData.location}
+            script={promptData.script}
+          />
         ) : (
           <div className="flex flex-col gap-2.5 py-2">
             <Skeleton className="h-4 w-4/5 bg-surface-container-high/60" />

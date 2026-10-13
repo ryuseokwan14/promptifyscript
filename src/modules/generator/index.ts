@@ -9,6 +9,7 @@ export { LiveAssembledCatalog } from "./components/live-assembled-catalog";
 export { PromptOutputBox } from "./components/prompt-output-box";
 export { PromptActions } from "./components/prompt-actions";
 export { GeneratedPromptModal } from "./components/generated-prompt-modal";
+export { HighlightedPromptText } from "./components/highlighted-prompt-text";
 export * from "./schemas/generate-prompt.schema";
 export * from "./use-cases/generate-prompt.use-case";
 export * from "./actions/generate-prompt.action";

@@ -2,6 +2,7 @@ import React from "react";
 import { toast } from "sonner";
 import { Product } from "@/types";
 import { Skeleton } from "@/components/ui/skeleton";
+import { HighlightedPromptText } from "./highlighted-prompt-text";
 
 export interface LiveCardData {
   prompt: string;
@@ -101,7 +102,11 @@ export function LivePromptCard({
               isTransitioning ? "opacity-30" : "opacity-100"
             }`}
           >
-            {data.prompt}
+            <HighlightedPromptText
+              prompt={data.prompt}
+              location={data.location}
+              script={data.script}
+            />
           </div>
         ) : (
           <div className="flex flex-col gap-2 py-2">
@@ -116,7 +121,7 @@ export function LivePromptCard({
       {/* Bottom Metadata */}
       <div className="flex items-center justify-between gap-2 text-[11px] font-label-code text-on-surface-variant pt-1 border-t border-surface-container-high/30">
         <div className="flex items-center gap-1 min-w-0">
-          <span className="material-symbols-outlined text-[13px] text-primary shrink-0">
+          <span className="material-symbols-outlined text-[13px] text-secondary shrink-0">
             pin_drop
           </span>
           <span className="truncate text-on-surface" title={data?.location}>
@@ -124,9 +129,15 @@ export function LivePromptCard({
           </span>
         </div>
 
-        <span className="shrink-0 text-primary font-medium">
-          {data ? `~${data.tokens} Tkn` : "..."}
-        </span>
+        <div className="flex items-center gap-2 shrink-0">
+          <span className="inline-flex items-center gap-1 text-[10px] text-tertiary">
+            <span className="w-1.5 h-1.5 rounded-full bg-tertiary" />
+            Lip-sync
+          </span>
+          <span className="text-primary font-medium">
+            {data ? `~${data.tokens} Tkn` : "..."}
+          </span>
+        </div>
       </div>
     </article>
   );
