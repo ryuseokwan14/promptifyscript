@@ -1,6 +1,7 @@
 import { productRepository } from "@/modules/products/repositories/product.repository";
 import { scriptRepository } from "@/modules/scripts/repositories/script.repository";
 import { locationRepository } from "@/modules/locations/repositories/location.repository";
+import { actionRepository } from "@/modules/actions/repositories/action.repository";
 import { templateRepository } from "@/modules/templates/repositories/template.repository";
 import { GeneratePromptInput, GeneratePromptSchema } from "../schemas/generate-prompt.schema";
 import { deckRotator } from "../utils/deck-rotator";
@@ -66,21 +67,35 @@ export class GeneratePromptUseCase {
       });
     }
 
-    // 3. Ambil Master Template Sesuai Gender Persona
+    // 3. Ambil Aksi dari Seluruh Bank Data (Rotasi Non-Repeating Adil)
+    const allActions = await actionRepository.findAll();
+    let selectedAction = "berdiri santai dan percaya diri";
+    let actionPick = null;
+    if (allActions.length > 0) {
+      actionPick = deckRotator.pickNonRepeating(
+        "server_actions",
+        allActions,
+        (a) => a.name
+      );
+      selectedAction = actionPick.item ? actionPick.item.name : allActions[0].name;
+    }
+
+    // 4. Ambil Master Template Sesuai Gender Persona
     const genderKey = (product.gender === "male" ? "male" : "female") as "female" | "male";
     const templateRecord = await templateRepository.findByGender(genderKey);
 
     const fallbackTemplate =
       genderKey === "female"
-        ? `Seorang Perempuan berjalan dengan suasana ceria dan gerakan ringan model berada di {tempat}, Gerakan tangan ringan menunjuk ke arah celana. Sedikit menggeser berat badan kanan-kiri secara natural., ekspresi bahagia namun natural, berbicara jelas ke kamera dengan bahasa indonesia: “{Script gerak bibir}” video realistis, tanpa subtitle & musik`
-        : `Seorang Pria berjalan dengan langkah santai dan percaya diri model berada di {tempat}, Gerakan tangan santai menunjuk ke arah celana. Sedikit menggeser berat badan kanan-kiri secara natural., ekspresi santai namun percaya diri, berbicara jelas ke kamera dengan bahasa indonesia: “{Script gerak bibir}” video realistis, tanpa subtitle & musik`;
+        ? `Seorang Perempuan berjalan dengan suasana ceria dan gerakan ringan model berada di {tempat}, {aksi}, Gerakan tangan ringan menunjuk ke arah celana. Sedikit menggeser berat badan kanan-kiri secara natural., ekspresi bahagia namun natural, berbicara jelas ke kamera dengan bahasa indonesia: “{Script gerak bibir}” video realistis, tanpa subtitle & musik`
+        : `Seorang Pria berjalan dengan langkah santai dan percaya diri model berada di {tempat}, {aksi}, Gerakan tangan santai menunjuk ke arah celana. Sedikit menggeser berat badan kanan-kiri secara natural., ekspresi santai namun percaya diri, berbicara jelas ke kamera dengan bahasa indonesia: “{Script gerak bibir}” video realistis, tanpa subtitle & musik`;
 
     const templateContent = templateRecord?.content || fallbackTemplate;
 
-    // 4. Kompilasi & Rakit Prompt Video
+    // 5. Kompilasi & Rakit Prompt Video
     const itemDescription = product.itemDesc || product.name;
     const compiled = templateContent
       .replace(/\{tempat\}/gi, selectedLocation)
+      .replace(/\{aksi\}/gi, selectedAction)
       .replace(/\{produk\}/gi, itemDescription)
       .replace(/\{Script gerak bibir\}/gi, selectedScriptText);
 
@@ -90,6 +105,7 @@ export class GeneratePromptUseCase {
     return {
       prompt: compiled,
       location: selectedLocation,
+      action: selectedAction,
       script: selectedScriptText,
       tokens,
       product,
@@ -103,6 +119,10 @@ export class GeneratePromptUseCase {
         locationIsLastInCycle: locPick?.isLastInCycle ?? false,
         locationRemaining: locPick?.remainingInCycle ?? 0,
         locationTotal: locPick?.totalCandidates ?? allLocations.length,
+        actionCycleReset: actionPick?.isCycleReset ?? false,
+        actionIsLastInCycle: actionPick?.isLastInCycle ?? false,
+        actionRemaining: actionPick?.remainingInCycle ?? 0,
+        actionTotal: actionPick?.totalCandidates ?? allActions.length,
       },
     };
   }

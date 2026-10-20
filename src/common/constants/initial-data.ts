@@ -208,16 +208,29 @@ export const INITIAL_LOCATIONS: string[] = [
   "teras cafe bergaya Parisienne di kawasan Senopati",
 ];
 
+export const INITIAL_ACTIONS: string[] = [
+  "sedang jogging santai dengan langkah ringan",
+  "memanjat tebing batu dengan gerakan lincah dan fokus",
+  "mengendarai motor custom klasik dengan gaya santai",
+  "duduk santai menikmati segelas kopi hangat",
+  "melakukan salto akrobatik dengan pendaratan sempurna",
+  "berpidato penuh wibawa dan karismatik",
+  "bersepeda santai menyusuri jalanan kota",
+  "berjalan cepat sambil mengecek jam tangan",
+  "meregangkan badan dan pemanasan ringan",
+  "berdiri santai bersandar sambil tersenyum percaya diri",
+];
+
 export const INITIAL_TEMPLATES: MasterTemplates = {
   female: `Video vertikal 9:16 sinematik TikTok / Reels. Seorang model wanita Indonesia muda usia 22 tahun, berparas cantik natural, senyum ramah dan ekspresif.
-Ia sedang berada di {tempat}, pencahayaan alami terang bernuansa clean warm aesthetic.
+Ia sedang berada di {tempat}, {aksi}, pencahayaan alami terang bernuansa clean warm aesthetic.
 Model mengenakan {produk} yang tampak sangat pas, rapi, dan jatuh kainnya terlihat sangat berkualitas tinggi.
 Model menatap langsung ke kamera smartphone dan berbicara aktif (lip-sync realistis) dengan intonasi natural:
 "{Script gerak bibir}"
 Kamera bergerak smooth handheld tracking shot, 4k ultra realistic, high-fidelity fabric details, depth of field blur lembut di latar belakang.`,
 
   male: `Video vertikal 9:16 sinematik modern casual TikTok / Reels. Seorang pria Indonesia muda usia 24 tahun, berpenampilan rapi maskulin dan percaya diri.
-Ia sedang berada di {tempat}, dengan ambient lighting estetik dan modern city contrast.
+Ia sedang berada di {tempat}, {aksi}, dengan ambient lighting estetik dan modern city contrast.
 Model memakai {produk} dengan fitting pas di badan, menunjukkan kenyamanan dan fleksibilitas bahan pakaian.
 Model berbicara santai dan percaya diri langsung ke arah lensa kamera (gerakan bibir natural sinkron):
 "{Script gerak bibir}"

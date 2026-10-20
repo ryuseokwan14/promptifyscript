@@ -32,6 +32,10 @@ export function MasterTemplatesTab({
               {"{tempat}"}
             </code>
             ,{" "}
+            <code className="font-label-code text-label-code text-amber-400 bg-surface-container px-1.5 py-0.5 rounded-md">
+              {"{aksi}"}
+            </code>
+            ,{" "}
             <code className="font-label-code text-label-code text-tertiary bg-surface-container px-1.5 py-0.5 rounded-md">
               {"{produk}"}
             </code>{" "}

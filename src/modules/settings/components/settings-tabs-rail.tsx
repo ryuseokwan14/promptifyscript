@@ -6,6 +6,7 @@ interface SettingsTabsRailProps {
   productsCount: number;
   scriptsCount: number;
   locationsCount: number;
+  actionsCount: number;
   onTabChange: (tab: SettingsTab) => void;
 }
 
@@ -14,6 +15,7 @@ export function SettingsTabsRail({
   productsCount,
   scriptsCount,
   locationsCount,
+  actionsCount,
   onTabChange,
 }: SettingsTabsRailProps) {
   return (
@@ -36,6 +38,7 @@ export function SettingsTabsRail({
             <option value="products">Product ({productsCount})</option>
             <option value="scripts">Lip-Sync ({scriptsCount})</option>
             <option value="locations">Locations Bank ({locationsCount})</option>
+            <option value="actions">Actions Bank ({actionsCount})</option>
             <option value="templates">Master Template</option>
             <option value="security">Security &amp; Auth</option>
           </select>
@@ -89,6 +92,22 @@ export function SettingsTabsRail({
           <span>Locations Bank</span>
           <span className="bg-surface-container-highest text-on-surface-variant font-label-code text-[11px] px-2 py-0.5 rounded-full ml-0.5">
             {locationsCount}
+          </span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => onTabChange("actions")}
+          className={`shrink-0 whitespace-nowrap flex items-center gap-1.5 px-3.5 sm:px-space-lg py-2 sm:py-2.5 rounded-xl font-headline-sm text-[13px] sm:text-[15px] transition-all cursor-pointer ${
+            activeTab === "actions"
+              ? "bg-surface-container-high text-primary font-medium shadow-[0_0_12px_rgba(128,131,255,0.18)]"
+              : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container"
+          }`}
+        >
+          <span className="material-symbols-outlined text-[17px] sm:text-[18px]">directions_run</span>
+          <span>Actions Bank</span>
+          <span className="bg-amber-500/20 text-amber-300 font-label-code text-[11px] px-2 py-0.5 rounded-full ml-0.5">
+            {actionsCount}
           </span>
         </button>
 

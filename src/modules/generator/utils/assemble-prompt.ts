@@ -5,10 +5,14 @@ interface CompilePromptOptions {
   product: Product;
   scripts: ScriptItem[];
   locations: string[];
+  actions?: string[];
+  includeAction?: boolean;
   templates: MasterTemplates;
   overrideLocation?: string;
+  overrideAction?: string;
   overrideScriptText?: string;
   locationPoolKey?: string;
+  actionPoolKey?: string;
   scriptPoolKey?: string;
   vibe?: VibeType;
 }
@@ -17,10 +21,14 @@ export function compileVideoPrompt({
   product,
   scripts,
   locations,
+  actions = [],
+  includeAction = false,
   templates,
   overrideLocation,
+  overrideAction,
   overrideScriptText,
   locationPoolKey,
+  actionPoolKey,
   scriptPoolKey,
   vibe,
 }: CompilePromptOptions): GenerationResult {
@@ -41,7 +49,28 @@ export function compileVideoPrompt({
     }
   }
 
-  // 2. Ambil Script Dialog Gerak Bibir Terkait Produk (Rotasi Non-Repeating Merata)
+  // 2. Pilih Aksi HANYA jika mode includeAction aktif
+  let selectedAction: string | undefined = undefined;
+  let actionPick: ReturnType<typeof deckRotator.pickNonRepeating<string>> | null = null;
+
+  if (includeAction) {
+    selectedAction = overrideAction;
+    if (!selectedAction) {
+      if (actions.length > 0) {
+        const actKey = actionPoolKey || "generator_actions";
+        actionPick = deckRotator.pickNonRepeating(
+          actKey,
+          actions,
+          (a) => a
+        );
+        selectedAction = actionPick.item || actions[0];
+      } else {
+        selectedAction = "berdiri santai dan percaya diri";
+      }
+    }
+  }
+
+  // 3. Ambil Script Dialog Gerak Bibir Terkait Produk (Rotasi Non-Repeating Merata)
   const productScripts = scripts.filter((s) => s.productId === product.id);
   const fallbackScript =
     product.gender === "female"
@@ -64,14 +93,32 @@ export function compileVideoPrompt({
     }
   }
 
-  // 3. Ambil Master Template Sesuai Gender
+  // 4. Ambil Master Template Sesuai Gender
   const templateText = product.gender === "female" ? templates.female : templates.male;
 
-  // 4. Injeksi & Kompilasi Variabel Prompt
-  const assembled = templateText
+  // 5. Injeksi & Kompilasi Variabel Prompt
+  let assembled = templateText
     .replace(/\{tempat\}/gi, selectedLocation)
     .replace(/\{produk\}/gi, product.itemDesc || product.name)
     .replace(/\{Script gerak bibir\}/gi, selectedScript);
+
+  if (includeAction && selectedAction) {
+    assembled = assembled.replace(/\{aksi\}/gi, selectedAction);
+  } else {
+    // Smart strip placeholder {aksi} agar tata bahasa tetap mulus dan bebas tanda baca ganda
+    assembled = assembled
+      .replace(/\s*,\s*\{aksi\}\s*,\s*/gi, ", ")
+      .replace(/\s*,\s*\{aksi\}\s*/gi, "")
+      .replace(/\s*\{aksi\}\s*,\s*/gi, "")
+      .replace(/\s*\.\s*\{aksi\}\s*/gi, ". ")
+      .replace(/\s*\{aksi\}\s*\.\s*/gi, ". ")
+      .replace(/\{aksi\}/gi, "")
+      .replace(/,\s*,/g, ",")
+      .replace(/\.\s*\./g, ".")
+      .replace(/,\s*\./g, ".")
+      .replace(/[ \t]{2,}/g, " ")
+      .trim();
+  }
 
   const wordCount = assembled.split(/\s+/).length;
   const tokens = Math.round(wordCount * 1.35);
@@ -79,6 +126,7 @@ export function compileVideoPrompt({
   return {
     prompt: assembled,
     location: selectedLocation,
+    action: selectedAction,
     script: selectedScript,
     tokens,
     product,
@@ -93,6 +141,10 @@ export function compileVideoPrompt({
       locationIsLastInCycle: locPick?.isLastInCycle ?? false,
       locationRemaining: locPick?.remainingInCycle ?? 0,
       locationTotal: locPick?.totalCandidates ?? locations.length,
+      actionCycleReset: actionPick?.isCycleReset ?? false,
+      actionIsLastInCycle: actionPick?.isLastInCycle ?? false,
+      actionRemaining: actionPick?.remainingInCycle ?? 0,
+      actionTotal: actionPick?.totalCandidates ?? actions.length,
     },
   };
 }

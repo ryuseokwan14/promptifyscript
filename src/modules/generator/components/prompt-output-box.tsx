@@ -26,6 +26,7 @@ export function PromptOutputBox({ promptData }: PromptOutputBoxProps) {
           <HighlightedPromptText
             prompt={promptData.prompt}
             location={promptData.location}
+            action={promptData.action}
             script={promptData.script}
           />
         ) : (

@@ -1,6 +1,7 @@
 export interface PromptState {
   prompt: string;
   location: string;
+  action?: string;
   script: string;
   tokens: number;
 }

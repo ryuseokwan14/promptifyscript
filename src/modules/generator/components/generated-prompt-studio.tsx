@@ -98,6 +98,11 @@ export function GeneratedPromptStudio({
               <span className="text-on-surface-variant truncate max-w-[180px] sm:max-w-[220px]" title={result.location}>
                 <span className="text-outline">Spot:</span> {result.location}
               </span>
+              {result.action && (
+                <span className="text-on-surface-variant truncate max-w-[180px] sm:max-w-[220px]" title={result.action}>
+                  <span className="text-amber-400">Aksi:</span> {result.action}
+                </span>
+              )}
             </div>
             <span className="text-primary font-medium shrink-0">~{result.tokens} Tokens</span>
           </div>
@@ -109,6 +114,7 @@ export function GeneratedPromptStudio({
             <HighlightedPromptText
               prompt={result.prompt}
               location={result.location}
+              action={result.action}
               script={result.script}
             />
           </div>
@@ -148,6 +154,15 @@ export function GeneratedPromptStudio({
                 <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
                 Tempat
               </span>
+              {result.action && (
+                <>
+                  <span className="text-outline/40">•</span>
+                  <span className="inline-flex items-center gap-1 text-[10.5px] text-amber-300 font-medium">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                    Aksi
+                  </span>
+                </>
+              )}
               <span className="text-outline/40">•</span>
               <span className="inline-flex items-center gap-1 text-[10.5px] text-tertiary font-medium">
                 <span className="w-1.5 h-1.5 rounded-full bg-tertiary" />

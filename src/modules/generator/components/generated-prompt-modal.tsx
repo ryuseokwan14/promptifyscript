@@ -92,6 +92,15 @@ export function GeneratedPromptModal({
                 {result.location}
               </span>
             </div>
+
+            {result.action && (
+              <div className="flex items-center gap-1">
+                <span className="text-outline">Aksi:</span>
+                <span className="text-amber-300 truncate max-w-[150px] sm:max-w-[200px]" title={result.action}>
+                  {result.action}
+                </span>
+              </div>
+            )}
           </div>
 
           {result.cycleInfo && (
@@ -141,6 +150,7 @@ export function GeneratedPromptModal({
             <HighlightedPromptText
               prompt={result.prompt}
               location={result.location}
+              action={result.action}
               script={result.script}
             />
           </div>

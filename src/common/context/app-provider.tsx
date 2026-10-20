@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { Product, ScriptItem, LocationItem, MasterTemplates, User, GenerationResult, VibeType } from "@/types";
+import { Product, ScriptItem, LocationItem, ActionItem, MasterTemplates, User, GenerationResult, VibeType } from "@/types";
 import { AppContext } from "./app-context";
 import {
   getProductsAction,
@@ -27,6 +27,14 @@ import {
   deleteBatchLocationsAction,
 } from "@/modules/locations";
 import {
+  getActionsAction,
+  createActionAction,
+  createBatchActionsAction,
+  updateActionAction,
+  deleteActionAction,
+  deleteBatchActionsAction,
+} from "@/modules/actions";
+import {
   getTemplatesAction,
   updateTemplatesAction,
   resetTemplatesAction,
@@ -36,8 +44,6 @@ import {
   compileVideoPrompt,
   deckRotator,
   getDeckStateAction,
-  saveDeckStateAction,
-  resetDeckStateAction,
 } from "@/modules/generator";
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
@@ -46,19 +52,23 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [scripts, setScripts] = useState<ScriptItem[]>([]);
   const [locations, setLocations] = useState<string[]>([]);
   const [locationItems, setLocationItems] = useState<LocationItem[]>([]);
+  const [actions, setActions] = useState<string[]>([]);
+  const [actionItems, setActionItems] = useState<ActionItem[]>([]);
   const [templates, setTemplates] = useState<MasterTemplates>({ female: "", male: "" });
   const [user, setUser] = useState<User | null>(null);
   const [creatorEmail, setCreatorEmail] = useState<string>("najmishfwn@gmail.com");
   const [activeProductId, setActiveProductId] = useState<string>("");
   const [activeVibe, setActiveVibe] = useState<VibeType | null>(null);
+  const [includeAction, setIncludeAction] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const refreshData = useCallback(async () => {
     try {
-      const [prodRes, scrRes, locRes, tplRes, authRes, deckRes] = await Promise.all([
+      const [prodRes, scrRes, locRes, actRes, tplRes, authRes, deckRes] = await Promise.all([
         getProductsAction(),
         getScriptsAction(),
         getLocationsAction(),
+        getActionsAction(),
         getTemplatesAction(),
         getCurrentUserAction(),
         getDeckStateAction(),
@@ -92,6 +102,11 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       if (locRes.success && locRes.data) {
         setLocationItems(locRes.data);
         setLocations(locRes.data.map((l) => l.name));
+      }
+
+      if (actRes.success && actRes.data) {
+        setActionItems(actRes.data);
+        setActions(actRes.data.map((a) => a.name));
       }
 
       if (tplRes.success && tplRes.data) {
@@ -277,6 +292,63 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     return false;
   };
 
+  const addAction = async (name: string) => {
+    const res = await createActionAction({ name });
+    if (res.success && res.data) {
+      setActionItems((prev) => [res.data, ...prev]);
+      setActions((prev) => [res.data.name, ...prev]);
+    }
+  };
+
+  const addBatchActions = async (names: string[]): Promise<boolean> => {
+    const res = await createBatchActionsAction({ names });
+    if (res.success) {
+      const actRes = await getActionsAction();
+      if (actRes.success && actRes.data) {
+        setActionItems(actRes.data);
+        setActions(actRes.data.map((a) => a.name));
+      }
+      return true;
+    }
+    return false;
+  };
+
+  const updateAction = async (id: string, name: string) => {
+    const res = await updateActionAction({ id, name });
+    if (res.success && res.data) {
+      const updated = res.data;
+      setActionItems((prev) =>
+        prev.map((item) => (item.id === id ? updated : item))
+      );
+      setActions((prev) =>
+        prev.map((act) => {
+          const old = actionItems.find((a) => a.id === id);
+          return old && old.name === act ? updated.name : act;
+        })
+      );
+    }
+  };
+
+  const deleteAction = async (nameOrId: string) => {
+    const res = await deleteActionAction({ name: nameOrId, id: nameOrId });
+    if (res.success) {
+      setActionItems((prev) => prev.filter((a) => a.id !== nameOrId && a.name !== nameOrId));
+      setActions((prev) => prev.filter((a) => a !== nameOrId));
+    }
+  };
+
+  const deleteBatchActions = async (idsOrNames: string[]): Promise<boolean> => {
+    if (idsOrNames.length === 0) return false;
+    const res = await deleteBatchActionsAction({ idsOrNames });
+    if (res.success) {
+      const targetSet = new Set(idsOrNames);
+      setActionItems((prev) => prev.filter((a) => !targetSet.has(a.id) && !targetSet.has(a.name)));
+      setActions((prev) => prev.filter((a) => !targetSet.has(a)));
+      return true;
+    }
+    return false;
+  };
+
   const updateTemplates = async (female: string, male: string) => {
     const res = await updateTemplatesAction({ female, male });
     if (res.success && res.data) {
@@ -340,13 +412,15 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const generatePrompt = (
     productId?: string,
-    vibe?: VibeType | null
+    vibe?: VibeType | null,
+    withAction?: boolean
   ): GenerationResult | null => {
     const targetId = productId || activeProductId;
     const product = products.find((p) => p.id === targetId) || products[0];
     if (!product) return null;
 
     const chosenVibe = vibe !== undefined ? vibe : activeVibe;
+    const shouldIncludeAction = withAction !== undefined ? withAction : includeAction;
     let targetLocations: string[] = [];
     let poolKey = "generator_locations";
 
@@ -365,8 +439,11 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       product,
       scripts,
       locations: targetLocations,
+      actions,
+      includeAction: shouldIncludeAction,
       templates,
       locationPoolKey: poolKey,
+      actionPoolKey: "generator_actions",
       scriptPoolKey: `generator_scripts_${product.id}`,
       vibe: chosenVibe || undefined,
     });
@@ -388,19 +465,23 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     return result;
   };
 
-  const compileLivePrompt = (productId: string): GenerationResult | null => {
+  const compileLivePrompt = (productId: string, withAction?: boolean): GenerationResult | null => {
     const product = products.find((p) => p.id === productId);
     if (!product) return null;
 
     const targetLocations =
       universalLocations.length > 0 ? universalLocations : locations;
+    const shouldIncludeAction = withAction !== undefined ? withAction : includeAction;
 
     return compileVideoPrompt({
       product,
       scripts,
       locations: targetLocations,
+      actions,
+      includeAction: shouldIncludeAction,
       templates,
       locationPoolKey: `live_locations_${product.id}_universal`,
+      actionPoolKey: "live_actions_universal",
       scriptPoolKey: `live_scripts_${product.id}`,
       vibe: "universal",
     });
@@ -430,6 +511,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         scripts,
         locations,
         locationItems,
+        actions,
+        actionItems,
         universalLocations,
         locationCounts,
         templates,
@@ -440,6 +523,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         setActiveProductId,
         activeVibe,
         setActiveVibe,
+        includeAction,
+        setIncludeAction,
         addProduct,
         updateProduct,
         deleteProduct,
@@ -453,6 +538,11 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         updateLocation,
         deleteLocation,
         deleteBatchLocations,
+        addAction,
+        addBatchActions,
+        updateAction,
+        deleteAction,
+        deleteBatchActions,
         updateTemplates,
         resetTemplates,
         login,

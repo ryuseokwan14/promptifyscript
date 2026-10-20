@@ -28,6 +28,13 @@ export interface LocationItem {
   updatedAt?: string | Date;
 }
 
+export interface ActionItem {
+  id: string;
+  name: string;
+  createdAt?: string | Date;
+  updatedAt?: string | Date;
+}
+
 export interface MasterTemplates {
   female: string;
   male: string;
@@ -49,6 +56,10 @@ export interface CycleInfo {
   locationIsLastInCycle: boolean;
   locationRemaining: number;
   locationTotal: number;
+  actionCycleReset?: boolean;
+  actionIsLastInCycle?: boolean;
+  actionRemaining?: number;
+  actionTotal?: number;
 }
 
 export type VibeType = "universal" | "casual_aesthetic" | "urban_adventure";
@@ -56,6 +67,7 @@ export type VibeType = "universal" | "casual_aesthetic" | "urban_adventure";
 export interface GenerationResult {
   prompt: string;
   location: string;
+  action?: string;
   script: string;
   tokens: number;
   product: Product;

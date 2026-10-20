@@ -1,13 +1,15 @@
 "use client";
 
 import { createContext, useContext } from "react";
-import { Product, ScriptItem, LocationItem, MasterTemplates, User, GenerationResult, VibeType } from "@/types";
+import { Product, ScriptItem, LocationItem, ActionItem, MasterTemplates, User, GenerationResult, VibeType } from "@/types";
 
 export interface AppContextType {
   products: Product[];
   scripts: ScriptItem[];
   locations: string[];
   locationItems: LocationItem[];
+  actions: string[];
+  actionItems: ActionItem[];
   universalLocations: string[];
   locationCounts: {
     universal: number;
@@ -20,6 +22,8 @@ export interface AppContextType {
   setActiveProductId: (id: string) => void;
   activeVibe: VibeType | null;
   setActiveVibe: (vibe: VibeType | null) => void;
+  includeAction: boolean;
+  setIncludeAction: (include: boolean) => void;
   addProduct: (product: Omit<Product, "id">) => Promise<Product | null>;
   updateProduct: (product: Partial<Product> & { id: string }) => Promise<void>;
   deleteProduct: (id: string) => Promise<void>;
@@ -33,14 +37,19 @@ export interface AppContextType {
   updateLocation: (id: string, name: string, vibe: string) => Promise<void>;
   deleteLocation: (location: string) => Promise<void>;
   deleteBatchLocations: (idsOrNames: string[]) => Promise<boolean>;
+  addAction: (name: string) => Promise<void>;
+  addBatchActions: (names: string[]) => Promise<boolean>;
+  updateAction: (id: string, name: string) => Promise<void>;
+  deleteAction: (nameOrId: string) => Promise<void>;
+  deleteBatchActions: (idsOrNames: string[]) => Promise<boolean>;
   updateTemplates: (female: string, male: string) => Promise<void>;
   resetTemplates: () => Promise<void>;
   login: (email: string, role?: "SUPERADMIN" | "CREATOR") => void;
   logout: () => Promise<void>;
   creatorEmail: string;
   refreshCurrentUser: () => Promise<void>;
-  generatePrompt: (productId?: string, vibe?: VibeType | null) => GenerationResult | null;
-  compileLivePrompt: (productId: string) => GenerationResult | null;
+  generatePrompt: (productId?: string, vibe?: VibeType | null, withAction?: boolean) => GenerationResult | null;
+  compileLivePrompt: (productId: string, withAction?: boolean) => GenerationResult | null;
   resetDeckCycle: (productId?: string) => Promise<void>;
   refreshData: () => Promise<void>;
   isLoaded: boolean;

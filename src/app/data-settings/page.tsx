@@ -12,6 +12,7 @@ import {
   ProductCatalogTab,
   ScriptsTab,
   LocationsTab,
+  ActionsTab,
   MasterTemplatesTab,
   SecurityTab,
   SettingsTab,
@@ -24,6 +25,8 @@ export default function DataSettingsPage() {
     scripts,
     locations,
     locationItems,
+    actions,
+    actionItems,
     templates,
     user,
     creatorEmail,
@@ -41,6 +44,11 @@ export default function DataSettingsPage() {
     updateLocation,
     deleteLocation,
     deleteBatchLocations,
+    addAction,
+    addBatchActions,
+    updateAction,
+    deleteAction,
+    deleteBatchActions,
     updateTemplates,
   } = useApp();
 
@@ -68,11 +76,12 @@ export default function DataSettingsPage() {
 
   const handleExportJSON = () => {
     exportBackupJSON({
-      version: "2.4",
+      version: "2.5",
       exportDate: new Date().toISOString(),
       products,
       scripts,
       locations,
+      actions,
       templates,
     });
   };
@@ -118,6 +127,7 @@ export default function DataSettingsPage() {
             productsCount={products.length}
             scriptsCount={scripts.length}
             locationsCount={locations.length}
+            actionsCount={actions.length}
             onTabChange={handleTabChange}
           />
           <div className="flex flex-col gap-space-xl">
@@ -156,6 +166,17 @@ export default function DataSettingsPage() {
                 onUpdateLocation={updateLocation}
                 onDeleteLocation={deleteLocation}
                 onDeleteBatchLocations={deleteBatchLocations}
+              />
+            )}
+            {activeTab === "actions" && (
+              <ActionsTab
+                actions={actions}
+                actionItems={actionItems}
+                onAddAction={addAction}
+                onAddBatchActions={addBatchActions}
+                onUpdateAction={updateAction}
+                onDeleteAction={deleteAction}
+                onDeleteBatchActions={deleteBatchActions}
               />
             )}
             {activeTab === "templates" && (

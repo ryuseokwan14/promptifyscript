@@ -10,15 +10,22 @@ import { resetCreatorUseCase } from "@/modules/auth/use-cases/reset-creator.use-
 import { getDeckStateUseCase } from "@/modules/generator/use-cases/get-deck-state.use-case";
 import { saveDeckStateUseCase } from "@/modules/generator/use-cases/save-deck-state.use-case";
 import { resetDeckStateUseCase } from "@/modules/generator/use-cases/reset-deck-state.use-case";
+import { getActionsUseCase } from "@/modules/actions/use-cases/get-actions.use-case";
+import { createActionUseCase } from "@/modules/actions/use-cases/create-action.use-case";
+import { createBatchActionsUseCase } from "@/modules/actions/use-cases/create-batch-actions.use-case";
+import { updateActionUseCase } from "@/modules/actions/use-cases/update-action.use-case";
+import { deleteActionUseCase } from "@/modules/actions/use-cases/delete-action.use-case";
+import { deleteBatchActionsUseCase } from "@/modules/actions/use-cases/delete-batch-actions.use-case";
 
 export async function GET() {
   try {
-    const [products, locations, scripts, templates, deckState] = await Promise.all([
+    const [products, locations, scripts, templates, deckState, actions] = await Promise.all([
       getProductsUseCase.execute(),
       getLocationsUseCase.execute(),
       getScriptsUseCase.execute(),
       getTemplatesUseCase.execute(),
       getDeckStateUseCase.execute(),
+      getActionsUseCase.execute(),
     ]);
 
     return NextResponse.json({
@@ -29,6 +36,7 @@ export async function GET() {
         scripts,
         templates,
         deckState,
+        actions,
       },
     });
   } catch (error) {
@@ -87,6 +95,31 @@ export async function POST(req: Request) {
     if (action === "reset-deck-state") {
       const resetRes = await resetDeckStateUseCase.execute({ productId: body.productId });
       return NextResponse.json({ success: true, data: resetRes });
+    }
+
+    if (action === "create-action" && body.name) {
+      const created = await createActionUseCase.execute({ name: body.name });
+      return NextResponse.json({ success: true, data: created });
+    }
+
+    if (action === "create-batch-actions" && Array.isArray(body.names)) {
+      const res = await createBatchActionsUseCase.execute({ names: body.names });
+      return NextResponse.json({ success: true, count: res.count });
+    }
+
+    if (action === "update-action" && body.id && body.name) {
+      const updated = await updateActionUseCase.execute({ id: body.id, name: body.name });
+      return NextResponse.json({ success: true, data: updated });
+    }
+
+    if (action === "delete-action" && (body.id || body.name)) {
+      await deleteActionUseCase.execute({ id: body.id, name: body.name });
+      return NextResponse.json({ success: true });
+    }
+
+    if (action === "delete-batch-actions" && Array.isArray(body.idsOrNames)) {
+      const res = await deleteBatchActionsUseCase.execute({ idsOrNames: body.idsOrNames });
+      return NextResponse.json({ success: true, count: res.count });
     }
 
     // Default full sync products

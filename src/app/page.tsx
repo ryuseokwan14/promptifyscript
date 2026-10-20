@@ -23,6 +23,8 @@ export default function GeneratorPage() {
     setActiveProductId,
     activeVibe,
     setActiveVibe,
+    includeAction,
+    setIncludeAction,
     locationCounts,
     generatePrompt,
     compileLivePrompt,
@@ -95,6 +97,21 @@ export default function GeneratorPage() {
     }
   }, [activeProductId, resetDeckCycle, generatedResult, activeVibe, generatePrompt]);
 
+  const handleToggleAction = useCallback((val: boolean) => {
+    setIncludeAction(val);
+    if (generatedResult && activeVibe) {
+      const res = generatePrompt(activeProductId, activeVibe, val);
+      if (res) {
+        setGeneratedResult(res);
+      }
+    }
+    toast.info(val ? "Mode + Aksi Aktif" : "Mode Tempat Saja Aktif", {
+      description: val
+        ? "Prompt akan menyertakan kegiatan dinamis model."
+        : "Prompt kembali ke formula natural tempat saja.",
+    });
+  }, [setIncludeAction, generatedResult, activeVibe, activeProductId, generatePrompt]);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.code === "Space" && e.target === document.body && activeVibe && !isRolling) {
@@ -129,12 +146,13 @@ export default function GeneratorPage() {
               />
             </div>
 
-            {/* Layer 2: Tombol Aksi Kompilasi & Re-roll */}
+            {/* Layer 2: Tombol Kompilasi Prompt & Toggle Aksi */}
             <GeneratorControls
               isRolling={isRolling}
               canGenerate={activeVibe !== null}
+              includeAction={includeAction}
+              onToggleAction={handleToggleAction}
               onGenerate={handleGenerate}
-              onReroll={handleReroll}
             />
 
             {/* Layer 3: Studio Output Hasil Prompt */}
@@ -149,6 +167,7 @@ export default function GeneratorPage() {
             products={products}
             compileLivePrompt={compileLivePrompt}
             isLoaded={isLoaded}
+            includeAction={includeAction}
           />
         </div>
       </main>

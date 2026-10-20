@@ -6,22 +6,54 @@ interface LiveAssembledCatalogProps {
   products: Product[];
   compileLivePrompt: (productId: string) => GenerationResult | null;
   isLoaded?: boolean;
+  includeAction?: boolean;
 }
 
 export function LiveAssembledCatalog({
   products,
   compileLivePrompt,
   isLoaded = true,
+  includeAction = false,
 }: LiveAssembledCatalogProps) {
   const [promptMap, setPromptMap] = useState<Record<string, LiveCardData>>({});
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [countdown, setCountdown] = useState(8);
   const compileRef = useRef(compileLivePrompt);
+  const touchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     compileRef.current = compileLivePrompt;
   }, [compileLivePrompt]);
 
-  // Initial populate when products or isLoaded changes
+  // Cleanup touch timeout saat unmount
+  useEffect(() => {
+    return () => {
+      if (touchTimeoutRef.current) {
+        clearTimeout(touchTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  // Handler interaksi touch mobile (jeda saat disentuh/scroll, grace period 5s saat dilepas)
+  const handleTouchStart = () => {
+    if (touchTimeoutRef.current) clearTimeout(touchTimeoutRef.current);
+    setIsHovered(true);
+  };
+
+  const handleTouchMove = () => {
+    if (touchTimeoutRef.current) clearTimeout(touchTimeoutRef.current);
+    setIsHovered(true);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchTimeoutRef.current) clearTimeout(touchTimeoutRef.current);
+    touchTimeoutRef.current = setTimeout(() => {
+      setIsHovered(false);
+    }, 5000); // Waktu tenggang 5 detik setelah jari lepas dari layar HP
+  };
+
+  // Populate when products, isLoaded, or includeAction changes
   useEffect(() => {
     if (!isLoaded || products.length === 0) return;
 
@@ -32,6 +64,7 @@ export function LiveAssembledCatalog({
         initialMap[prod.id] = {
           prompt: res.prompt,
           location: res.location,
+          action: res.action,
           script: res.script,
           tokens: res.tokens,
         };
@@ -39,38 +72,49 @@ export function LiveAssembledCatalog({
     }
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setPromptMap(initialMap);
-  }, [products, isLoaded]);
+  }, [products, isLoaded, includeAction]);
 
-  // Interval timer for auto-rotation every 8 seconds
+  // Interval timer for auto-rotation with Pause on Hover/Touch
   useEffect(() => {
     if (!isLoaded || products.length === 0) return;
 
     const interval = setInterval(() => {
-      setIsTransitioning(true);
+      // Jika user sedang membaca (hover/touch), hitungan detik membeku/diam di tempat
+      if (isHovered) return;
 
-      setTimeout(() => {
-        setPromptMap((prev) => {
-          const nextMap = { ...prev };
-          for (const prod of products) {
-            const res = compileRef.current(prod.id);
-            if (res) {
-              nextMap[prod.id] = {
-                prompt: res.prompt,
-                location: res.location,
-                script: res.script,
-                tokens: res.tokens,
-              };
-            }
-          }
-          return nextMap;
-        });
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          setIsTransitioning(true);
 
-        setIsTransitioning(false);
-      }, 250);
-    }, 8000);
+          setTimeout(() => {
+            setPromptMap((prevMap) => {
+              const nextMap = { ...prevMap };
+              for (const prod of products) {
+                const res = compileRef.current(prod.id);
+                if (res) {
+                  nextMap[prod.id] = {
+                    prompt: res.prompt,
+                    location: res.location,
+                    action: res.action,
+                    script: res.script,
+                    tokens: res.tokens,
+                  };
+                }
+              }
+              return nextMap;
+            });
+
+            setIsTransitioning(false);
+          }, 250);
+
+          return 8; // Reset countdown kembali ke 8 detik setelah rotasi selesai
+        }
+        return prev - 1;
+      });
+    }, 1000);
 
     return () => clearInterval(interval);
-  }, [products, isLoaded]);
+  }, [products, isLoaded, isHovered]);
 
   if (!isLoaded && products.length === 0) {
     return null;
@@ -99,11 +143,32 @@ export function LiveAssembledCatalog({
           </div>
         </div>
 
+        {/* Dedicated Countdown Timer Badge */}
         <div className="flex items-center gap-2 self-start sm:self-auto shrink-0">
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary/10 border border-secondary/30 text-secondary text-[11px] font-label-code font-medium">
-            <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-            LIVE SYNC • UNIVERSAL
-          </span>
+          <div
+            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11.5px] font-label-code font-medium transition-colors duration-200 border ${
+              isHovered
+                ? "bg-amber-500/15 border-amber-500/40 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.15)]"
+                : "bg-surface-container-high/80 border-surface-container-highest text-on-surface"
+            }`}
+          >
+            <span
+              className={`material-symbols-outlined text-[15px] ${
+                isHovered ? "text-amber-400" : "text-secondary"
+              }`}
+            >
+              {isHovered ? "pause" : "timer"}
+            </span>
+            <div className="flex items-center gap-1.5 leading-none">
+              <span className={`font-bold font-label-code ${isHovered ? "text-amber-300" : "text-secondary"}`}>
+                {countdown}s
+              </span>
+              <span className="text-outline/40">•</span>
+              <span className={`text-[10.5px] ${isHovered ? "text-amber-400/90" : "text-on-surface-variant"}`}>
+                {isHovered ? "Dijeda" : "Auto-Rotate"}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -113,7 +178,14 @@ export function LiveAssembledCatalog({
           Belum ada produk yang terdaftar di sistem.
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md items-stretch">
+        <div
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md items-stretch"
+        >
           {products.map((product) => (
             <LivePromptCard
               key={product.id}

@@ -8,6 +8,7 @@ import { HighlightedPromptText } from "./highlighted-prompt-text";
 export interface LiveCardData {
   prompt: string;
   location: string;
+  action?: string;
   script: string;
   tokens: number;
 }
@@ -104,6 +105,7 @@ export function LivePromptCard({
             <HighlightedPromptText
               prompt={data.prompt}
               location={data.location}
+              action={data.action}
               script={data.script}
             />
           </div>

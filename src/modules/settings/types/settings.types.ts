@@ -1,1 +1,1 @@
-export type SettingsTab = "products" | "scripts" | "locations" | "templates" | "security";
+export type SettingsTab = "products" | "scripts" | "locations" | "actions" | "templates" | "security";
