@@ -8,28 +8,27 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { copyToClipboard } from "@/common/utils/clipboard";
 
 interface PromptActionsProps {
   promptData: PromptState | null;
 }
 
 export function PromptActions({ promptData }: PromptActionsProps) {
-  const handleCopy = () => {
+  const handleCopy = async () => {
     if (!promptData?.prompt) {
       toast.error("Tidak ada prompt yang bisa disalin");
       return;
     }
 
-    navigator.clipboard
-      .writeText(promptData.prompt)
-      .then(() => {
-        toast.success("Prompt berhasil disalin ke clipboard!", {
-          description: "Siap di-paste ke generator video AI pilihan Anda.",
-        });
-      })
-      .catch(() => {
-        toast.error("Gagal menyalin prompt ke clipboard");
+    const success = await copyToClipboard(promptData.prompt);
+    if (success) {
+      toast.success("Prompt berhasil disalin ke clipboard!", {
+        description: "Siap di-paste ke generator video AI pilihan Anda.",
       });
+    } else {
+      toast.error("Gagal menyalin prompt ke clipboard");
+    }
   };
 
   return (

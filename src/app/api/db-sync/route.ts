@@ -7,14 +7,18 @@ import { getLocationsUseCase } from "@/modules/locations/use-cases/get-locations
 import { getScriptsUseCase } from "@/modules/scripts/use-cases/get-scripts.use-case";
 import { getTemplatesUseCase } from "@/modules/templates/use-cases/get-templates.use-case";
 import { resetCreatorUseCase } from "@/modules/auth/use-cases/reset-creator.use-case";
+import { getDeckStateUseCase } from "@/modules/generator/use-cases/get-deck-state.use-case";
+import { saveDeckStateUseCase } from "@/modules/generator/use-cases/save-deck-state.use-case";
+import { resetDeckStateUseCase } from "@/modules/generator/use-cases/reset-deck-state.use-case";
 
 export async function GET() {
   try {
-    const [products, locations, scripts, templates] = await Promise.all([
+    const [products, locations, scripts, templates, deckState] = await Promise.all([
       getProductsUseCase.execute(),
       getLocationsUseCase.execute(),
       getScriptsUseCase.execute(),
       getTemplatesUseCase.execute(),
+      getDeckStateUseCase.execute(),
     ]);
 
     return NextResponse.json({
@@ -24,6 +28,7 @@ export async function GET() {
         locations,
         scripts,
         templates,
+        deckState,
       },
     });
   } catch (error) {
@@ -71,6 +76,16 @@ export async function POST(req: Request) {
         email: body.email,
         newPassword: body.password,
       });
+      return NextResponse.json({ success: true, data: resetRes });
+    }
+
+    if (action === "update-deck-state" && body.deckState) {
+      await saveDeckStateUseCase.execute(body.deckState);
+      return NextResponse.json({ success: true });
+    }
+
+    if (action === "reset-deck-state") {
+      const resetRes = await resetDeckStateUseCase.execute({ productId: body.productId });
       return NextResponse.json({ success: true, data: resetRes });
     }
 

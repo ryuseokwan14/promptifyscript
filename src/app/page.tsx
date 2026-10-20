@@ -26,6 +26,7 @@ export default function GeneratorPage() {
     locationCounts,
     generatePrompt,
     compileLivePrompt,
+    resetDeckCycle,
     isLoaded,
   } = useApp();
 
@@ -79,6 +80,21 @@ export default function GeneratorPage() {
     }, 200);
   }, [activeVibe, activeProductId, generatePrompt]);
 
+  const handleResetCycle = useCallback(async () => {
+    if (!activeProductId) return;
+    await resetDeckCycle(activeProductId);
+    toast.success("Siklus naskah berhasil direset ke Putaran #1", {
+      description: "Antrean naskah produk ini kembali penuh.",
+    });
+
+    if (generatedResult && activeVibe) {
+      const res = generatePrompt(activeProductId, activeVibe);
+      if (res) {
+        setGeneratedResult(res);
+      }
+    }
+  }, [activeProductId, resetDeckCycle, generatedResult, activeVibe, generatePrompt]);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.code === "Space" && e.target === document.body && activeVibe && !isRolling) {
@@ -126,6 +142,7 @@ export default function GeneratorPage() {
               result={generatedResult}
               onReroll={handleReroll}
               isRolling={isRolling}
+              onResetCycle={handleResetCycle}
             />
           </div>
           <LiveAssembledCatalog

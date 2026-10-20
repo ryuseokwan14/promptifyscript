@@ -2,6 +2,7 @@ import React from "react";
 import { toast } from "sonner";
 import { Product } from "@/types";
 import { Skeleton } from "@/components/ui/skeleton";
+import { copyToClipboard } from "@/common/utils/clipboard";
 import { HighlightedPromptText } from "./highlighted-prompt-text";
 
 export interface LiveCardData {
@@ -24,23 +25,21 @@ export function LivePromptCard({
 }: LivePromptCardProps) {
   const isFemale = product.gender === "female";
 
-  const handleCopy = (e: React.MouseEvent) => {
+  const handleCopy = async (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!data?.prompt) {
       toast.error("Prompt belum siap disalin");
       return;
     }
 
-    navigator.clipboard
-      .writeText(data.prompt)
-      .then(() => {
-        toast.success(`Prompt "${product.name}" berhasil disalin!`, {
-          description: "Siap digunakan di generator AI video.",
-        });
-      })
-      .catch(() => {
-        toast.error("Gagal menyalin prompt");
+    const success = await copyToClipboard(data.prompt);
+    if (success) {
+      toast.success(`Prompt "${product.name}" berhasil disalin!`, {
+        description: "Siap digunakan di generator AI video.",
       });
+    } else {
+      toast.error("Gagal menyalin prompt");
+    }
   };
 
   return (

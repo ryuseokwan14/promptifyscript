@@ -6,6 +6,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { copyToClipboard } from "@/common/utils/clipboard";
 import { HighlightedPromptText } from "./highlighted-prompt-text";
 
 interface GeneratedPromptModalProps {
@@ -14,6 +15,7 @@ interface GeneratedPromptModalProps {
   onClose: () => void;
   onReroll: () => void;
   isRolling?: boolean;
+  onResetCycle?: () => void;
 }
 
 export function GeneratedPromptModal({
@@ -22,20 +24,21 @@ export function GeneratedPromptModal({
   onClose,
   onReroll,
   isRolling = false,
+  onResetCycle,
 }: GeneratedPromptModalProps) {
   if (!isOpen || !result) return null;
 
-  const handleCopy = () => {
-    navigator.clipboard
-      .writeText(result.prompt)
-      .then(() => {
-        toast.success("Prompt berhasil disalin ke clipboard!", {
-          description: "Siap digunakan di video generator AI pilihan Anda.",
-        });
-      })
-      .catch(() => {
-        toast.error("Gagal menyalin prompt ke clipboard");
+  const handleCopy = async () => {
+    if (!result?.prompt) return;
+
+    const success = await copyToClipboard(result.prompt);
+    if (success) {
+      toast.success("Prompt berhasil disalin ke clipboard!", {
+        description: "Siap digunakan di video generator AI pilihan Anda.",
       });
+    } else {
+      toast.error("Gagal menyalin prompt ke clipboard");
+    }
   };
 
   const isFemale = result.product.gender === "female";
@@ -92,7 +95,7 @@ export function GeneratedPromptModal({
           </div>
 
           {result.cycleInfo && (
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1.5 flex-wrap">
               {result.cycleInfo.scriptIsLastInCycle ? (
                 <span className="text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-medium flex items-center gap-1 text-[11px]">
                   <span className="material-symbols-outlined text-[14px]">warning</span>
@@ -108,6 +111,17 @@ export function GeneratedPromptModal({
                   <span className="material-symbols-outlined text-[14px] text-primary">shuffle</span>
                   Sisa {result.cycleInfo.scriptRemaining} naskah unik (Siklus #{result.cycleInfo.scriptCycleNumber})
                 </span>
+              )}
+              {onResetCycle && (
+                <button
+                  type="button"
+                  onClick={onResetCycle}
+                  title="Kembalikan antrean naskah produk ini ke Putaran #1"
+                  className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-surface-container-high/60 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary border border-surface-container-highest/60 text-[11px] transition-all cursor-pointer active:scale-95"
+                >
+                  <span className="material-symbols-outlined text-[13px]">restart_alt</span>
+                  Reset Siklus
+                </button>
               )}
             </div>
           )}

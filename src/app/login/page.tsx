@@ -2,15 +2,21 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { LoginCard } from "@/modules/auth";
+import { ThemeMenu } from "@/common/components/theme-menu";
 
 export default function LoginPage() {
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-background p-6 md:p-10 relative overflow-hidden">
+    <div className="flex min-h-svh flex-col items-center justify-center p-4 sm:p-6 md:p-10 relative overflow-y-auto">
+      {/* Menu Penggantian Mode Tema (Di luar kartu login) */}
+      <div className="fixed top-3 right-3 sm:top-5 sm:right-6 z-30">
+        <ThemeMenu />
+      </div>
+
       {/* Ambient background glows */}
       <div className="absolute -top-12 -left-10 w-72 h-72 bg-primary/15 rounded-full blur-[88px] pointer-events-none"></div>
       <div className="absolute -bottom-16 -right-10 w-80 h-80 bg-secondary/10 rounded-full blur-[100px] pointer-events-none"></div>
 
-      <div className="flex w-full max-w-sm flex-col gap-6 relative z-10">
+      <div className="my-auto w-full max-w-sm flex flex-col gap-5 sm:gap-6 relative z-10 py-6">
         <Link
           href="/"
           className="flex items-center gap-2.5 self-center font-headline-sm text-headline-sm text-on-surface group"

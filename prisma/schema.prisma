@@ -64,6 +64,7 @@ model AppUser {
   email     String   @unique @default("najmishfwn@gmail.com")
   password  String   // Hashed password
   role      String   @default("CREATOR") // "CREATOR"
+  deckState Json?    // Snapshot antrean deck: { pools: Record<string, string[]>, cycles: Record<string, number> }
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

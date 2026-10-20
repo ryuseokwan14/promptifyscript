@@ -4,3 +4,9 @@ export interface PromptState {
   script: string;
   tokens: number;
 }
+
+export interface DeckStateSnapshot {
+  pools: Record<string, string[]>;
+  cycles: Record<string, number>;
+}
+

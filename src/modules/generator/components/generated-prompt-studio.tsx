@@ -2,12 +2,14 @@ import React from "react";
 import { toast } from "sonner";
 import { GenerationResult } from "@/types";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { copyToClipboard } from "@/common/utils/clipboard";
 import { HighlightedPromptText } from "./highlighted-prompt-text";
 
 interface GeneratedPromptStudioProps {
   result: GenerationResult | null;
   onReroll: () => void;
   isRolling?: boolean;
+  onResetCycle?: () => void;
 }
 
 const VIBE_LABELS: Record<string, string> = {
@@ -20,20 +22,22 @@ export function GeneratedPromptStudio({
   result,
   onReroll,
   isRolling = false,
+  onResetCycle,
 }: GeneratedPromptStudioProps) {
-  const handleCopy = () => {
+  const handleCopy = async () => {
     if (!result?.prompt) {
       toast.error("Tidak ada prompt untuk disalin");
       return;
     }
-    navigator.clipboard
-      .writeText(result.prompt)
-      .then(() => {
-        toast.success("Prompt berhasil disalin ke clipboard!", {
-          description: "Siap langsung di-paste ke generator video AI pilihan Anda.",
-        });
-      })
-      .catch(() => toast.error("Gagal menyalin prompt ke clipboard"));
+
+    const success = await copyToClipboard(result.prompt);
+    if (success) {
+      toast.success("Prompt berhasil disalin ke clipboard!", {
+        description: "Siap langsung di-paste ke generator video AI pilihan Anda.",
+      });
+    } else {
+      toast.error("Gagal menyalin prompt ke clipboard");
+    }
   };
 
   return (
@@ -111,17 +115,30 @@ export function GeneratedPromptStudio({
 
           <div className="flex items-center justify-between flex-wrap gap-2 text-[11px] font-label-code px-1 text-on-surface-variant">
             {result.cycleInfo ? (
-              result.cycleInfo.scriptIsLastInCycle ? (
-                <span className="text-amber-400 flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[13px]">warning</span>
-                  Batas aman: Naskah terakhir siklus #{result.cycleInfo.scriptCycleNumber}
-                </span>
-              ) : (
-                <span className="flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[13px] text-primary">shuffle</span>
-                  Sisa {result.cycleInfo.scriptRemaining} naskah unik (Siklus #{result.cycleInfo.scriptCycleNumber})
-                </span>
-              )
+              <div className="flex items-center gap-2 flex-wrap">
+                {result.cycleInfo.scriptIsLastInCycle ? (
+                  <span className="text-amber-400 flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[13px]">warning</span>
+                    Batas aman: Naskah terakhir siklus #{result.cycleInfo.scriptCycleNumber}
+                  </span>
+                ) : (
+                  <span className="flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[13px] text-primary">shuffle</span>
+                    Sisa {result.cycleInfo.scriptRemaining} naskah unik (Siklus #{result.cycleInfo.scriptCycleNumber})
+                  </span>
+                )}
+                {onResetCycle && (
+                  <button
+                    type="button"
+                    onClick={onResetCycle}
+                    title="Kembalikan antrean naskah produk ini ke Putaran #1"
+                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-surface-container-high/60 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary border border-surface-container-highest/60 text-[10.5px] transition-all cursor-pointer active:scale-95"
+                  >
+                    <span className="material-symbols-outlined text-[12px]">restart_alt</span>
+                    Reset Siklus
+                  </button>
+                )}
+              </div>
             ) : (
               <span />
             )}

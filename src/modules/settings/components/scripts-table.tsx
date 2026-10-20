@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { toast } from "sonner";
 import { ScriptItem } from "@/types";
+import { copyToClipboard } from "@/common/utils/clipboard";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -79,9 +80,13 @@ export function ScriptsTable({
     }
   };
 
-  const handleCopy = (text: string) => {
-    navigator.clipboard.writeText(text);
-    toast.success("Naskah dialog berhasil disalin ke clipboard!");
+  const handleCopy = async (text: string) => {
+    const success = await copyToClipboard(text);
+    if (success) {
+      toast.success("Naskah dialog berhasil disalin ke clipboard!");
+    } else {
+      toast.error("Gagal menyalin naskah dialog ke clipboard.");
+    }
   };
 
   const handleDelete = (id: string) => {

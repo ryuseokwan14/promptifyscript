@@ -32,7 +32,13 @@ import {
   resetTemplatesAction,
 } from "@/modules/templates";
 import { getCurrentUserAction, logoutAction } from "@/modules/auth";
-import { compileVideoPrompt } from "@/modules/generator/utils/assemble-prompt";
+import {
+  compileVideoPrompt,
+  deckRotator,
+  getDeckStateAction,
+  saveDeckStateAction,
+  resetDeckStateAction,
+} from "@/modules/generator";
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -49,12 +55,13 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const refreshData = useCallback(async () => {
     try {
-      const [prodRes, scrRes, locRes, tplRes, authRes] = await Promise.all([
+      const [prodRes, scrRes, locRes, tplRes, authRes, deckRes] = await Promise.all([
         getProductsAction(),
         getScriptsAction(),
         getLocationsAction(),
         getTemplatesAction(),
         getCurrentUserAction(),
+        getDeckStateAction(),
       ]);
 
       if (authRes.user) {
@@ -62,6 +69,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       }
       if (authRes.creatorEmail) {
         setCreatorEmail(authRes.creatorEmail);
+      }
+
+      if (deckRes.success && deckRes.data) {
+        deckRotator.loadState(deckRes.data);
       }
 
       if (prodRes.success && prodRes.data) {
@@ -350,7 +361,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       targetLocations = locations;
     }
 
-    return compileVideoPrompt({
+    const result = compileVideoPrompt({
       product,
       scripts,
       locations: targetLocations,
@@ -359,6 +370,22 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       scriptPoolKey: `generator_scripts_${product.id}`,
       vibe: chosenVibe || undefined,
     });
+
+    if (result) {
+      // Auto-save antrean deck ke Supabase di background via API (tanpa memicu router revalidation)
+      fetch("/api/db-sync", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "update-deck-state",
+          deckState: deckRotator.getState(),
+        }),
+      }).catch((err) => {
+        console.error("Gagal auto-save deck state:", err);
+      });
+    }
+
+    return result;
   };
 
   const compileLivePrompt = (productId: string): GenerationResult | null => {
@@ -377,6 +404,23 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       scriptPoolKey: `live_scripts_${product.id}`,
       vibe: "universal",
     });
+  };
+
+  const resetDeckCycle = async (productId?: string) => {
+    const targetId = productId || activeProductId;
+    deckRotator.resetPoolsForProduct(targetId);
+    try {
+      await fetch("/api/db-sync", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "reset-deck-state",
+          productId: targetId,
+        }),
+      });
+    } catch (err) {
+      console.error("Gagal reset deck state di database:", err);
+    }
   };
 
   return (
@@ -415,6 +459,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         logout,
         generatePrompt,
         compileLivePrompt,
+        resetDeckCycle,
         refreshData,
         isLoaded,
       }}

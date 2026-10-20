@@ -41,6 +41,7 @@ export interface AppContextType {
   refreshCurrentUser: () => Promise<void>;
   generatePrompt: (productId?: string, vibe?: VibeType | null) => GenerationResult | null;
   compileLivePrompt: (productId: string) => GenerationResult | null;
+  resetDeckCycle: (productId?: string) => Promise<void>;
   refreshData: () => Promise<void>;
   isLoaded: boolean;
 }

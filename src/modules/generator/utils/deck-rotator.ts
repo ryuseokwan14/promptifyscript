@@ -1,3 +1,5 @@
+import { DeckStateSnapshot } from "../types/generator.types";
+
 /**
  * DeckRotator Utility
  * Mengelola shuffle pool (kocokan deck) anti-duplikat.
@@ -102,6 +104,70 @@ class DeckRotator {
       this.pools.clear();
       this.cycles.clear();
     }
+  }
+
+  /**
+   * Mengambil snapshot antrean dan siklus saat ini dalam bentuk JSON serializable.
+   */
+  getState(): DeckStateSnapshot {
+    const poolsObj: Record<string, string[]> = {};
+    const cyclesObj: Record<string, number> = {};
+
+    this.pools.forEach((val, key) => {
+      poolsObj[key] = [...val];
+    });
+
+    this.cycles.forEach((val, key) => {
+      cyclesObj[key] = val;
+    });
+
+    return {
+      pools: poolsObj,
+      cycles: cyclesObj,
+    };
+  }
+
+  /**
+   * Memuat kembali antrean dan siklus dari database Supabase.
+   */
+  loadState(state?: DeckStateSnapshot | null) {
+    if (!state) return;
+
+    if (state.pools && typeof state.pools === "object") {
+      Object.entries(state.pools).forEach(([key, val]) => {
+        if (Array.isArray(val)) {
+          this.pools.set(key, [...val]);
+        }
+      });
+    }
+
+    if (state.cycles && typeof state.cycles === "object") {
+      Object.entries(state.cycles).forEach(([key, val]) => {
+        if (typeof val === "number") {
+          this.cycles.set(key, val);
+        }
+      });
+    }
+  }
+
+  /**
+   * Reset naskah khusus produk tertentu kembali ke putaran awal (siklus 1).
+   */
+  resetPoolsForProduct(productId?: string) {
+    if (!productId) {
+      this.reset();
+      return;
+    }
+
+    const scriptKeys = [
+      `generator_scripts_${productId}`,
+      `live_scripts_${productId}`,
+    ];
+
+    scriptKeys.forEach((key) => {
+      this.pools.delete(key);
+      this.cycles.set(key, 1);
+    });
   }
 }
 

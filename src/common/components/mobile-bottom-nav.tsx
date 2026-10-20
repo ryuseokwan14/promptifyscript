@@ -27,12 +27,17 @@ const NAV_ITEMS: NavItem[] = [
 export function MobileBottomNav() {
   const pathname = usePathname();
 
+  // Sembunyikan navigasi bawah di halaman login (baik vertikal maupun horizontal)
+  if (pathname?.startsWith("/login")) {
+    return null;
+  }
+
   return (
     <nav
       aria-label="Mobile Navigation"
       className="md:hidden fixed bottom-0 left-0 right-0 z-50 pb-safe bg-surface-dim/90 backdrop-blur-xl border-t border-surface-container-high/40 shadow-[0_-4px_24px_rgba(0,0,0,0.45)]"
     >
-      <div className="h-16 px-6 grid grid-cols-2 items-center max-w-sm mx-auto">
+      <div className="h-16 landscape:h-13 px-6 grid grid-cols-2 items-center max-w-sm mx-auto">
         {NAV_ITEMS.map((item) => {
           const isActive =
             item.href === "/"
